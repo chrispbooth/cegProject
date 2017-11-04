@@ -96,7 +96,7 @@ def main():
     # creating object of TwitterClient Class
     api = TwitterClient()
     # calling function to get tweets
-    tweets = api.get_tweets(query = 'hey', count = 5000)
+    tweets = api.get_tweets(query = 'Engineer', count = 5000)
     addline("total"+str(len(tweets)))
     ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
     addline("positive"+str(float(len(ptweets))/float(len(tweets))))
@@ -116,9 +116,12 @@ def main():
     global respMain
     genRank = respMain
     respMain = ""
+    f = open('sentiment.txt','w')
+    f.write(genRank)
+    f.close()
     return genRank
 @app.route('/')
-def hello_world():##HEY FUCKER SOMETHING IS WRONG RIGHT HERE FUCK IT RIGHT OFF @APP.ROUTE DEFINES RECIEVING TWEETS BUT THIS IS AN ASS FUCK HELLO WORLD 
+def hello_world():
     return main()
 if __name__ == "__main__":
     # calling main function
