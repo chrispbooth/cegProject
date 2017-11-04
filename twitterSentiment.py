@@ -75,12 +75,13 @@ class TwitterClient(object):
  
                 # appending parsed tweet to tweets list
                 if tweet.retweet_count > 0:
+                    print ('hey bhole')
                     # if tweet has retweets, ensure that it is appended only once
                     if parsed_tweet not in tweets:
                         tweets.append(parsed_tweet)
                 else:
                     tweets.append(parsed_tweet)
- 
+                    print ('hey bhole')
             # return parsed tweets
             return tweets
  
@@ -119,8 +120,8 @@ def main():
     respMain = ""
     return genRank
 @app.route('/')
-def hello_world():
+def hello_world():##HEY FUCKER SOMETHING IS WRONG RIGHT HERE FUCK IT RIGHT OFF @APP.ROUTE DEFINES RECIEVING TWEETS BUT THIS IS AN ASS FUCK HELLO WORLD 
     return main()
 if __name__ == "__main__":
     # calling main function
-    app.run(host='138.197.131.142', port=3333)
+    app.run(host='138.197.158.105', port=3333)
