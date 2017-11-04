@@ -14,10 +14,10 @@ class TwitterClient(object):
         Class constructor or initialization method.
         '''
         # keys and tokens from the Twitter Dev Console
-        consumer_key = 'hfwpuUy8AbfQEWop6SmtLu0Vo'
-        consumer_secret = 'EOcwVK6IGxd1NWAqdzVuOygcXdMHWbG7AZREg2uVwkd8a55c8e'
-        access_token = '578964539-Z8YzO0mx022PoKpD49GPgsqvOjEYSqsxP0GS5yaY'
-        access_token_secret = 'mMNBzr6GCFzeCjEDyTbquxChi2qg0vvc3xL6Yov0IVsOl'
+        consumer_key = 'rtvP67wxMLQxGHSmmxBsCSkS2'
+        consumer_secret = ' xG2TNmJtQFMMFwu4LlRBSYHKyhwQK5HqrAxp0k6WTHCfv1cuTd'
+        access_token = '3008198358-Kduryv0qm7NvYHS1BmsXfqbGIRzDB8QQMe3rGa1'
+        access_token_secret = 'oTSeWtzgZBzhJ4qV9v0gY9nicM4g7SHrr5AgBd2xoBVRZ'
  
         # attempt authentication
         try:
@@ -75,14 +75,12 @@ class TwitterClient(object):
  
                 # appending parsed tweet to tweets list
                 if tweet.retweet_count > 0:
-                    print ('hey bhole')
                     # if tweet has retweets, ensure that it is appended only once
                     if parsed_tweet not in tweets:
                         tweets.append(parsed_tweet)
                 else:
                     tweets.append(parsed_tweet)
-                    print ('hey bhole')
-            # return parsed tweets
+                                # return parsed tweets
             return tweets
  
         except tweepy.TweepError as e:
@@ -98,7 +96,7 @@ def main():
     # creating object of TwitterClient Class
     api = TwitterClient()
     # calling function to get tweets
-    tweets = api.get_tweets(query = 'Engineer', count = 5000)
+    tweets = api.get_tweets(query = 'hey', count = 5000)
     addline("total"+str(len(tweets)))
     ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
     addline("positive"+str(float(len(ptweets))/float(len(tweets))))
