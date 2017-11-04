@@ -123,4 +123,4 @@ def hello_world():
     return main()
 if __name__ == "__main__":
     # calling main function
-    app.run(host='0.0.0.0', port=3333)
+    app.run(host='138.197.131.142', port=3333)
