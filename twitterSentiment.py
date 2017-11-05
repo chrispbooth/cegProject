@@ -118,7 +118,7 @@ def main():
     global respMain
     genRank = respMain
     respMain = ""
-    addline("Time is: " + (time.time()-myTime))
+    addline("Time is: " + str(time.time()-myTime))
     return genRank
 @app.route('/')
 def hello_world():
