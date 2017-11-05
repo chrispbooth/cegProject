@@ -1,5 +1,6 @@
 import re
 import tweepy
+import time
 from tweepy import OAuthHandler
 from textblob import TextBlob
 from flask import Flask
@@ -61,7 +62,7 @@ class TwitterClient(object):
         try:
             # call twitter api to fetch tweets
             #fetched_tweets = self.api.search(q = query, count = count)
-            fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query).items(count)]
+            fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
             # parsing tweets one by one
             for tweet in fetched_tweets:
                 # empty dictionary to store required params of a tweet
@@ -93,18 +94,17 @@ def addline(aLine):
  
 def main():
     # creating object of TwitterClient Class
+    myTime = time.time()
     api = TwitterClient()
     # calling function to get tweets
-    #get_tweets has internal loop count/100 times
-    tweets = api.get_tweets(query = 'Engineer', count = 2500)   
+    
+    tweets = api.get_tweets(query = 'anime -filter:links lang:en', count = 400)   
     addline("total "+str(len(tweets)))
-    #another loop for adding positive tweets count
     ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
     addline("positive "+str(float(len(ptweets))/float(len(tweets))))
     # percentage of positive tweets
     addline("Positive tweets percentage: "+''.format(100*len(ptweets)/len(tweets)))
     # picking negative tweets from tweets
-    #another loop for adding negative tweets count
     ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 'negative']
     # percentage of negative tweets
     addline("negative "+str(float(len(ntweets))/float(len(tweets))))    
@@ -112,10 +112,10 @@ def main():
     # percentage of neutral tweets
     #print("Neutral tweets percentage: "+''.format(100*len(tweets - ntweets - ptweets)/len(tweets)))
     addline("========================================================================")
-    #loop for printing all the tweets
     for tweet in tweets:
         addline(tweet['text'])
     addline("========================================================================")
+    addline("Time is: " + str(time.time()-myTime))
     global respMain
     genRank = respMain
     respMain = ""
@@ -125,5 +125,4 @@ def hello_world():
     return main()
 if __name__ == "__main__":
     # calling main function
-    app.run(host='138.197.158.105', port=6528)
-    #4 total loops to be split and optimized in OpenMP
+   app.run(host='138.197.158.105', port=6528)
