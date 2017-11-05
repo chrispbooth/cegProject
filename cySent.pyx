@@ -116,6 +116,9 @@ def main():
         addline(tweet['text'])
     addline("========================================================================")
     addline("Time is: " + str(time.time()-myTime))
+    f = open('Sentiment.txt','w')
+    f.write(respMain)
+    f.close()
     global respMain
     genRank = respMain
     respMain = ""
@@ -125,4 +128,4 @@ def hello_world():
     return main()
 if __name__ == "__main__":
     # calling main function
-   app.run(host='138.197.158.105', port=6528)
+   app.run(host='10.10.10.5', port=6528)
