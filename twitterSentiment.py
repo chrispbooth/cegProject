@@ -115,10 +115,10 @@ def main():
     for tweet in tweets:
         addline(tweet['text'])
     addline("========================================================================")
+    addline("Time is: " + str(time.time()-myTime))
     global respMain
     genRank = respMain
     respMain = ""
-    addline("Time is: " + str(time.time()-myTime))
     return genRank
 @app.route('/')
 def hello_world():
