@@ -4,8 +4,8 @@ from tweepy import OAuthHandler
 from textblob import TextBlob
 
 #Twitter API credentials
-consumer_key = 'rtvP67wxMLQxGHSmmxBsCSkS2'
-consumer_secret = ' xG2TNmJtQFMMFwu4LlRBSYHKyhwQK5HqrAxp0k6WTHCfv1cuTd'
+consumer_key = '3OOyW4Z3eDDy5me2QRLtcRCGk'
+consumer_secret = 'b5mDtuukQXIGFo1suPiDUeui2ql05HmujQv6eXjfjd4Xy3m7Dq'
 access_token = '3008198358-Kduryv0qm7NvYHS1BmsXfqbGIRzDB8QQMe3rGa1'
 access_token_secret = 'oTSeWtzgZBzhJ4qV9v0gY9nicM4g7SHrr5AgBd2xoBVRZ'
 

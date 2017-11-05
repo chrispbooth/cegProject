@@ -58,7 +58,9 @@ class TwitterClient(object):
         '''
         # empty list to store parsed tweets
         tweets = []
- 
+        f = open('DEBUG.txt','w')
+        f.write('READINGTWEETS')
+        f.close()
         try:
             # call twitter api to fetch tweets
             fetched_tweets = self.api.search(q = query, count = count)
@@ -125,4 +127,4 @@ def hello_world():
     return main()
 if __name__ == "__main__":
     # calling main function
-    app.run(host='138.197.158.105', port=3333)
+    app.run(host='10.10.10.5', port=8080)
