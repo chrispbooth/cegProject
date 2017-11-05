@@ -98,7 +98,7 @@ def main():
     api = TwitterClient()
     # calling function to get tweets
     
-    tweets = api.get_tweets(query = 'anime -filter:links', count = 400)   
+    tweets = api.get_tweets(query = 'anime -filter:links lang:en', count = 400)   
     addline("total "+str(len(tweets)))
     ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
     addline("positive "+str(float(len(ptweets))/float(len(tweets))))
