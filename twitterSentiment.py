@@ -1,5 +1,6 @@
 import re
 import tweepy
+import timeit
 from tweepy import OAuthHandler
 from textblob import TextBlob
 from flask import Flask
@@ -122,4 +123,4 @@ def hello_world():
     return main()
 if __name__ == "__main__":
     # calling main function
-    app.run(host='138.197.158.105', port=6528)
+    timeit.timeit(app.run(host='138.197.158.105', port=6528))
