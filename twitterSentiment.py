@@ -58,9 +58,6 @@ class TwitterClient(object):
         '''
         # empty list to store parsed tweets
         tweets = []
-        f = open('DEBUG.txt','w')
-        f.write('READINGTWEETS')
-        f.close()
         try:
             # call twitter api to fetch tweets
             fetched_tweets = self.api.search(q = query, count = count)
@@ -118,9 +115,6 @@ def main():
     global respMain
     genRank = respMain
     respMain = ""
-    f = open('sentiment.txt','w')
-    f.write(genRank)
-    f.close()
     return genRank
 @app.route('/')
 def hello_world():
