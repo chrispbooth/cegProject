@@ -60,8 +60,7 @@ class TwitterClient(object):
         tweets = []
         try:
             # call twitter api to fetch tweets
-            # fetched_tweets = self.api.search(q = query,count = 1000)
-            fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q = query).items(5000)]
+            fetched_tweets = self.api.search(q = query,count = count)
             # parsing tweets one by one
             for tweet in fetched_tweets:
                 # empty dictionary to store required params of a tweet
@@ -95,7 +94,7 @@ def main():
     # creating object of TwitterClient Class
     api = TwitterClient()
     # calling function to get tweets
-    tweets = api.get_tweets(query = 'Engineer', count = 5000)
+    tweets = api.get_tweets(query = 'Engineer', count = 200)
     addline("total "+str(len(tweets)))
     ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
     addline("positive "+str(float(len(ptweets))/float(len(tweets))))
