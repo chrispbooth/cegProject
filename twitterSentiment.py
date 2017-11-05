@@ -1,6 +1,6 @@
 import re
 import tweepy
-import timeit
+import time
 from tweepy import OAuthHandler
 from textblob import TextBlob
 from flask import Flask
@@ -94,10 +94,11 @@ def addline(aLine):
  
 def main():
     # creating object of TwitterClient Class
+    myTime = time.time()
     api = TwitterClient()
     # calling function to get tweets
     
-    tweets = api.get_tweets(query = 'Engineer', count = 2500)   
+    tweets = api.get_tweets(query = 'Engineer', count = 200)   
     addline("total "+str(len(tweets)))
     ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
     addline("positive "+str(float(len(ptweets))/float(len(tweets))))
@@ -117,10 +118,11 @@ def main():
     global respMain
     genRank = respMain
     respMain = ""
+    addline("Time is: " + (time.time()-myTime))
     return genRank
 @app.route('/')
 def hello_world():
     return main()
 if __name__ == "__main__":
     # calling main function
-    timeit.timeit(app.run(host='138.197.158.105', port=6528))
+   app.run(host='138.197.158.105', port=6528)
