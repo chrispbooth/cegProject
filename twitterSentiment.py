@@ -60,7 +60,7 @@ class TwitterClient(object):
         tweets = []
         try:
             # call twitter api to fetch tweets
-            fetched_tweets = self.api.search(q = query, count = count)
+            fetched_tweets = self.api.search(q = query, count = 1000)
  
             # parsing tweets one by one
             for tweet in fetched_tweets:
@@ -95,16 +95,16 @@ def main():
     # creating object of TwitterClient Class
     api = TwitterClient()
     # calling function to get tweets
-    tweets = api.get_tweets(query = 'hey', count = 5000)
-    addline("total"+str(len(tweets)))
+    tweets = api.get_tweets(query = 'Engineer', count = 5000)
+    addline("total "+str(len(tweets)))
     ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
-    addline("positive"+str(float(len(ptweets))/float(len(tweets))))
+    addline("positive "+str(float(len(ptweets))/float(len(tweets))))
     # percentage of positive tweets
     addline("Positive tweets percentage: "+''.format(100*len(ptweets)/len(tweets)))
     # picking negative tweets from tweets
     ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 'negative']
     # percentage of negative tweets
-    addline("negative"+str(float(len(ntweets))/float(len(tweets))))    
+    addline("negative "+str(float(len(ntweets))/float(len(tweets))))    
     addline("Negative tweets percentage: "+''.format(100*len(ntweets)/len(tweets)))
     # percentage of neutral tweets
     #print("Neutral tweets percentage: "+''.format(100*len(tweets - ntweets - ptweets)/len(tweets)))
