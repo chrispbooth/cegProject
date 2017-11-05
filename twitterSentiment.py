@@ -14,10 +14,10 @@ class TwitterClient(object):
         Class constructor or initialization method.
         '''
         # keys and tokens from the Twitter Dev Console
-        consumer_key = '3OOyW4Z3eDDy5me2QRLtcRCGk'
-        consumer_secret = 'b5mDtuukQXIGFo1suPiDUeui2ql05HmujQv6eXjfjd4Xy3m7Dq'
-        access_token = '3008198358-Kduryv0qm7NvYHS1BmsXfqbGIRzDB8QQMe3rGa1'
-        access_token_secret = 'oTSeWtzgZBzhJ4qV9v0gY9nicM4g7SHrr5AgBd2xoBVRZ'
+        consumer_key = 'TvkYzSoAx0PMcli3G35xSecGl'
+        consumer_secret = 'vLXaEK2JxKpHpQskB2C2WaoX1z4nT6VwxTKRcCOlrxbS6mytar'
+        access_token = '3008198358-HIHL7y1AvVbHC6mXPon7TbaclI04HydmIJ2OIj9'
+        access_token_secret = '8lED2dIKSsLCSJngVBE54C08oy814QJXi8jRXBBfe9GJy'
  
         # attempt authentication
         try:
@@ -60,8 +60,8 @@ class TwitterClient(object):
         tweets = []
         try:
             # call twitter api to fetch tweets
-            fetched_tweets = self.api.search(q = query,count = 1000)
-            
+            #fetched_tweets = self.api.search(q = query, count = count)
+            fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query).items(count)]
             # parsing tweets one by one
             for tweet in fetched_tweets:
                 # empty dictionary to store required params of a tweet
