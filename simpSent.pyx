@@ -110,7 +110,7 @@ def main():
         
         ptweets += (tweets[i]['sentiment']=='positive')
     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
-    addline("positive "+str(float(ptweets))/float(len(tweets))))
+    addline("positive "+str(float(ptweets)/float(len(tweets))))
     # percentage of positive tweets
     addline("Positive tweets percentage: "+''.format(100*len(ptweets)/len(tweets)))
     # picking negative tweets from tweets
