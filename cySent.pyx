@@ -111,7 +111,7 @@ def main():
     tweets = api.get_tweets(query = 'anime -filter:links lang:en', count = 400)   
     addline("total "+str(len(tweets)))
     cdef int k =len(tweets)
-    cdef int* sentar = tweets['sentiment']
+    cdef int sentar[k] = tweets['sentiment']
     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
     ptweets = parallelPositiveTweets(sentar, k)
     #addline("positive "+str(float(len(ptweets))/float(len(tweets))))
