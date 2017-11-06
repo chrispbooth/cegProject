@@ -99,11 +99,10 @@ def addline(aLine):
 @Cython.boundscheck(False)
 @Cython.wraparound(False)
 def parallelPositiveTweets(int param[]):
-    cdef int N = int(param.size)
+    cdef int N = param.size
     cdef int i
-    with nogil:
-        for i in prange(N, schedule='static'):
-            N = N +(param[i]==1)
+    for i in prange(N, schedule='static', nogil=True):
+        N = N +(param[i]==1)
     return N
 def main():
     # creating object of TwitterClient Class
