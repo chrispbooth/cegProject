@@ -100,6 +100,7 @@ class TwitterClient(object):
         except tweepy.TweepError as e:
             # print error (if any)
             print("Error : " + str(e))
+tweets []
 respMain=""
 def addline(aLine):
     global respMain
