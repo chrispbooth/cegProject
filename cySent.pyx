@@ -125,7 +125,7 @@ def main():
     addline("total "+str(len(tweets)))
     cdef int k =len(tweets)
     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
-    cdef int i
+    cdef int i =0
     cdef int N = 0
     for i in prange(k, schedule='static', nogil=True):
         N += (point[i]==1)
