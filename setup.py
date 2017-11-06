@@ -1,5 +1,5 @@
 from distutils.core import setup
-from Cython.Build import cythonize
+from cython.Build import cythonize
 
 setup(
     ext_modules=cythonize("cySent.pyx"),
