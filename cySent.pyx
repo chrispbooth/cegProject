@@ -82,7 +82,7 @@ class TwitterClient(object):
                 parsed_tweet['text'] = tweet.text
                 # saving sentiment of tweet
                 sentPoint[tsize] = self.get_tweet_sentiment(tweet.text)
-                tsize++
+                tsize=tsize+1
                 # appending parsed tweet to tweets list
                 if tweet.retweet_count > 0:
                     # if tweet has retweets, ensure that it is appended only once
