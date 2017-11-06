@@ -107,7 +107,8 @@ def main():
     addline("total "+str(len(tweets)))
     ptweets = 0
     for i in prange(len(tweets), schedule='static', nogil=True):
-        ptweets += (tweets{i}['sentiment']=='positive')
+        
+        ptweets += (tweets[i]['sentiment']=='positive')
     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
     addline("positive "+str(float(ptweets))/float(len(tweets))))
     # percentage of positive tweets
