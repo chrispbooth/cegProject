@@ -1,11 +1,11 @@
 import re
 import tweepy
 import time
-import Cython
+import cython
 from tweepy import OAuthHandler
 from textblob import TextBlob
 from flask import Flask
-from Cython import parallel, prange
+from cython.parallel import prange
 #import numpy
 #from numpy cimport ndarray as ar
 cimport openmp
