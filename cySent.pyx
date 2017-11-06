@@ -143,7 +143,7 @@ def main():
     i = 0
     for i in prange(k, schedule='static', nogil=True):
         M += (point[i]==0)
-    ptweets = M
+    ntweets = M
     # percentage of negative tweets
     addline("negative "+str(float(ntweets)/float(len(tweets))))    
     addline("Negative tweets percentage: "+''.format(100*ntweets/len(tweets)))
