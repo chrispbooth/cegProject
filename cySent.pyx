@@ -123,7 +123,7 @@ def main():
     cdef int i
     cdef int N = 0
     for i in prange(k, schedule='static', nogil=True):
-        N = N +(param[i]==1)
+        N = N +(point[i]==1)
     ptweets = N
     #ptweets = parallelPositiveTweets(*point, k)
     #addline("positive "+str(float(len(ptweets))/float(len(tweets))))
