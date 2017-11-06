@@ -1,7 +1,7 @@
 import re
 import tweepy
 import time
-import cython
+cimport cython
 from tweepy import OAuthHandler
 from textblob import TextBlob
 from flask import Flask
