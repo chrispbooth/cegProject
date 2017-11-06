@@ -96,8 +96,8 @@ def addline(aLine):
     global respMain
     respMain=respMain+"\r\n<br />"+aLine
     return
-@cython.boundscheck(False)
-@cython.wraparound(False)
+@Cython.boundscheck(False)
+@Cython.wraparound(False)
 def parallelPositiveTweets(int param[]):
     cdef int N = param.size
     cdef int i
