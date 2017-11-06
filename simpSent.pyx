@@ -109,7 +109,7 @@ def main():
     k = len(tweets)
     for i in prange(k, schedule='dynamic', nogil=True):    
         if (tweets[i]['sentiment']=='positive'):
-            ptweets = ptweets + 1
+            ptweets += 1
     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
     addline("positive "+str(float(ptweets)/float(len(tweets))))
     # percentage of positive tweets
