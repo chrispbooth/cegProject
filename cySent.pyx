@@ -5,7 +5,9 @@ from tweepy import OAuthHandler
 from textblob import TextBlob
 from flask import Flask
 import Cython
-from Cython.parallel import prange, parallel
+from Cython.parallel cimport prange, parallel
+cimport openmp
+
 app = Flask(__name__)
  
 class TwitterClient(object):
