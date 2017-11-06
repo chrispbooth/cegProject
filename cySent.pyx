@@ -4,8 +4,8 @@ import time
 from tweepy import OAuthHandler
 from textblob import TextBlob
 from flask import Flask
-import cython
-from cython.parallel import prange, parallel
+import Cython
+from Cython.parallel cimport prange, parallel
 #import numpy
 #from numpy cimport ndarray as ar
 cimport openmp
