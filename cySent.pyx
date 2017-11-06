@@ -138,10 +138,10 @@ def main():
     # percentage of positive tweets
     addline("Positive tweets percentage: "+''.format(100*ptweets/len(tweets)))
     # picking negative tweets from tweets
-    ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 0]
+    ######ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 0]
     # percentage of negative tweets
-    addline("negative "+str(float(len(ntweets))/float(len(tweets))))    
-    addline("Negative tweets percentage: "+''.format(100*len(ntweets)/len(tweets)))
+    ######addline("negative "+str(float(len(ntweets))/float(len(tweets))))    
+    #######addline("Negative tweets percentage: "+''.format(100*len(ntweets)/len(tweets)))
     # percentage of neutral tweets
     #print("Neutral tweets percentage: "+''.format(100*len(tweets - ntweets - ptweets)/len(tweets)))
     addline("========================================================================")
