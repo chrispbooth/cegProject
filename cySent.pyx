@@ -56,11 +56,14 @@ class TwitterClient(object):
         analysis = TextBlob(self.clean_tweet(tweet))
         # set sentiment
         if analysis.sentiment.polarity > 0:
-            return fucker = 1
+            fucker = 1
+            return fucker
         elif analysis.sentiment.polarity == 0:
-            return fucker = null
+            fucker = None
+            return fucker
         else:
-            return fucker = 0
+            fucker = 0 
+            return fucker
     
     def get_tweets(self, query, count):
         '''
