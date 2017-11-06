@@ -70,7 +70,7 @@ class TwitterClient(object):
         Main function to fetch tweets and parse them.
         '''
         # empty list to store parsed tweets
-        global tweets = []
+        global tweets
         cpdef int[200] sentPointer
         cdef int tsize = 0
         try:
