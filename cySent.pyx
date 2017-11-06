@@ -110,7 +110,7 @@ def main():
     tweets = api.get_tweets(query = 'anime -filter:links lang:en', count = 400)   
     addline("total "+str(len(tweets)))
     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
-    ptweets = parallelPositiveTweets(tweet['sentiment'])
+    ptweets = parallelPositiveTweets(tweets['sentiment'])
     #addline("positive "+str(float(len(ptweets))/float(len(tweets))))
     addline("positive "+str(float(ptweets)/float(len(tweets))))
     # percentage of positive tweets
