@@ -98,7 +98,7 @@ def main():
     api = TwitterClient()
     # calling function to get tweets
     
-    tweets = api.get_tweets(query = 'anime -filter:links lang:en', count = 200)   
+    tweets = api.get_tweets(query = 'anime -filter:links lang:en', count = 1000)   
     addline("total "+str(len(tweets)))
     ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
     addline("positive "+str(float(len(ptweets))/float(len(tweets))))
@@ -125,4 +125,4 @@ def hello_world():
     return main()
 if __name__ == "__main__":
     # calling main function
-   app.run(host='138.197.173.59', port=6528)
+   app.run(host='138.197.160.52', port=6528)
