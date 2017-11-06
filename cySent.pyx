@@ -8,6 +8,8 @@ import Cython
 from Cython.parallel import prange, parallel
 from numpy cimport ndarray as ar
 cimport openmp
+from cpython cimport array
+import array
 
 app = Flask(__name__)
  
@@ -111,7 +113,7 @@ def main():
     tweets = api.get_tweets(query = 'anime -filter:links lang:en', count = 400)   
     addline("total "+str(len(tweets)))
     cdef int k =len(tweets)
-    cdef int sentar[k] = tweets['sentiment']
+    cdef int* sentar = tweets['sentiment']
     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
     ptweets = parallelPositiveTweets(sentar, k)
     #addline("positive "+str(float(len(ptweets))/float(len(tweets))))
