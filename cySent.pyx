@@ -52,14 +52,15 @@ class TwitterClient(object):
         using textblob's sentiment method
         '''
         # create TextBlob object of passed tweet text
+        cdef int fucker
         analysis = TextBlob(self.clean_tweet(tweet))
         # set sentiment
         if analysis.sentiment.polarity > 0:
-            return 1
+            return fucker = 1
         elif analysis.sentiment.polarity == 0:
-            return None
+            return fucker = null
         else:
-            return 0
+            return fucker = 0
     
     def get_tweets(self, query, count):
         '''
