@@ -5,8 +5,8 @@ import Cython
 from tweepy import OAuthHandler
 from textblob import TextBlob
 from flask import Flask
-from Cython import parallel
-from Cython.parallel import parallel, prange
+from Cython import Parallel
+from Cython.Parallel import parallel, prange
 
 #import numpy
 #from numpy cimport ndarray as ar
