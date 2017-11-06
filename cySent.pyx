@@ -100,8 +100,9 @@ class TwitterClient(object):
         except tweepy.TweepError as e:
             # print error (if any)
             print("Error : " + str(e))
-tweets []
+
 respMain=""
+tweets = []
 def addline(aLine):
     global respMain
     respMain=respMain+"\r\n<br />"+aLine
@@ -116,6 +117,7 @@ def addline(aLine):
 #    return N
 def main():
     global tweets
+
     # creating object of TwitterClient Class
     myTime = time.time()
     api = TwitterClient()
