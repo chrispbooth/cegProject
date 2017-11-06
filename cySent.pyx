@@ -103,7 +103,7 @@ def addline(aLine):
     return
 @Cython.boundscheck(False)
 @Cython.wraparound(False)
-def parallelPositiveTweets(int param[], int k):
+def parallelPositiveTweets(int* param, int k):
     cdef int i
     for i in prange(k, schedule='static', nogil=True):
         N = N +(param[i]==1)
