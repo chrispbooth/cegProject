@@ -6,6 +6,7 @@ from textblob import TextBlob
 from flask import Flask
 import Cython
 from Cython.parallel import prange, parallel
+from numpy cimport ndarray as ar
 cimport openmp
 
 app = Flask(__name__)
@@ -95,8 +96,10 @@ def addline(aLine):
     global respMain
     respMain=respMain+"\r\n<br />"+aLine
     return
+@cython.boundscheck(False)
+@cython.wraparound(False)
 def parallelPositiveTweets(int param[]):
-    cdef int N = 0
+    cdef int N = param.size
     cdef int i
     with nogil:
         for i in prange(N, schedule='static'):
