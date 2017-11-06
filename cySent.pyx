@@ -6,6 +6,7 @@ from textblob import TextBlob
 from flask import Flask
 import Cython
 from Cython.parallel import prange, parallel
+import numpy
 from numpy cimport ndarray as ar
 cimport openmp
 from cpython cimport array
