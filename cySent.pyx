@@ -5,7 +5,7 @@ from tweepy import OAuthHandler
 from textblob import TextBlob
 from flask import Flask
 import Cython
-from Cython.parallel cimport prange, parallel
+from Cython.parallel import prange, parallel
 cimport openmp
 
 app = Flask(__name__)
