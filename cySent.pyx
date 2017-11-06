@@ -73,7 +73,6 @@ class TwitterClient(object):
         global tweets
         cpdef int[200] sentPointer
         cdef int tsize = 0
-        cpdef char *parsed_tweet
         try:
             # call twitter api to fetch tweets
             #fetched_tweets = self.api.search(q = query, count = count)
@@ -81,10 +80,10 @@ class TwitterClient(object):
             # parsing tweets one by one
             for tweet in fetched_tweets:
                 # empty dictionary to store required params of a tweet
-                
+                parsed_tweet = {}
  
                 # saving text of tweet
-                parsed_tweet = tweet.text
+                parsed_tweet['text'] = tweet.text
                 # saving sentiment of tweet
                 sentPointer[tsize] = self.get_tweet_sentiment(tweet.text)
                 tsize=tsize+1
@@ -103,7 +102,7 @@ class TwitterClient(object):
             print("Error : " + str(e))
 
 respMain=""
-cpdef char *tweets[]
+tweets = []
 def addline(aLine):
     global respMain
     respMain=respMain+"\r\n<br />"+aLine
@@ -151,9 +150,8 @@ def main():
     # percentage of neutral tweets
     #print("Neutral tweets percentage: "+''.format(100*len(tweets - ntweets - ptweets)/len(tweets)))
     addline("========================================================================")
-    i = 0
-    for i in prange(k, schedule='dynamic', nogil=True):
-        respMain=respMain+"\r\n<br />"+tweets[i]
+    for tweet in tweets:
+        addline(tweet['text'])
     addline("========================================================================")
     addline("Time is: " + str(time.time()-myTime))
     f = open('Sentiment.txt','w')
