@@ -98,10 +98,9 @@ def addline(aLine):
     return
 @Cython.boundscheck(False)
 @Cython.wraparound(False)
-def parallelPositiveTweets(int param[]):
-    cdef int N = param.size
+def parallelPositiveTweets(int param[], int k):
     cdef int i
-    for i in prange(N, schedule='static', nogil=True):
+    for i in prange(k, schedule='static', nogil=True):
         N = N +(param[i]==1)
     return N
 def main():
@@ -111,8 +110,9 @@ def main():
     # calling function to get tweets
     tweets = api.get_tweets(query = 'anime -filter:links lang:en', count = 400)   
     addline("total "+str(len(tweets)))
+    cdef int k =len(tweets)
     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
-    ptweets = parallelPositiveTweets(tweets['sentiment'])
+    ptweets = parallelPositiveTweets(tweets['sentiment'], k)
     #addline("positive "+str(float(len(ptweets))/float(len(tweets))))
     addline("positive "+str(float(ptweets)/float(len(tweets))))
     # percentage of positive tweets
