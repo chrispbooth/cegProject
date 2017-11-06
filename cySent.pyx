@@ -71,7 +71,7 @@ class TwitterClient(object):
         '''
         # empty list to store parsed tweets
         global tweets
-        cpdef int[200] sentPointer
+        cpdef int[1000] sentPointer
         cdef int tsize = 0
         try:
             # call twitter api to fetch tweets
@@ -122,14 +122,14 @@ def main():
     myTime = time.time()
     api = TwitterClient()
     # calling function to get tweets
-    cpdef int point[200]
-    point = api.get_tweets(query = 'anime -filter:links lang:en', count = 200)   
+    cpdef int point[1000]
+    point = api.get_tweets(query = 'anime -filter:links lang:en', count = 1000)   
     addline("total "+str(len(tweets)))
     cdef int k =len(tweets)
     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
     cdef int i =0
     cdef int N = 0
-    for i in prange(k, schedule='dynamic', nogil=True):
+    for i in prange(k, schedule='dynamic', nogil=True, num_threads=8):
         N += (point[i]==1)
     ptweets = N
     #ptweets = parallelPositiveTweets(*point, k)
@@ -141,7 +141,7 @@ def main():
     ######ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 0]
     cdef int M = 0
     i = 0
-    for i in prange(k, schedule='dynamic', nogil=True):
+    for i in prange(k, schedule='dynamic', nogil=True, num_threads=8):
         M += (point[i]==0)
     ntweets = M
     # percentage of negative tweets
