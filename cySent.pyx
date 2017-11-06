@@ -67,11 +67,12 @@ class TwitterClient(object):
         # empty list to store parsed tweets
         tweets = []
         cdef int* sentPointer
+        cdef int tsize
         try:
             # call twitter api to fetch tweets
             #fetched_tweets = self.api.search(q = query, count = count)
             fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
-            cdef int tsize = len(fetched_tweets)
+            tsize = len(fetched_tweets)
             # parsing tweets one by one
             for i in range(tsize):
                 # empty dictionary to store required params of a tweet
