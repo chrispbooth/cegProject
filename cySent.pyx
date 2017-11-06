@@ -129,7 +129,7 @@ def main():
     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
     cdef int i =0
     cdef int N = 0
-    for i in prange(k, schedule='static', nogil=True):
+    for i in prange(k, schedule='dynamic', nogil=True):
         N += (point[i]==1)
     ptweets = N
     #ptweets = parallelPositiveTweets(*point, k)
@@ -141,7 +141,7 @@ def main():
     ######ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 0]
     cdef int M = 0
     i = 0
-    for i in prange(k, schedule='static', nogil=True):
+    for i in prange(k, schedule='dynamic', nogil=True):
         M += (point[i]==0)
     ntweets = M
     # percentage of negative tweets
@@ -150,8 +150,9 @@ def main():
     # percentage of neutral tweets
     #print("Neutral tweets percentage: "+''.format(100*len(tweets - ntweets - ptweets)/len(tweets)))
     addline("========================================================================")
-    for tweet in tweets:
-        addline(tweet['text'])
+    i = 0
+    for i in prange(k, schedule='dynamic', nogil=True):
+        addline(tweets[i]['text'])
     addline("========================================================================")
     addline("Time is: " + str(time.time()-myTime))
     f = open('Sentiment.txt','w')
