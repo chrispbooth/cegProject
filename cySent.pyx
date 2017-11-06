@@ -119,7 +119,7 @@ def main():
     addline("total "+str(len(tweets)))
     cdef int k =len(tweets)
     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
-    ptweets = parallelPositiveTweets(point, k)
+    ptweets = parallelPositiveTweets(*point, k)
     #addline("positive "+str(float(len(ptweets))/float(len(tweets))))
     addline("positive "+str(float(ptweets)/float(len(tweets))))
     # percentage of positive tweets
