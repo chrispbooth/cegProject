@@ -80,10 +80,10 @@ class TwitterClient(object):
             # parsing tweets one by one
             for tweet in fetched_tweets:
                 # empty dictionary to store required params of a tweet
-                parsed_tweet = {}
+                cddef char *parsed_tweet
  
                 # saving text of tweet
-                parsed_tweet['text'] = tweet.text
+                parsed_tweet = tweet.text
                 # saving sentiment of tweet
                 sentPointer[tsize] = self.get_tweet_sentiment(tweet.text)
                 tsize=tsize+1
@@ -152,7 +152,7 @@ def main():
     addline("========================================================================")
     i = 0
     for i in prange(k, schedule='dynamic', nogil=True):
-        addline(tweets[i]['text'])
+        addline(tweets[i])
     addline("========================================================================")
     addline("Time is: " + str(time.time()-myTime))
     f = open('Sentiment.txt','w')
