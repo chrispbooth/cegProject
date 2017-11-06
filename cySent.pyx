@@ -127,7 +127,7 @@ def main():
     addline("total "+str(len(tweets)))
     cdef int k =len(tweets)
     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
-    cdef int i =0
+    #cdef int i =0
     cdef int N = 0
     for i in prange(k, schedule='static', nogil=True):
         N += (point[i]==1)
@@ -139,9 +139,13 @@ def main():
     addline("Positive tweets percentage: "+''.format(100*ptweets/len(tweets)))
     # picking negative tweets from tweets
     ######ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 0]
+    cdef int M = 0
+    for i in prange(k, schedule='static', nogil=True):
+        M += (point[i]==0)
+    ptweets = M
     # percentage of negative tweets
-    ######addline("negative "+str(float(len(ntweets))/float(len(tweets))))    
-    #######addline("Negative tweets percentage: "+''.format(100*len(ntweets)/len(tweets)))
+    addline("negative "+str(float(ntweets)/float(len(tweets))))    
+    addline("Negative tweets percentage: "+''.format(100*ntweets/len(tweets)))
     # percentage of neutral tweets
     #print("Neutral tweets percentage: "+''.format(100*len(tweets - ntweets - ptweets)/len(tweets)))
     addline("========================================================================")
