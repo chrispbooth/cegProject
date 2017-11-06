@@ -66,19 +66,21 @@ class TwitterClient(object):
         '''
         # empty list to store parsed tweets
         tweets = []
+        cdef int* sentPointer
         try:
             # call twitter api to fetch tweets
             #fetched_tweets = self.api.search(q = query, count = count)
             fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
+            cdef int tsize = len(fetched_tweets)
             # parsing tweets one by one
-            for tweet in fetched_tweets:
+            for i in range(tsize):
                 # empty dictionary to store required params of a tweet
                 parsed_tweet = {}
  
                 # saving text of tweet
                 parsed_tweet['text'] = tweet.text
                 # saving sentiment of tweet
-                parsed_tweet['sentiment'] = self.get_tweet_sentiment(tweet.text)
+                *(sentPointer+i) = self.get_tweet_sentiment(tweet.text)
  
                 # appending parsed tweet to tweets list
                 if tweet.retweet_count > 0:
@@ -88,7 +90,7 @@ class TwitterClient(object):
                 else:
                     tweets.append(parsed_tweet)
                                 # return parsed tweets
-            return tweets
+            return sentPointer
  
         except tweepy.TweepError as e:
             # print error (if any)
@@ -106,16 +108,17 @@ def parallelPositiveTweets(int param[], int k):
         N = N +(param[i]==1)
     return N
 def main():
+    global tweets
     # creating object of TwitterClient Class
     myTime = time.time()
     api = TwitterClient()
     # calling function to get tweets
-    tweets = api.get_tweets(query = 'anime -filter:links lang:en', count = 400)   
+    cdef int* point
+    point = api.get_tweets(query = 'anime -filter:links lang:en', count = 400)   
     addline("total "+str(len(tweets)))
     cdef int k =len(tweets)
-    cdef int* sentar = tweets['sentiment']
     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
-    ptweets = parallelPositiveTweets(sentar, k)
+    ptweets = parallelPositiveTweets(point, k)
     #addline("positive "+str(float(len(ptweets))/float(len(tweets))))
     addline("positive "+str(float(ptweets)/float(len(tweets))))
     # percentage of positive tweets
