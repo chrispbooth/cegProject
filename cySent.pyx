@@ -103,7 +103,7 @@ class TwitterClient(object):
             print("Error : " + str(e))
 
 respMain=""
-tweets = []
+cpdef char tweets[]
 def addline(aLine):
     global respMain
     respMain=respMain+"\r\n<br />"+aLine
