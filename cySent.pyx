@@ -1,10 +1,11 @@
 import re
 import tweepy
 import time
+import Cython
 from tweepy import OAuthHandler
 from textblob import TextBlob
 from flask import Flask
-from Cython import cython
+from Cython import parallel
 from cython.parallel import parallel, prange
 
 #import numpy
