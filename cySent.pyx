@@ -119,7 +119,7 @@ def main():
     myTime = time.time()
     api = TwitterClient()
     # calling function to get tweets
-    cpdef int point[400]
+    cpdef int point[200]
     point = api.get_tweets(query = 'anime -filter:links lang:en', count = 200)   
     addline("total "+str(len(tweets)))
     cdef int k =len(tweets)
