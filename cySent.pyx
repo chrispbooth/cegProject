@@ -49,12 +49,12 @@ class TwitterClient(object):
         analysis = TextBlob(self.clean_tweet(tweet))
         # set sentiment
         if analysis.sentiment.polarity > 0:
-            return 'positive'
+            return 1
         elif analysis.sentiment.polarity == 0:
-            return 'neutral'
+            return null
         else:
-            return 'negative'
- 
+            return 0
+    
     def get_tweets(self, query, count):
         '''
         Main function to fetch tweets and parse them.
