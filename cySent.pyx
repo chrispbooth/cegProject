@@ -67,22 +67,22 @@ class TwitterClient(object):
         # empty list to store parsed tweets
         tweets = []
         cdef int[400] sentPointer
-        cdef int tsize
+        cdef int tsize = 0
         try:
             # call twitter api to fetch tweets
             #fetched_tweets = self.api.search(q = query, count = count)
             fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
             tsize = len(fetched_tweets)
             # parsing tweets one by one
-            for i in range(tsize):
+            for tweet in fetched_tweets:
                 # empty dictionary to store required params of a tweet
                 parsed_tweet = {}
  
                 # saving text of tweet
                 parsed_tweet['text'] = tweet.text
                 # saving sentiment of tweet
-                sentPoint[i] = self.get_tweet_sentiment(tweet.text)
- 
+                sentPoint[tsize] = self.get_tweet_sentiment(tweet.text)
+                tsize++
                 # appending parsed tweet to tweets list
                 if tweet.retweet_count > 0:
                     # if tweet has retweets, ensure that it is appended only once
