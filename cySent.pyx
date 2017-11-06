@@ -4,8 +4,8 @@ import time
 from tweepy import OAuthHandler
 from textblob import TextBlob
 from flask import Flask
-cimport cython
-from cython.parallel import prange, parallel
+import Cython
+from Cython.parallel import prange, parallel
 app = Flask(__name__)
  
 class TwitterClient(object):
