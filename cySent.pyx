@@ -93,17 +93,24 @@ def addline(aLine):
     global respMain
     respMain=respMain+"\r\n<br />"+aLine
     return
- 
+def parallelPositiveTweets(int param[]):
+    cdef int N 
+    cdef int i
+    with nogil:
+        for i in prange(N, schedule='static'):
+            N = N +(param[i]==1)
+    return N
 def main():
     # creating object of TwitterClient Class
     myTime = time.time()
     api = TwitterClient()
     # calling function to get tweets
-    
     tweets = api.get_tweets(query = 'anime -filter:links lang:en', count = 400)   
     addline("total "+str(len(tweets)))
-    ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
-    addline("positive "+str(float(len(ptweets))/float(len(tweets))))
+    #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
+    ptweets = parallelPositiveTweets(tweet['sentiment'])
+    #addline("positive "+str(float(len(ptweets))/float(len(tweets))))
+    addline("positive "+str(float(ptweets)/float(len(tweets))))
     # percentage of positive tweets
     addline("Positive tweets percentage: "+''.format(100*len(ptweets)/len(tweets)))
     # picking negative tweets from tweets
