@@ -59,7 +59,7 @@ class TwitterClient(object):
             fucker = 1
             return fucker
         elif analysis.sentiment.polarity == 0:
-            fucker = None
+            fucker = 2
             return fucker
         else:
             fucker = 0 
