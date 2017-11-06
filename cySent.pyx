@@ -73,6 +73,7 @@ class TwitterClient(object):
         global tweets
         cpdef int[200] sentPointer
         cdef int tsize = 0
+        cpdef char *parsed_tweet
         try:
             # call twitter api to fetch tweets
             #fetched_tweets = self.api.search(q = query, count = count)
@@ -80,7 +81,7 @@ class TwitterClient(object):
             # parsing tweets one by one
             for tweet in fetched_tweets:
                 # empty dictionary to store required params of a tweet
-                cpdef char *parsed_tweet
+                
  
                 # saving text of tweet
                 parsed_tweet = tweet.text
