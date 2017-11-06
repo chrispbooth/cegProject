@@ -4,6 +4,8 @@ import time
 from tweepy import OAuthHandler
 from textblob import TextBlob
 from flask import Flask
+cimport cython
+from cython.parallel import prange, parallel
 app = Flask(__name__)
  
 class TwitterClient(object):
@@ -113,7 +115,7 @@ def main():
     #print("Neutral tweets percentage: "+''.format(100*len(tweets - ntweets - ptweets)/len(tweets)))
     addline("========================================================================")
     for tweet in tweets:
-        addline(tweet['text'])
+        addline(tweet['sentiment'])
     addline("========================================================================")
     addline("Time is: " + str(time.time()-myTime))
     f = open('Sentiment.txt','w')
