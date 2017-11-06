@@ -66,7 +66,7 @@ class TwitterClient(object):
         '''
         # empty list to store parsed tweets
         tweets = []
-        cdef int* sentPointer
+        cdef int[400] sentPointer
         cdef int tsize
         try:
             # call twitter api to fetch tweets
@@ -81,7 +81,7 @@ class TwitterClient(object):
                 # saving text of tweet
                 parsed_tweet['text'] = tweet.text
                 # saving sentiment of tweet
-                *(sentPointer+i) = self.get_tweet_sentiment(tweet.text)
+                sentPoint[i] = self.get_tweet_sentiment(tweet.text)
  
                 # appending parsed tweet to tweets list
                 if tweet.retweet_count > 0:
@@ -114,7 +114,7 @@ def main():
     myTime = time.time()
     api = TwitterClient()
     # calling function to get tweets
-    cdef int* point
+    cdef int point[]
     point = api.get_tweets(query = 'anime -filter:links lang:en', count = 400)   
     addline("total "+str(len(tweets)))
     cdef int k =len(tweets)
