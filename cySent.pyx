@@ -104,7 +104,7 @@ class TwitterClient(object):
 
 respMain=""
 cpdef char tweets[]
-def addline(aLine):
+def addline(char aLine[]):
     global respMain
     respMain=respMain+"\r\n<br />"+aLine
     return
