@@ -94,7 +94,7 @@ def addline(aLine):
     respMain=respMain+"\r\n<br />"+aLine
     return
 def parallelPositiveTweets(int param[]):
-    cdef int N 
+    cdef int N = 0
     cdef int i
     with nogil:
         for i in prange(N, schedule='static'):
