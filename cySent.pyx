@@ -102,12 +102,12 @@ def main():
     
     tweets = api.get_tweets(query = 'anime -filter:links lang:en', count = 400)   
     addline("total "+str(len(tweets)))
-    ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
+    ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
     addline("positive "+str(float(len(ptweets))/float(len(tweets))))
     # percentage of positive tweets
     addline("Positive tweets percentage: "+''.format(100*len(ptweets)/len(tweets)))
     # picking negative tweets from tweets
-    ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 'negative']
+    ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 0]
     # percentage of negative tweets
     addline("negative "+str(float(len(ntweets))/float(len(tweets))))    
     addline("Negative tweets percentage: "+''.format(100*len(ntweets)/len(tweets)))
@@ -115,7 +115,7 @@ def main():
     #print("Neutral tweets percentage: "+''.format(100*len(tweets - ntweets - ptweets)/len(tweets)))
     addline("========================================================================")
     for tweet in tweets:
-        addline(tweet['sentiment'])
+        addline(tweet['text'])
     addline("========================================================================")
     addline("Time is: " + str(time.time()-myTime))
     f = open('Sentiment.txt','w')
