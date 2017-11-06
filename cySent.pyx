@@ -52,7 +52,7 @@ class TwitterClient(object):
         using textblob's sentiment method
         '''
         # create TextBlob object of passed tweet text
-        cdef int fucker
+        cdef int fucker =2
         analysis = TextBlob(self.clean_tweet(tweet))
         # set sentiment
         if analysis.sentiment.polarity > 0:
