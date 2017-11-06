@@ -71,13 +71,12 @@ class TwitterClient(object):
         '''
         # empty list to store parsed tweets
         tweets = []
-        cpdef int[400] sentPointer
+        cpdef int[200] sentPointer
         cdef int tsize = 0
         try:
             # call twitter api to fetch tweets
             #fetched_tweets = self.api.search(q = query, count = count)
             fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
-            tsize = len(fetched_tweets)
             # parsing tweets one by one
             for tweet in fetched_tweets:
                 # empty dictionary to store required params of a tweet
@@ -121,7 +120,7 @@ def main():
     api = TwitterClient()
     # calling function to get tweets
     cpdef int point[400]
-    point = api.get_tweets(query = 'anime -filter:links lang:en', count = 400)   
+    point = api.get_tweets(query = 'anime -filter:links lang:en', count = 200)   
     addline("total "+str(len(tweets)))
     cdef int k =len(tweets)
     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
