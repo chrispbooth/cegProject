@@ -66,7 +66,7 @@ class TwitterClient(object):
         '''
         # empty list to store parsed tweets
         tweets = []
-        cdef int[400] sentPointer
+        cpdef int[400] sentPointer
         cdef int tsize = 0
         try:
             # call twitter api to fetch tweets
@@ -114,7 +114,7 @@ def main():
     myTime = time.time()
     api = TwitterClient()
     # calling function to get tweets
-    cdef int point[400]
+    cpdef int point[400]
     point = api.get_tweets(query = 'anime -filter:links lang:en', count = 400)   
     addline("total "+str(len(tweets)))
     cdef int k =len(tweets)
