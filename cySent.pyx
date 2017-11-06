@@ -103,8 +103,8 @@ class TwitterClient(object):
             print("Error : " + str(e))
 
 respMain=""
-cpdef char tweets[]
-def addline(char aLine[]):
+cpdef char *tweets[]
+def addline(aLine):
     global respMain
     respMain=respMain+"\r\n<br />"+aLine
     return
@@ -153,7 +153,7 @@ def main():
     addline("========================================================================")
     i = 0
     for i in prange(k, schedule='dynamic', nogil=True):
-        addline(tweets[i])
+        respMain=respMain+"\r\n<br />"+tweets[i]
     addline("========================================================================")
     addline("Time is: " + str(time.time()-myTime))
     f = open('Sentiment.txt','w')
