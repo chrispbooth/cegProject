@@ -80,7 +80,7 @@ class TwitterClient(object):
             # parsing tweets one by one
             for tweet in fetched_tweets:
                 # empty dictionary to store required params of a tweet
-                cddef char *parsed_tweet
+                cpdef char *parsed_tweet
  
                 # saving text of tweet
                 parsed_tweet = tweet.text
