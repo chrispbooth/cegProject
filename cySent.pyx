@@ -101,13 +101,14 @@ def addline(aLine):
     global respMain
     respMain=respMain+"\r\n<br />"+aLine
     return
-@Cython.boundscheck(False)
-@Cython.wraparound(False)
-def parallelPositiveTweets(int* param, int k):
-    cdef int i
-    for i in prange(k, schedule='static', nogil=True):
-        N = N +(param[i]==1)
-    return N
+#@Cython.boundscheck(False)
+#@Cython.wraparound(False)
+#def parallelPositiveTweets(int* param, int k):
+#    cdef int i
+#    cdef int N = 0
+#    for i in prange(k, schedule='static', nogil=True):
+#        N = N +(param[i]==1)
+#    return N
 def main():
     global tweets
     # creating object of TwitterClient Class
@@ -119,7 +120,12 @@ def main():
     addline("total "+str(len(tweets)))
     cdef int k =len(tweets)
     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
-    ptweets = parallelPositiveTweets(*point, k)
+    cdef int i
+    cdef int N = 0
+    for i in prange(k, schedule='static', nogil=True):
+        N = N +(param[i]==1)
+    ptweets = N
+    #ptweets = parallelPositiveTweets(*point, k)
     #addline("positive "+str(float(len(ptweets))/float(len(tweets))))
     addline("positive "+str(float(ptweets)/float(len(tweets))))
     # percentage of positive tweets
