@@ -106,7 +106,8 @@ def main():
     tweets = api.get_tweets(query = 'anime -filter:links lang:en', count = 400)   
     addline("total "+str(len(tweets)))
     ptweets = 0
-    for i in prange(len(tweets), schedule='static', nogil=True):
+    k = len(tweets)
+    for i in prange(k, schedule='static', nogil=True):
         
         ptweets += (tweets[i]['sentiment']=='positive')
     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
