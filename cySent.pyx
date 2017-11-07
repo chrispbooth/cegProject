@@ -130,7 +130,7 @@ def main():
     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
     cdef int i =0
     cdef int N = 0
-    for i in prange(k, schedule='dynamic', nogil=True, num_threads=8):
+    for i in prange(k, schedule='dynamic', nogil=True, num_threads=64):
         N += (point[i]==1)
     ptweets = N
     #ptweets = parallelPositiveTweets(*point, k)
@@ -142,7 +142,7 @@ def main():
     ######ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 0]
     cdef int M = 0
     i = 0
-    for i in prange(k, schedule='dynamic', nogil=True, num_threads=8):
+    for i in prange(k, schedule='dynamic', nogil=True, num_threads=64):
         M += (point[i]==0)
     ntweets = M
     # percentage of negative tweets
