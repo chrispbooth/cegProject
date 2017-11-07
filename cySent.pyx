@@ -123,7 +123,8 @@ def main():
     api = TwitterClient()
     # calling function to get tweets
     cpdef int point[1000]
-    point = api.get_tweets(query = 'anime -filter:links lang:en', count = 1000)   
+    point = api.get_tweets(query = 'anime -filter:links lang:en', count = 1000)
+    addline("Time is: " + str(time.time()-myTime))
     addline("total "+str(len(tweets)))
     cdef int k =len(tweets)
     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
