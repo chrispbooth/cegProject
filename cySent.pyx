@@ -6,8 +6,8 @@ from tweepy import OAuthHandler
 from textblob import TextBlob
 from flask import Flask
 from cython.parallel import prange
-import pathos.multiprocessing as mp
-from  pathos.multiprocessing import ProcessingPool as Pool
+import multiprocessing as mp
+from  multiprocessing import Pool
 #import numpy
 #from numpy cimport ndarray as ar
 cimport openmp
@@ -83,7 +83,8 @@ class TwitterClient(object):
             # call twitter api to fetch tweets
             #fetched_tweets = self.api.search(q = query, count = count)
             p = Pool(2)
-            fetched_tweets = p.map(star(self.pull_from_API), [(self, query, 50, 0), (self, query, 50, 3)])#, (self, query, 50, 6), (self, query, 50, 9)])
+            fetched_tweets = p.starmap(self.pull_from_API, [(self, query, 50, 0), (self, query, 50, 3)])
+            #, (self, query, 50, 6), (self, query, 50, 9)])
 
 
             ###fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
