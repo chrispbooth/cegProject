@@ -82,8 +82,8 @@ class TwitterClient(object):
         try:
             # call twitter api to fetch tweets
             #fetched_tweets = self.api.search(q = query, count = count)
-            p = Pool(4)
-            fetched_tweets = p.starmap(self.pull_from_API, [(self, query, 50, 0), (self, query, 50, 3), (self, query, 50, 6), (self, query, 50, 9)])
+            p = Pool(1)
+            fetched_tweets = p.starmap(self.pull_from_API, [(self, query, 50, 0)])#, (self, query, 50, 3), (self, query, 50, 6), (self, query, 50, 9)])
 
 
             ###fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
@@ -178,4 +178,4 @@ def main():
 def hello_world():
     return main()
 def startwebapp():
-    app.run(host='138.197.173.59', port=6528)
+    app.run(host='138.197.157.72', port=6528)
