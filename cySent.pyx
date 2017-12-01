@@ -118,6 +118,7 @@ class TwitterClient(object):
                 else:
                     tweets.append(str(value))
                                 # return parsed tweets
+            return_tweets.clear()
             return sentPointer
  
         except tweepy.TweepError as e:
@@ -127,7 +128,7 @@ class TwitterClient(object):
 respMain=""
 manager=Manager()
 return_tweets = manager.dict()
-return_tweets[0] = {}
+return_tweets.clear()
 tweets =[]
 
 def addline(aLine):
