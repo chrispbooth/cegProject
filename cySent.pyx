@@ -95,6 +95,7 @@ class TwitterClient(object):
                 parsed_tweet = {}
                 # saving text of tweet
                 parsed_tweet['text'] = fetched_tweets[i]
+                print (parsed_tweet['text'])
                 # saving sentiment of tweet
                 sentPointer[tsize] = self.get_tweet_sentiment(fetched_tweets[i].text)
                 tsize=tsize+1
