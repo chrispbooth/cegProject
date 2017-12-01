@@ -77,6 +77,8 @@ class TwitterClient(object):
         '''
         # empty list to store parsed tweets
         global tweets
+        global return_tweets
+
         cpdef int[200] sentPointer
         cdef int tsize = 0
         try:
