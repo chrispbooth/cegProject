@@ -98,8 +98,8 @@ class TwitterClient(object):
                 # empty dictionary to store required params of a tweet
                 parsed_tweet = {}
                 # saving text of tweet
-                parsed_tweet['text'] = fetched_tweets[i]
-                print (parsed_tweet['text'])
+                parsed_tweet[i] = fetched_tweets[i]
+                #print (parsed_tweet['text'])
                 # saving sentiment of tweet
                 sentPointer[tsize] = self.get_tweet_sentiment(fetched_tweets[i])
                 tsize=tsize+1
@@ -107,9 +107,9 @@ class TwitterClient(object):
                 if fetched_tweets[i].retweet_count > 0:
                     # if tweet has retweets, ensure that it is appended only once
                     if parsed_tweet not in tweets:
-                        tweets.append(parsed_tweet)
+                        tweets.append(parsed_tweet[i])
                 else:
-                    tweets.append(parsed_tweet)
+                    tweets.append(parsed_tweet[i])
                                 # return parsed tweets
             return sentPointer
  
