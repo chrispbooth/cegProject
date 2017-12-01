@@ -6,8 +6,8 @@ from tweepy import OAuthHandler
 from textblob import TextBlob
 from flask import Flask
 from cython.parallel import prange
-import pathos.multiprocessing as mp
-from  pathos.multiprocessing import ProcessingPool as Pool
+import multiprocessing as mp
+from  multiprocessing import Pool
 #import numpy
 #from numpy cimport ndarray as ar
 cimport openmp
