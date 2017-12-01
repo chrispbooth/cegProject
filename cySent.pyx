@@ -108,7 +108,7 @@ class TwitterClient(object):
                 #parsed_tweet['text'] = fetched_tweets[key]
                 #print (parsed_tweet['text'])
                 # saving sentiment of tweet
-                sentPointer[tsize] = self.get_tweet_sentiment(value)
+                sentPointer[tsize] = self.get_tweet_sentiment(str(value))
                 tsize=tsize+1
                 # appending parsed tweet to tweets list
                 #if "rt" not in key:
