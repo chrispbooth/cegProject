@@ -88,7 +88,7 @@ class TwitterClient(object):
         '''
         # empty list to store parsed tweets
         global tweets
-        tweets.append("hey buddy")
+        return_tweets.clear()
         cpdef int[200] sentPointer
         cdef int tsize = 0
         try:
@@ -118,7 +118,7 @@ class TwitterClient(object):
                 else:
                     tweets.append(str(value))
                                 # return parsed tweets
-            return_tweets.clear()
+            
             return sentPointer
  
         except tweepy.TweepError as e:
