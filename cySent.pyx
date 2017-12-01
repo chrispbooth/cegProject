@@ -84,7 +84,7 @@ class TwitterClient(object):
             # call twitter api to fetch tweets
             #fetched_tweets = self.api.search(q = query, count = count)
             #, (self, query, 50, 6), (self, query, 50, 9)])
-            p = Process(target=self.pull_from_API, args=(self, query, 200, 0,return_tweets))
+            p = Process(target=self.pull_from_API, args=(query, 200, 0,return_tweets))
             p.start()
             p.join()
             fetched_tweets=return_tweets.items()
