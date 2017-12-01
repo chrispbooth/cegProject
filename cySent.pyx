@@ -8,6 +8,7 @@ from flask import Flask
 from cython.parallel import prange
 import multiprocessing as mp
 from  multiprocessing import Process
+from multiprocessing import Manager
 import dill
 #import numpy
 #from numpy cimport ndarray as ar
@@ -67,12 +68,8 @@ class TwitterClient(object):
         else:
             norman = 0 
             return norman
-    def pull_from_API(self, query, count, i):
-        j=i+2
-        fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query + " since:2017-10-" + i + " until:2017-10-" + j, rpp = 100).items(count)]
-        
-
-        return fetched_tweets
+    def pull_from_API(self, query, count, i,return_tweets):
+        return_tweets = [status for status in tweepy.Cursor(self.api.search, q=query + " since:2017-10-" + i + " until:2017-10-" + i, rpp = 100).items(count)]
 
     def get_tweets(self, query, count):
         '''
@@ -87,9 +84,9 @@ class TwitterClient(object):
             #fetched_tweets = self.api.search(q = query, count = count)
             #, (self, query, 50, 6), (self, query, 50, 9)])
             p = Process(target=self.pull_from_API, args=(self, query, 200, 0))
-            fetched_tweets=p.start()
+            p.start()
             p.join()
-
+            fetched_tweets=return_tweets
             ###fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
             # parsing tweets one by one
             for tweet in fetched_tweets:
@@ -133,7 +130,8 @@ def addline(aLine):
 #    return N
 def main():
     global tweets
-
+    manager=Manager()
+    return_tweets[procnum] = procnum
     # creating object of TwitterClient Class
     myTime = time.time()
     api = TwitterClient()
