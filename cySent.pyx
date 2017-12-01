@@ -116,7 +116,7 @@ class TwitterClient(object):
 respMain=""
 tweets = []
 manager=Manager()
-return_tweets = manager.array()
+return_tweets = manager.Array()
 def addline(aLine):
     global respMain
     respMain=respMain+"\r\n<br />"+aLine
