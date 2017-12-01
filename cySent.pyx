@@ -111,10 +111,10 @@ class TwitterClient(object):
                 sentPointer[tsize] = self.get_tweet_sentiment(value)
                 tsize=tsize+1
                 # appending parsed tweet to tweets list
-                if "rt" not in key:
+                #if "rt" not in key:
                     # if tweet has retweets, ensure that it is appended only once
-                    if value not in tweets:
-                        tweets.append(value)
+                if value not in tweets:
+                    tweets.append(value)
                 else:
                     tweets.append(value)
                                 # return parsed tweets
