@@ -74,7 +74,7 @@ class TwitterClient(object):
         for tweet in muhtweets:
             if tweet.retweet_count> 0:
                 ritc = str(itc)+"rt"   
-            else
+            else :
                 ritc = str(itc)
             return_tweets[ritc]=tweet.text
             itc=itc+1
