@@ -71,14 +71,15 @@ class TwitterClient(object):
     def pull_from_API(self, query, count, i,return_tweets):
         muhtweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
         itc=0
+        d=return_tweets
         for tweet in muhtweets:
             if tweet.retweet_count> 0:
                 ritc = str(itc)+"rt"   
             else :
                 ritc = str(itc)
-            return_tweets[ritc]=tweet.text
+            d[ritc]=tweet.text
             itc=itc+1
-                     
+        return_tweets = d
 
         #, since="2017-11-" + str(i),  until="2017-11-" + str(i)
     def get_tweets(self, query, count):
