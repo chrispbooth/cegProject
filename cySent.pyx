@@ -68,15 +68,15 @@ class TwitterClient(object):
         else:
             norman = 0 
             return norman
-    def pull_from_API(self, query, count, i,return_tweets):
+    def pull_from_API(self, query, count, i,return_tweets,procm):
         muhtweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
         itc=0
         d=return_tweets
         for tweet in muhtweets:
             if tweet.retweet_count> 0:
-                ritc = str(itc)+"rt"   
+                ritc = str(itc)+"rt"+procm   
             else :
-                ritc = str(itc)
+                ritc = str(itc)+procm
             d[ritc]=tweet.text
             itc=itc+1
         return_tweets.update(d)
@@ -96,8 +96,9 @@ class TwitterClient(object):
             # call twitter api to fetch tweets
             #fetched_tweets = self.api.search(q = query, count = count)
             #, (self, query, 50, 6), (self, query, 50, 9)])
-            p = Process(target=self.pull_from_API, args=(query, 100, 0,return_tweets))
-            o = Process(target=self.pull_from_API, args=(query, 100, 0,return_tweets))
+
+            p = Process(target=self.pull_from_API, args=(query, 100, 0,return_tweets,"p"))
+            o = Process(target=self.pull_from_API, args=(query, 100, 0,return_tweets,"o"))
             p.start()
             o.start()
             p.join()
