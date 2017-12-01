@@ -7,7 +7,7 @@ from textblob import TextBlob
 from flask import Flask
 from cython.parallel import prange
 import multiprocessing as mp
-from  multiprocessing import Pool
+from  multiprocessing import Process
 import dill
 #import numpy
 #from numpy cimport ndarray as ar
