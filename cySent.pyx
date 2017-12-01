@@ -9,7 +9,7 @@ from cython.parallel import prange
 import multiprocessing as mp
 from  multiprocessing import Process
 from multiprocessing import Manager
-import dill
+import json
 #import numpy
 #from numpy cimport ndarray as ar
 cimport openmp
@@ -69,11 +69,11 @@ class TwitterClient(object):
             norman = 0 
             return norman
     def pull_from_API(self, query, count, i,return_tweets):
-        return_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
-        #itc=0
-        #for tweet in muhtweets:
-        #    return_tweets[itc]=tweet.text
-
+        muhtweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
+        itc=0
+        for tweet in muhtweets:
+            return_tweets[str(itc)]=tweet.text
+            itc=itc+1
         #, since="2017-11-" + str(i),  until="2017-11-" + str(i)
     def get_tweets(self, query, count):
         '''
@@ -91,17 +91,17 @@ class TwitterClient(object):
             p = Process(target=self.pull_from_API, args=(query, 200, 0,return_tweets))
             p.start()
             p.join()
-            fetched_tweets=return_tweets[0]
+            fetched_tweets=return_tweets
             ###fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
             # parsing tweets one by one
-            for tweet in fetched_tweets[0]:
+            for key in fetched_tweets:
                 # empty dictionary to store required params of a tweet
                 parsed_tweet = {}
                 # saving text of tweet
-                parsed_tweet['text'] = tweet.text
+                parsed_tweet['text'] = fetched_tweets[key]
                 #print (parsed_tweet['text'])
                 # saving sentiment of tweet
-                sentPointer[tsize] = self.get_tweet_sentiment(tweet.text)
+                sentPointer[tsize] = self.get_tweet_sentiment(fetched_tweets[key])
                 tsize=tsize+1
                 # appending parsed tweet to tweets list
                 if tweet.retweet_count > 0:
