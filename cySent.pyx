@@ -167,7 +167,7 @@ def main():
     #print("Neutral tweets percentage: "+''.format(100*len(tweets - ntweets - ptweets)/len(tweets)))
     addline("========================================================================")
     for i in range(len(tweets)):
-        addline(tweet[i])
+        addline(tweets[i])
     addline("========================================================================")
     addline("Time is: " + str(time.time()-myTime))
     f = open('Sentiment.txt','w')
