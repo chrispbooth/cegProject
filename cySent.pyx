@@ -8,7 +8,7 @@ from flask import Flask
 from cython.parallel import prange
 import multiprocessing as mp
 from  multiprocessing import Pool
-import pickle
+import dill
 #import numpy
 #from numpy cimport ndarray as ar
 cimport openmp
@@ -69,8 +69,10 @@ class TwitterClient(object):
             return norman
     def pull_from_API(self, query, count, i):
         j=i+2
-        fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query + " since:2017-10-" + i + " until:2017-10-" + j, rpp = 100).items(count)]
-        return pickle.dumps(fetched_tweets)
+        fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query + " since:2017-10-" + i + " until:2017-10-" + j, rpp = 100).items(count)].tweets
+        
+
+        return fetched_tweets
 
     def get_tweets(self, query, count):
         '''
@@ -78,15 +80,15 @@ class TwitterClient(object):
         '''
         # empty list to store parsed tweets
         global tweets
-        cpdef int[4][50] sentPointer
+        cpdef int[200] sentPointer
         cdef int tsize = 0
         try:
             # call twitter api to fetch tweets
             #fetched_tweets = self.api.search(q = query, count = count)
-            p = Pool(2)
-            fetched_tweets = p.starmap(self.pull_from_API, [(self, query, 50, 0), (self, query, 50, 3)])
             #, (self, query, 50, 6), (self, query, 50, 9)])
-
+            p = Process(target=self.pull_from_API, args=(self, query, 200, 0))
+            p.start()
+            p.join()
 
             ###fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
             # parsing tweets one by one
