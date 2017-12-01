@@ -126,8 +126,8 @@ class TwitterClient(object):
 
 respMain=""
 manager=Manager()
-return_tweets = manager.list()
-return_tweets.append({})
+return_tweets = manager.dict()
+return_tweets[0] = {}
 tweets =[]
 
 def addline(aLine):
