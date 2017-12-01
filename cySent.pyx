@@ -72,10 +72,13 @@ class TwitterClient(object):
         muhtweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
         itc=0
         for tweet in muhtweets:
-            return_tweets[str(itc)]=tweet.text
-            itc=itc+1
             if tweet.retweet_count> 0:
-                itc = str(itc)+"rt"            
+                ritc = str(itc)+"rt"   
+            else
+                ritc = str(itc)
+            return_tweets[ritc]=tweet.text
+            itc=itc+1
+                     
 
         #, since="2017-11-" + str(i),  until="2017-11-" + str(i)
     def get_tweets(self, query, count):
