@@ -101,7 +101,7 @@ class TwitterClient(object):
                 parsed_tweet['text'] = fetched_tweets[i]
                 print (parsed_tweet['text'])
                 # saving sentiment of tweet
-                sentPointer[tsize] = self.get_tweet_sentiment(fetched_tweets[i].text)
+                sentPointer[tsize] = self.get_tweet_sentiment(fetched_tweets[i])
                 tsize=tsize+1
                 # appending parsed tweet to tweets list
                 if fetched_tweets[i].retweet_count > 0:
