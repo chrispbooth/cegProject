@@ -76,10 +76,12 @@ class TwitterClient(object):
         d=return_tweets
         for tweet in muhtweets:
             if tweet.retweet_count> 0:
-                ritc = str(itc)+"rt"+procm   
+                if tweet.text not in d.values():
+                    ritc = str(itc)+"rt"+procm
+                    d[ritc]=tweet.text   
             else :
                 ritc = str(itc)+procm
-            d[ritc]=tweet.text
+                d[ritc]=tweet.text
             itc=itc+1
         return_tweets.update(d)
 
