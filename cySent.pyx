@@ -126,7 +126,7 @@ class TwitterClient(object):
 
 respMain=""
 manager=Manager()
-return_tweets = manager.dict()
+return_tweets = manager.list()
 return_tweets.append({})
 tweets =[]
 
