@@ -96,9 +96,12 @@ class TwitterClient(object):
             # call twitter api to fetch tweets
             #fetched_tweets = self.api.search(q = query, count = count)
             #, (self, query, 50, 6), (self, query, 50, 9)])
-            p = Process(target=self.pull_from_API, args=(query, 200, 0,return_tweets))
+            p = Process(target=self.pull_from_API, args=(query, 100, 0,return_tweets))
+            o = Process(target=self.pull_from_API, args=(query, 100, 0,return_tweets))
             p.start()
+            o.start()
             p.join()
+            o.join()
             fetched_tweets=return_tweets
             ###fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
             # parsing tweets one by one
