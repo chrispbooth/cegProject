@@ -69,10 +69,10 @@ class TwitterClient(object):
             norman = 0 
             return norman
     def pull_from_API(self, query, count, i,return_tweets):
-        muhtweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
-        itc=0
-        for tweet in muhtweets:
-            return_tweets[itc]=tweet.text
+        return_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
+        #itc=0
+        #for tweet in muhtweets:
+        #    return_tweets[itc]=tweet.text
 
         #, since="2017-11-" + str(i),  until="2017-11-" + str(i)
     def get_tweets(self, query, count):
@@ -91,25 +91,25 @@ class TwitterClient(object):
             p = Process(target=self.pull_from_API, args=(query, 200, 0,return_tweets))
             p.start()
             p.join()
-            fetched_tweets=return_tweets
+            fetched_tweets=return_tweets[0]
             ###fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
             # parsing tweets one by one
-            for i in fetched_tweets:
+            for tweet in fetched_tweets[0]:
                 # empty dictionary to store required params of a tweet
                 parsed_tweet = {}
                 # saving text of tweet
-                parsed_tweet[i] = fetched_tweets[i]
+                parsed_tweet['text'] = tweet.text
                 #print (parsed_tweet['text'])
                 # saving sentiment of tweet
-                sentPointer[tsize] = self.get_tweet_sentiment(str(fetched_tweets[i]))
+                sentPointer[tsize] = self.get_tweet_sentiment(tweet.text)
                 tsize=tsize+1
                 # appending parsed tweet to tweets list
                 if fetched_tweets[i].retweet_count > 0:
                     # if tweet has retweets, ensure that it is appended only once
                     if parsed_tweet not in tweets:
-                        tweets.append(parsed_tweet[i])
+                        tweets.append(parsed_tweet)
                 else:
-                    tweets.append(parsed_tweet[i])
+                    tweets.append(parsed_tweet)
                                 # return parsed tweets
             return sentPointer
  
