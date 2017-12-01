@@ -119,8 +119,7 @@ class TwitterClient(object):
 
 respMain=""
 manager=Manager()
-mang=Manager()
-return_tweets = manager.Array('i', range(200))
+return_tweets = manager.dict()
 tweets =[]
 
 def addline(aLine):
