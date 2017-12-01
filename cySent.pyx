@@ -129,9 +129,12 @@ def main():
     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
     cdef int i =0
     cdef int N = 0
+    cdef int M = 0
     for i in prange(k, schedule='dynamic', nogil=True):
         N += (point[i]==1)
+        M += (point[i]==0)
     ptweets = N
+    ntweets = M
     #ptweets = parallelPositiveTweets(*point, k)
     #addline("positive "+str(float(len(ptweets))/float(len(tweets))))
     addline("positive "+str(float(ptweets)/float(len(tweets))))
@@ -139,11 +142,9 @@ def main():
     addline("Positive tweets percentage: "+''.format(100*ptweets/len(tweets)))
     # picking negative tweets from tweets
     ######ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 0]
-    cdef int M = 0
-    i = 0
-    for i in prange(k, schedule='dynamic', nogil=True):
-        M += (point[i]==0)
-    ntweets = M
+    #i = 0
+    #for i in prange(k, schedule='dynamic', nogil=True):
+    #ntweets = M
     # percentage of negative tweets
     addline("negative "+str(float(ntweets)/float(len(tweets))))    
     addline("Negative tweets percentage: "+''.format(100*ntweets/len(tweets)))
@@ -164,6 +165,5 @@ def main():
 @app.route('/')
 def hello_world():
     return main()
-if __name__ == "__main__":
-    # calling main function
-   app.run(host='138.197.173.59', port=6528)
+def startwebapp():
+    app.run(host='138.197.173.59', port=6528)
