@@ -101,7 +101,7 @@ class TwitterClient(object):
             fetched_tweets=return_tweets
             ###fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
             # parsing tweets one by one
-            for value in fetched_tweets.itervalues():
+            for value in fetched_tweets.values():
                 # empty dictionary to store required params of a tweet
                 #parsed_tweet = {}
                 # saving text of tweet
