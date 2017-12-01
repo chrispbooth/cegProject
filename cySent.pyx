@@ -77,7 +77,6 @@ class TwitterClient(object):
         '''
         # empty list to store parsed tweets
         global tweets
-        global return_tweets
 
         cpdef int[200] sentPointer
         cdef int tsize = 0
@@ -115,9 +114,8 @@ class TwitterClient(object):
 
 respMain=""
 tweets = []
-#manager=Manager()
-#return_tweets = manager.dict()
-global return_tweets
+manager=Manager()
+return_tweets = manager.dict()
 def addline(aLine):
     global respMain
     respMain=respMain+"\r\n<br />"+aLine
