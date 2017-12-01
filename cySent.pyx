@@ -121,7 +121,7 @@ respMain=""
 manager=Manager()
 mang=Manager()
 return_tweets = manager.Array('i', range(200))
-tweets = mang.Array()
+tweets []
 
 def addline(aLine):
     global respMain
