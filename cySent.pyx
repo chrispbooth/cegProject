@@ -73,7 +73,7 @@ class TwitterClient(object):
         itc=0
         for tweet in muhtweets:
             return_tweets[itc]=tweet.text
-            
+
         #, since="2017-11-" + str(i),  until="2017-11-" + str(i)
     def get_tweets(self, query, count):
         '''
@@ -120,7 +120,7 @@ class TwitterClient(object):
 respMain=""
 manager=Manager()
 mang=Manager()
-return_tweets = manager.Array()
+return_tweets = manager.Array('i', range(200))
 tweets = mang.Array()
 
 def addline(aLine):
