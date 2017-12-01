@@ -90,13 +90,13 @@ class TwitterClient(object):
             fetched_tweets=return_tweets.items()
             ###fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
             # parsing tweets one by one
-            for tweet in fetched_tweets:
+            for i in fetched_tweets:
                 # empty dictionary to store required params of a tweet
                 parsed_tweet = {}
                 # saving text of tweet
-                parsed_tweet['text'] = tweet.text
+                parsed_tweet['text'] = fetched_tweets[i]
                 # saving sentiment of tweet
-                sentPointer[tsize] = self.get_tweet_sentiment(tweet.text)
+                sentPointer[tsize] = self.get_tweet_sentiment(fetched_tweets[i].text)
                 tsize=tsize+1
                 # appending parsed tweet to tweets list
                 if tweet.retweet_count > 0:
