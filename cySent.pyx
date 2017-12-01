@@ -69,7 +69,7 @@ class TwitterClient(object):
             norman = 0 
             return norman
     def pull_from_API(self, query, count, i,return_tweets,procm):
-        muhtweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
+        muhtweets = [status for status in tweepy.Cursor(self.api.search, q=query, since="2017-11-" + str(i),  until="2017-11-" + str(i), rpp = 100).items(count)]
         itc=0
         d=return_tweets
         for tweet in muhtweets:
@@ -81,7 +81,7 @@ class TwitterClient(object):
             itc=itc+1
         return_tweets.update(d)
 
-        #, since="2017-11-" + str(i),  until="2017-11-" + str(i)
+        
     def get_tweets(self, query, count):
         '''
         Main function to fetch tweets and parse them.
@@ -90,19 +90,43 @@ class TwitterClient(object):
         global tweets
         return_tweets.clear()
         tweets.clear()
-        cpdef int[200] sentPointer
+        cpdef int[1000] sentPointer
         cdef int tsize = 0
         try:
             # call twitter api to fetch tweets
             #fetched_tweets = self.api.search(q = query, count = count)
             #, (self, query, 50, 6), (self, query, 50, 9)])
 
-            p = Process(target=self.pull_from_API, args=(query, 100, 0,return_tweets,"p"))
-            o = Process(target=self.pull_from_API, args=(query, 100, 0,return_tweets,"o"))
-            p.start()
-            o.start()
-            p.join()
-            o.join()
+            p1 = Process(target=self.pull_from_API, args=(query, 100, 0,return_tweets,"p1"))
+            p2 = Process(target=self.pull_from_API, args=(query, 100, 1,return_tweets,"p2"))
+            p3 = Process(target=self.pull_from_API, args=(query, 100, 2,return_tweets,"p3"))
+            p4 = Process(target=self.pull_from_API, args=(query, 100, 3,return_tweets,"p4"))
+            p5 = Process(target=self.pull_from_API, args=(query, 100, 4,return_tweets,"p5"))
+            p6 = Process(target=self.pull_from_API, args=(query, 100, 5,return_tweets,"p6"))
+            p7 = Process(target=self.pull_from_API, args=(query, 100, 6,return_tweets,"p7"))
+            p8 = Process(target=self.pull_from_API, args=(query, 100, 7,return_tweets,"p8"))
+            p9 = Process(target=self.pull_from_API, args=(query, 100, 8,return_tweets,"p9"))
+            p10 = Process(target=self.pull_from_API, args=(query, 100, 9,return_tweets,"p10"))
+            p1.start()
+            p2.start()
+            p3.start()
+            p4.start()
+            p5.start()
+            p6.start()
+            p7.start()
+            p8.start()
+            p9.start()
+            p10.start()
+            p1.join()
+            p2.join()
+            p3.join()
+            p4.join()
+            p5.join()
+            p6.join()
+            p7.join()
+            p8.join()
+            p9.join()
+            p10.join()
             fetched_tweets=return_tweets
             ###fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
             # parsing tweets one by one
@@ -156,8 +180,8 @@ def main():
     myTime = time.time()
     api = TwitterClient()
     # calling function to get tweets
-    cpdef int point[200]
-    point = api.get_tweets(query = 'anime -filter:links lang:en', count = 200)   
+    cpdef int point[1000]
+    point = api.get_tweets(query = 'anime -filter:links lang:en', count = 1000)   
     addline("total "+str(len(tweets)))
     cdef int k =len(tweets)
     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
