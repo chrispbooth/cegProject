@@ -74,6 +74,9 @@ class TwitterClient(object):
         for tweet in muhtweets:
             return_tweets[str(itc)]=tweet.text
             itc=itc+1
+            if tweet.retweet_count> 0:
+                itc = str(itc)+"rt"            
+
         #, since="2017-11-" + str(i),  until="2017-11-" + str(i)
     def get_tweets(self, query, count):
         '''
@@ -104,7 +107,7 @@ class TwitterClient(object):
                 sentPointer[tsize] = self.get_tweet_sentiment(fetched_tweets[key])
                 tsize=tsize+1
                 # appending parsed tweet to tweets list
-                if tweet.retweet_count > 0:
+                if rt not in key:
                     # if tweet has retweets, ensure that it is appended only once
                     if parsed_tweet not in tweets:
                         tweets.append(parsed_tweet)
