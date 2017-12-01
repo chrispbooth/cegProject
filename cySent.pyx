@@ -8,6 +8,7 @@ from flask import Flask
 from cython.parallel import prange
 import multiprocessing as mp
 from  multiprocessing import Pool
+import pickle
 #import numpy
 #from numpy cimport ndarray as ar
 cimport openmp
@@ -69,7 +70,7 @@ class TwitterClient(object):
     def pull_from_API(self, query, count, i):
         j=i+2
         fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query + " since:2017-10-" + i + " until:2017-10-" + j, rpp = 100).items(count)]
-        return fetched_tweets
+        return pickle.dumps(fetched_tweets)
 
     def get_tweets(self, query, count):
         '''
