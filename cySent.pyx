@@ -79,7 +79,7 @@ class TwitterClient(object):
                 ritc = str(itc)
             d[ritc]=tweet.text
             itc=itc+1
-        return_tweets = d
+        return_tweets.update(d)
 
         #, since="2017-11-" + str(i),  until="2017-11-" + str(i)
     def get_tweets(self, query, count):
