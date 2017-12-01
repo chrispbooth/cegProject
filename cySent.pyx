@@ -83,6 +83,8 @@ class TwitterClient(object):
             # call twitter api to fetch tweets
             #fetched_tweets = self.api.search(q = query, count = count)
             #, (self, query, 50, 6), (self, query, 50, 9)])
+            manager=Manager()
+            return_tweets[procnum] = procnum
             p = Process(target=self.pull_from_API, args=(self, query, 200, 0))
             p.start()
             p.join()
@@ -130,8 +132,6 @@ def addline(aLine):
 #    return N
 def main():
     global tweets
-    manager=Manager()
-    return_tweets[procnum] = procnum
     # creating object of TwitterClient Class
     myTime = time.time()
     api = TwitterClient()
