@@ -66,6 +66,10 @@ class TwitterClient(object):
         else:
             norman = 0 
             return norman
+    def pull_from_API(self, query, count, i):
+        j=i+2
+        fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query + " since:2017-10-" + i + " until:2017-10-" + j, rpp = 100).items(count)]
+        return fetched_tweets
 
     def get_tweets(self, query, count):
         '''
@@ -79,7 +83,7 @@ class TwitterClient(object):
             # call twitter api to fetch tweets
             #fetched_tweets = self.api.search(q = query, count = count)
             p = Pool(4)
-            fetched_tweets = p.starmap(pull_from_API, [(self, query, count/4, 0), (self, query, count/4, 3), (self, query, count/4, 6), (self, query, count/4, 9)])
+            fetched_tweets = p.starmap(self.pull_from_API, [(self, query, count/4, 0), (self, query, count/4, 3), (self, query, count/4, 6), (self, query, count/4, 9)])
 
 
             ###fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
@@ -114,10 +118,7 @@ def addline(aLine):
     respMain=respMain+"\r\n<br />"+aLine
     return
 
-def pull_from_API(self, query, count, i):
-    j=i+2
-    fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query + " since:2017-10-" + i + " until:2017-10-" + j, rpp = 100).items(count)]
-    return fetched_tweets
+
 #@Cython.boundscheck(False)
 #@Cython.wraparound(False)
 #def parallelPositiveTweets(int* param, int k):
