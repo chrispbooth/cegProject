@@ -6,12 +6,14 @@ from tweepy import OAuthHandler
 from textblob import TextBlob
 from flask import Flask
 from cython.parallel import prange
+import multiprocessing
+from  multiprocessing import Pool
 #import numpy
 #from numpy cimport ndarray as ar
 cimport openmp
 from cpython cimport array
 import array
-
+from itertools import product
 app = Flask(__name__)
  
 class TwitterClient(object):
@@ -64,6 +66,9 @@ class TwitterClient(object):
         else:
             norman = 0 
             return norman
+    def pullfromAPI(self, query, count, i):
+        j=i+2
+        fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query + " since:2017-10-" + i + " until:2017-10-" + j, rpp = 100).items(count)]
     
     def get_tweets(self, query, count):
         '''
@@ -71,12 +76,17 @@ class TwitterClient(object):
         '''
         # empty list to store parsed tweets
         global tweets
-        cpdef int[200] sentPointer
+        cpdef int[4][50] sentPointer
         cdef int tsize = 0
         try:
             # call twitter api to fetch tweets
             #fetched_tweets = self.api.search(q = query, count = count)
-            fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
+            datesarray = [0,3,6,9]
+            p = Pool(4)
+            fetched_tweets = p.starmap(pullfromAPI,product(self, query, count, datesarray))
+
+
+            ###fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
             # parsing tweets one by one
             for tweet in fetched_tweets:
                 # empty dictionary to store required params of a tweet
