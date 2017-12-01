@@ -69,7 +69,7 @@ class TwitterClient(object):
             norman = 0 
             return norman
     def pull_from_API(self, query, count, i,return_tweets):
-        return_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, since="2017-11-" + str(i),  until="2017-11-" + str(i), rpp = 100).items(count)]
+        return_tweets = [tweet for status in tweepy.Cursor(self.api.search, q=query, since="2017-11-" + str(i),  until="2017-11-" + str(i), rpp = 100).items(count)]
 
     def get_tweets(self, query, count):
         '''
