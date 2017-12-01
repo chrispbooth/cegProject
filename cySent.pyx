@@ -69,7 +69,7 @@ class TwitterClient(object):
             norman = 0 
             return norman
     def pull_from_API(self, query, count, i,return_tweets,procm):
-        muhtweets = [status for status in tweepy.Cursor(self.api.search, q=query, since="2017-11-" + str(i),  until="2017-11-" + str(i), rpp = 100).items(count)]
+        muhtweets = [status for status in tweepy.Cursor(self.api.search, q=query, since="2017-11-" + str(i),  until="2017-11-" + str(i+1), rpp = 100).items(count)]
         itc=0
         d=return_tweets
         for tweet in muhtweets:
@@ -98,15 +98,15 @@ class TwitterClient(object):
             #, (self, query, 50, 6), (self, query, 50, 9)])
 
             p1 = Process(target=self.pull_from_API, args=(query, 100, 0,return_tweets,"p1"))
-            p2 = Process(target=self.pull_from_API, args=(query, 100, 1,return_tweets,"p2"))
-            p3 = Process(target=self.pull_from_API, args=(query, 100, 2,return_tweets,"p3"))
-            p4 = Process(target=self.pull_from_API, args=(query, 100, 3,return_tweets,"p4"))
-            p5 = Process(target=self.pull_from_API, args=(query, 100, 4,return_tweets,"p5"))
-            p6 = Process(target=self.pull_from_API, args=(query, 100, 5,return_tweets,"p6"))
-            p7 = Process(target=self.pull_from_API, args=(query, 100, 6,return_tweets,"p7"))
-            p8 = Process(target=self.pull_from_API, args=(query, 100, 7,return_tweets,"p8"))
-            p9 = Process(target=self.pull_from_API, args=(query, 100, 8,return_tweets,"p9"))
-            p10 = Process(target=self.pull_from_API, args=(query, 100, 9,return_tweets,"p10"))
+            p2 = Process(target=self.pull_from_API, args=(query, 100, 2,return_tweets,"p2"))
+            p3 = Process(target=self.pull_from_API, args=(query, 100, 4,return_tweets,"p3"))
+            p4 = Process(target=self.pull_from_API, args=(query, 100, 6,return_tweets,"p4"))
+            p5 = Process(target=self.pull_from_API, args=(query, 100, 8,return_tweets,"p5"))
+            p6 = Process(target=self.pull_from_API, args=(query, 100, 10,return_tweets,"p6"))
+            p7 = Process(target=self.pull_from_API, args=(query, 100, 12,return_tweets,"p7"))
+            p8 = Process(target=self.pull_from_API, args=(query, 100, 14,return_tweets,"p8"))
+            p9 = Process(target=self.pull_from_API, args=(query, 100, 16,return_tweets,"p9"))
+            p10 = Process(target=self.pull_from_API, args=(query, 100, 18,return_tweets,"p10"))
             p1.start()
             p2.start()
             p3.start()
