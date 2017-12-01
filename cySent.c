@@ -1019,6 +1019,13 @@ static CYTHON_INLINE int __Pyx_PyList_Append(PyObject* list, PyObject* x) {
 #define __Pyx_PyList_Append(L,x) PyList_Append(L,x)
 #endif
 
+/* PyObjectCallMethod1.proto */
+static PyObject* __Pyx_PyObject_CallMethod1(PyObject* obj, PyObject* method_name, PyObject* arg);
+static PyObject* __Pyx__PyObject_CallMethod1(PyObject* method, PyObject* arg);
+
+/* append.proto */
+static CYTHON_INLINE int __Pyx_PyObject_Append(PyObject* L, PyObject* x);
+
 /* PyErrExceptionMatches.proto */
 #if CYTHON_FAST_THREAD_STATE
 #define __Pyx_PyErr_ExceptionMatches(err) __Pyx_PyErr_ExceptionMatchesInState(__pyx_tstate, err)
@@ -1042,13 +1049,6 @@ static double __Pyx__PyObject_AsDouble(PyObject* obj);
 ((likely(PyFloat_CheckExact(obj))) ?\
  PyFloat_AS_DOUBLE(obj) : __Pyx__PyObject_AsDouble(obj))
 #endif
-
-/* None.proto */
-static CYTHON_INLINE Py_ssize_t __Pyx_div_Py_ssize_t(Py_ssize_t, Py_ssize_t);
-
-/* UnaryNegOverflows.proto */
-#define UNARY_NEG_WOULD_OVERFLOW(x)\
-        (((x) < 0) & ((unsigned long)(x) == 0-(unsigned long)(x)))
 
 /* PyErrFetchRestore.proto */
 #if CYTHON_FAST_THREAD_STATE
@@ -1471,6 +1471,7 @@ static PyObject *__pyx_builtin_OverflowError;
 static PyObject *__pyx_builtin_enumerate;
 static PyObject *__pyx_builtin_IndexError;
 static const char __pyx_k_[] = " ";
+static const char __pyx_k_M[] = "M";
 static const char __pyx_k_N[] = "N";
 static const char __pyx_k_e[] = "e";
 static const char __pyx_k_f[] = "f";
@@ -1523,13 +1524,14 @@ static const char __pyx_k_tsize[] = "tsize";
 static const char __pyx_k_tweet[] = "tweet";
 static const char __pyx_k_write[] = "write";
 static const char __pyx_k_Cursor[] = "Cursor";
+static const char __pyx_k_append[] = "append";
 static const char __pyx_k_cySent[] = "cySent";
 static const char __pyx_k_format[] = "format";
-static const char __pyx_k_fucker[] = "fucker";
 static const char __pyx_k_import[] = "__import__";
 static const char __pyx_k_main_2[] = "__main__";
 static const char __pyx_k_module[] = "__module__";
 static const char __pyx_k_myTime[] = "myTime";
+static const char __pyx_k_norman[] = "norman";
 static const char __pyx_k_object[] = "object";
 static const char __pyx_k_search[] = "search";
 static const char __pyx_k_status[] = "status";
@@ -1569,8 +1571,8 @@ static const char __pyx_k_OverflowError[] = "OverflowError";
 static const char __pyx_k_Sentiment_txt[] = "Sentiment.txt";
 static const char __pyx_k_TwitterClient[] = "TwitterClient";
 static const char __pyx_k_retweet_count[] = "retweet_count";
+static const char __pyx_k_138_197_173_59[] = "138.197.173.59";
 static const char __pyx_k_fetched_tweets[] = "fetched_tweets";
-static const char __pyx_k_138_197_158_105[] = "138.197.158.105";
 static const char __pyx_k_consumer_secret[] = "consumer_secret";
 static const char __pyx_k_set_access_token[] = "set_access_token";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
@@ -1591,7 +1593,7 @@ static const char __pyx_k_TwitterClient_get_tweet_sentimen[] = "TwitterClient.ge
 static const char __pyx_k_b5mDtuukQXIGFo1suPiDUeui2ql05Hmu[] = "b5mDtuukQXIGFo1suPiDUeui2ql05HmujQv6eXjfjd4Xy3m7Dq";
 static const char __pyx_k_oTSeWtzgZBzhJ4qV9v0gY9nicM4g7SHr[] = "oTSeWtzgZBzhJ4qV9v0gY9nicM4g7SHrr5AgBd2xoBVRZ";
 static PyObject *__pyx_kp_s_;
-static PyObject *__pyx_kp_s_138_197_158_105;
+static PyObject *__pyx_kp_s_138_197_173_59;
 static PyObject *__pyx_kp_s_3008198358_Kduryv0qm7NvYHS1BmsXf;
 static PyObject *__pyx_kp_s_3OOyW4Z3eDDy5me2QRLtcRCGk;
 static PyObject *__pyx_n_s_API;
@@ -1602,6 +1604,7 @@ static PyObject *__pyx_kp_s_Error_Authentication_Failed;
 static PyObject *__pyx_n_s_Flask;
 static PyObject *__pyx_kp_s_Generic_Twitter_Class_for_senti;
 static PyObject *__pyx_n_s_IndexError;
+static PyObject *__pyx_n_s_M;
 static PyObject *__pyx_n_s_MemoryError;
 static PyObject *__pyx_n_s_N;
 static PyObject *__pyx_kp_s_Negative_tweets_percentage;
@@ -1629,6 +1632,7 @@ static PyObject *__pyx_n_s_analysis;
 static PyObject *__pyx_kp_s_anime_filter_links_lang_en;
 static PyObject *__pyx_n_s_api;
 static PyObject *__pyx_n_s_app;
+static PyObject *__pyx_n_s_append;
 static PyObject *__pyx_n_s_array;
 static PyObject *__pyx_n_s_auth;
 static PyObject *__pyx_n_s_b5mDtuukQXIGFo1suPiDUeui2ql05Hmu;
@@ -1650,7 +1654,6 @@ static PyObject *__pyx_n_s_fetched_tweets;
 static PyObject *__pyx_n_s_file;
 static PyObject *__pyx_n_s_flask;
 static PyObject *__pyx_n_s_format;
-static PyObject *__pyx_n_s_fucker;
 static PyObject *__pyx_n_s_genRank;
 static PyObject *__pyx_n_s_get_tweet_sentiment;
 static PyObject *__pyx_n_s_get_tweets;
@@ -1669,6 +1672,7 @@ static PyObject *__pyx_n_s_module;
 static PyObject *__pyx_n_s_myTime;
 static PyObject *__pyx_n_s_name;
 static PyObject *__pyx_kp_s_negative;
+static PyObject *__pyx_n_s_norman;
 static PyObject *__pyx_n_s_ntweets;
 static PyObject *__pyx_n_s_oTSeWtzgZBzhJ4qV9v0gY9nicM4g7SHr;
 static PyObject *__pyx_n_s_object;
@@ -1721,7 +1725,7 @@ static int __pyx_pf_7cpython_5array_5array___getbuffer__(arrayobject *__pyx_v_se
 static void __pyx_pf_7cpython_5array_5array_2__releasebuffer__(CYTHON_UNUSED arrayobject *__pyx_v_self, Py_buffer *__pyx_v_info); /* proto */
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_100;
-static PyObject *__pyx_int_400;
+static PyObject *__pyx_int_1000;
 static PyObject *__pyx_int_6528;
 static PyObject *__pyx_tuple__4;
 static PyObject *__pyx_tuple__5;
@@ -2381,7 +2385,7 @@ static PyObject *__pyx_pw_6cySent_13TwitterClient_5get_tweet_sentiment(PyObject 
 }
 
 static PyObject *__pyx_pf_6cySent_13TwitterClient_4get_tweet_sentiment(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_tweet) {
-  int __pyx_v_fucker;
+  int __pyx_v_norman;
   PyObject *__pyx_v_analysis = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -2397,15 +2401,15 @@ static PyObject *__pyx_pf_6cySent_13TwitterClient_4get_tweet_sentiment(CYTHON_UN
   /* "cySent.pyx":55
  *         '''
  *         # create TextBlob object of passed tweet text
- *         cdef int fucker =2             # <<<<<<<<<<<<<<
+ *         cdef int norman =2             # <<<<<<<<<<<<<<
  *         analysis = TextBlob(self.clean_tweet(tweet))
  *         # set sentiment
  */
-  __pyx_v_fucker = 2;
+  __pyx_v_norman = 2;
 
   /* "cySent.pyx":56
  *         # create TextBlob object of passed tweet text
- *         cdef int fucker =2
+ *         cdef int norman =2
  *         analysis = TextBlob(self.clean_tweet(tweet))             # <<<<<<<<<<<<<<
  *         # set sentiment
  *         if analysis.sentiment.polarity > 0:
@@ -2510,8 +2514,8 @@ static PyObject *__pyx_pf_6cySent_13TwitterClient_4get_tweet_sentiment(CYTHON_UN
  *         analysis = TextBlob(self.clean_tweet(tweet))
  *         # set sentiment
  *         if analysis.sentiment.polarity > 0:             # <<<<<<<<<<<<<<
- *             fucker = 1
- *             return fucker
+ *             norman = 1
+ *             return norman
  */
   __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_analysis, __pyx_n_s_sentiment); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -2527,21 +2531,21 @@ static PyObject *__pyx_pf_6cySent_13TwitterClient_4get_tweet_sentiment(CYTHON_UN
     /* "cySent.pyx":59
  *         # set sentiment
  *         if analysis.sentiment.polarity > 0:
- *             fucker = 1             # <<<<<<<<<<<<<<
- *             return fucker
+ *             norman = 1             # <<<<<<<<<<<<<<
+ *             return norman
  *         elif analysis.sentiment.polarity == 0:
  */
-    __pyx_v_fucker = 1;
+    __pyx_v_norman = 1;
 
     /* "cySent.pyx":60
  *         if analysis.sentiment.polarity > 0:
- *             fucker = 1
- *             return fucker             # <<<<<<<<<<<<<<
+ *             norman = 1
+ *             return norman             # <<<<<<<<<<<<<<
  *         elif analysis.sentiment.polarity == 0:
- *             fucker = 2
+ *             norman = 2
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_fucker); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_norman); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
@@ -2551,17 +2555,17 @@ static PyObject *__pyx_pf_6cySent_13TwitterClient_4get_tweet_sentiment(CYTHON_UN
  *         analysis = TextBlob(self.clean_tweet(tweet))
  *         # set sentiment
  *         if analysis.sentiment.polarity > 0:             # <<<<<<<<<<<<<<
- *             fucker = 1
- *             return fucker
+ *             norman = 1
+ *             return norman
  */
   }
 
   /* "cySent.pyx":61
- *             fucker = 1
- *             return fucker
+ *             norman = 1
+ *             return norman
  *         elif analysis.sentiment.polarity == 0:             # <<<<<<<<<<<<<<
- *             fucker = 2
- *             return fucker
+ *             norman = 2
+ *             return norman
  */
   __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_analysis, __pyx_n_s_sentiment); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -2576,56 +2580,56 @@ static PyObject *__pyx_pf_6cySent_13TwitterClient_4get_tweet_sentiment(CYTHON_UN
   if (__pyx_t_7) {
 
     /* "cySent.pyx":62
- *             return fucker
+ *             return norman
  *         elif analysis.sentiment.polarity == 0:
- *             fucker = 2             # <<<<<<<<<<<<<<
- *             return fucker
+ *             norman = 2             # <<<<<<<<<<<<<<
+ *             return norman
  *         else:
  */
-    __pyx_v_fucker = 2;
+    __pyx_v_norman = 2;
 
     /* "cySent.pyx":63
  *         elif analysis.sentiment.polarity == 0:
- *             fucker = 2
- *             return fucker             # <<<<<<<<<<<<<<
+ *             norman = 2
+ *             return norman             # <<<<<<<<<<<<<<
  *         else:
- *             fucker = 0
+ *             norman = 0
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_fucker); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 63, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_norman); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 63, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
     /* "cySent.pyx":61
- *             fucker = 1
- *             return fucker
+ *             norman = 1
+ *             return norman
  *         elif analysis.sentiment.polarity == 0:             # <<<<<<<<<<<<<<
- *             fucker = 2
- *             return fucker
+ *             norman = 2
+ *             return norman
  */
   }
 
   /* "cySent.pyx":65
- *             return fucker
+ *             return norman
  *         else:
- *             fucker = 0             # <<<<<<<<<<<<<<
- *             return fucker
+ *             norman = 0             # <<<<<<<<<<<<<<
+ *             return norman
  * 
  */
   /*else*/ {
-    __pyx_v_fucker = 0;
+    __pyx_v_norman = 0;
 
     /* "cySent.pyx":66
  *         else:
- *             fucker = 0
- *             return fucker             # <<<<<<<<<<<<<<
+ *             norman = 0
+ *             return norman             # <<<<<<<<<<<<<<
  * 
  *     def get_tweets(self, query, count):
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_fucker); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 66, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_norman); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 66, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
@@ -2658,7 +2662,7 @@ static PyObject *__pyx_pf_6cySent_13TwitterClient_4get_tweet_sentiment(CYTHON_UN
 }
 
 /* "cySent.pyx":68
- *             return fucker
+ *             return norman
  * 
  *     def get_tweets(self, query, count):             # <<<<<<<<<<<<<<
  *         '''
@@ -2740,8 +2744,7 @@ static PyObject *__pyx_pw_6cySent_13TwitterClient_7get_tweets(PyObject *__pyx_se
 }
 
 static PyObject *__pyx_pf_6cySent_13TwitterClient_6get_tweets(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_query, PyObject *__pyx_v_count) {
-  PyObject *__pyx_v_tweets = NULL;
-  int __pyx_v_sentPointer[0x190];
+  int __pyx_v_sentPointer[0x3E8];
   int __pyx_v_tsize;
   PyObject *__pyx_v_fetched_tweets = NULL;
   PyObject *__pyx_v_tweet = NULL;
@@ -2767,21 +2770,9 @@ static PyObject *__pyx_pf_6cySent_13TwitterClient_6get_tweets(CYTHON_UNUSED PyOb
   int __pyx_t_15;
   __Pyx_RefNannySetupContext("get_tweets", 0);
 
-  /* "cySent.pyx":73
- *         '''
- *         # empty list to store parsed tweets
- *         tweets = []             # <<<<<<<<<<<<<<
- *         cpdef int[400] sentPointer
- *         cdef int tsize = 0
- */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_v_tweets = ((PyObject*)__pyx_t_1);
-  __pyx_t_1 = 0;
-
   /* "cySent.pyx":75
- *         tweets = []
- *         cpdef int[400] sentPointer
+ *         global tweets
+ *         cpdef int[1000] sentPointer
  *         cdef int tsize = 0             # <<<<<<<<<<<<<<
  *         try:
  *             # call twitter api to fetch tweets
@@ -2789,7 +2780,7 @@ static PyObject *__pyx_pf_6cySent_13TwitterClient_6get_tweets(CYTHON_UNUSED PyOb
   __pyx_v_tsize = 0;
 
   /* "cySent.pyx":76
- *         cpdef int[400] sentPointer
+ *         cpdef int[1000] sentPointer
  *         cdef int tsize = 0
  *         try:             # <<<<<<<<<<<<<<
  *             # call twitter api to fetch tweets
@@ -2798,21 +2789,21 @@ static PyObject *__pyx_pf_6cySent_13TwitterClient_6get_tweets(CYTHON_UNUSED PyOb
   {
     __Pyx_PyThreadState_declare
     __Pyx_PyThreadState_assign
-    __Pyx_ExceptionSave(&__pyx_t_2, &__pyx_t_3, &__pyx_t_4);
+    __Pyx_ExceptionSave(&__pyx_t_1, &__pyx_t_2, &__pyx_t_3);
+    __Pyx_XGOTREF(__pyx_t_1);
     __Pyx_XGOTREF(__pyx_t_2);
     __Pyx_XGOTREF(__pyx_t_3);
-    __Pyx_XGOTREF(__pyx_t_4);
     /*try:*/ {
 
       /* "cySent.pyx":79
  *             # call twitter api to fetch tweets
  *             #fetched_tweets = self.api.search(q = query, count = count)
  *             fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]             # <<<<<<<<<<<<<<
- *             tsize = len(fetched_tweets)
  *             # parsing tweets one by one
+ *             for tweet in fetched_tweets:
  */
-      __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 79, __pyx_L3_error)
-      __Pyx_GOTREF(__pyx_t_1);
+      __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 79, __pyx_L3_error)
+      __Pyx_GOTREF(__pyx_t_4);
       __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_tweepy); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 79, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_6);
       __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_Cursor); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 79, __pyx_L3_error)
@@ -2925,75 +2916,65 @@ static PyObject *__pyx_pf_6cySent_13TwitterClient_6get_tweets(CYTHON_UNUSED PyOb
         }
         __Pyx_XDECREF_SET(__pyx_v_status, __pyx_t_5);
         __pyx_t_5 = 0;
-        if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_v_status))) __PYX_ERR(0, 79, __pyx_L3_error)
+        if (unlikely(__Pyx_ListComp_Append(__pyx_t_4, (PyObject*)__pyx_v_status))) __PYX_ERR(0, 79, __pyx_L3_error)
       }
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __pyx_v_fetched_tweets = ((PyObject*)__pyx_t_1);
-      __pyx_t_1 = 0;
+      __pyx_v_fetched_tweets = ((PyObject*)__pyx_t_4);
+      __pyx_t_4 = 0;
 
-      /* "cySent.pyx":80
- *             #fetched_tweets = self.api.search(q = query, count = count)
+      /* "cySent.pyx":81
  *             fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
- *             tsize = len(fetched_tweets)             # <<<<<<<<<<<<<<
- *             # parsing tweets one by one
- *             for tweet in fetched_tweets:
- */
-      __pyx_t_10 = PyList_GET_SIZE(__pyx_v_fetched_tweets); if (unlikely(__pyx_t_10 == ((Py_ssize_t)-1))) __PYX_ERR(0, 80, __pyx_L3_error)
-      __pyx_v_tsize = __pyx_t_10;
-
-      /* "cySent.pyx":82
- *             tsize = len(fetched_tweets)
  *             # parsing tweets one by one
  *             for tweet in fetched_tweets:             # <<<<<<<<<<<<<<
  *                 # empty dictionary to store required params of a tweet
  *                 parsed_tweet = {}
  */
-      __pyx_t_1 = __pyx_v_fetched_tweets; __Pyx_INCREF(__pyx_t_1); __pyx_t_10 = 0;
+      __pyx_t_4 = __pyx_v_fetched_tweets; __Pyx_INCREF(__pyx_t_4); __pyx_t_10 = 0;
       for (;;) {
-        if (__pyx_t_10 >= PyList_GET_SIZE(__pyx_t_1)) break;
+        if (__pyx_t_10 >= PyList_GET_SIZE(__pyx_t_4)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_8 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_10); __Pyx_INCREF(__pyx_t_8); __pyx_t_10++; if (unlikely(0 < 0)) __PYX_ERR(0, 82, __pyx_L3_error)
+        __pyx_t_8 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_10); __Pyx_INCREF(__pyx_t_8); __pyx_t_10++; if (unlikely(0 < 0)) __PYX_ERR(0, 81, __pyx_L3_error)
         #else
-        __pyx_t_8 = PySequence_ITEM(__pyx_t_1, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 82, __pyx_L3_error)
+        __pyx_t_8 = PySequence_ITEM(__pyx_t_4, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 81, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_8);
         #endif
         __Pyx_XDECREF_SET(__pyx_v_tweet, __pyx_t_8);
         __pyx_t_8 = 0;
 
-        /* "cySent.pyx":84
+        /* "cySent.pyx":83
  *             for tweet in fetched_tweets:
  *                 # empty dictionary to store required params of a tweet
  *                 parsed_tweet = {}             # <<<<<<<<<<<<<<
  * 
  *                 # saving text of tweet
  */
-        __pyx_t_8 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 84, __pyx_L3_error)
+        __pyx_t_8 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 83, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_8);
         __Pyx_XDECREF_SET(__pyx_v_parsed_tweet, ((PyObject*)__pyx_t_8));
         __pyx_t_8 = 0;
 
-        /* "cySent.pyx":87
+        /* "cySent.pyx":86
  * 
  *                 # saving text of tweet
  *                 parsed_tweet['text'] = tweet.text             # <<<<<<<<<<<<<<
  *                 # saving sentiment of tweet
  *                 sentPointer[tsize] = self.get_tweet_sentiment(tweet.text)
  */
-        __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_tweet, __pyx_n_s_text); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 87, __pyx_L3_error)
+        __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_tweet, __pyx_n_s_text); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 86, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_8);
-        if (unlikely(PyDict_SetItem(__pyx_v_parsed_tweet, __pyx_n_s_text, __pyx_t_8) < 0)) __PYX_ERR(0, 87, __pyx_L3_error)
+        if (unlikely(PyDict_SetItem(__pyx_v_parsed_tweet, __pyx_n_s_text, __pyx_t_8) < 0)) __PYX_ERR(0, 86, __pyx_L3_error)
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-        /* "cySent.pyx":89
+        /* "cySent.pyx":88
  *                 parsed_tweet['text'] = tweet.text
  *                 # saving sentiment of tweet
  *                 sentPointer[tsize] = self.get_tweet_sentiment(tweet.text)             # <<<<<<<<<<<<<<
  *                 tsize=tsize+1
  *                 # appending parsed tweet to tweets list
  */
-        __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_tweet_sentiment); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 89, __pyx_L3_error)
+        __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_get_tweet_sentiment); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 88, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_tweet, __pyx_n_s_text); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 89, __pyx_L3_error)
+        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_tweet, __pyx_n_s_text); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 88, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_6);
         __pyx_t_9 = NULL;
         if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -3006,14 +2987,14 @@ static PyObject *__pyx_pf_6cySent_13TwitterClient_6get_tweets(CYTHON_UNUSED PyOb
           }
         }
         if (!__pyx_t_9) {
-          __pyx_t_8 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 89, __pyx_L3_error)
+          __pyx_t_8 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 88, __pyx_L3_error)
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_GOTREF(__pyx_t_8);
         } else {
           #if CYTHON_FAST_PYCALL
           if (PyFunction_Check(__pyx_t_5)) {
             PyObject *__pyx_temp[2] = {__pyx_t_9, __pyx_t_6};
-            __pyx_t_8 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 89, __pyx_L3_error)
+            __pyx_t_8 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 88, __pyx_L3_error)
             __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
             __Pyx_GOTREF(__pyx_t_8);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -3022,30 +3003,30 @@ static PyObject *__pyx_pf_6cySent_13TwitterClient_6get_tweets(CYTHON_UNUSED PyOb
           #if CYTHON_FAST_PYCCALL
           if (__Pyx_PyFastCFunction_Check(__pyx_t_5)) {
             PyObject *__pyx_temp[2] = {__pyx_t_9, __pyx_t_6};
-            __pyx_t_8 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 89, __pyx_L3_error)
+            __pyx_t_8 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 88, __pyx_L3_error)
             __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
             __Pyx_GOTREF(__pyx_t_8);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           } else
           #endif
           {
-            __pyx_t_7 = PyTuple_New(1+1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 89, __pyx_L3_error)
+            __pyx_t_7 = PyTuple_New(1+1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 88, __pyx_L3_error)
             __Pyx_GOTREF(__pyx_t_7);
             __Pyx_GIVEREF(__pyx_t_9); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_9); __pyx_t_9 = NULL;
             __Pyx_GIVEREF(__pyx_t_6);
             PyTuple_SET_ITEM(__pyx_t_7, 0+1, __pyx_t_6);
             __pyx_t_6 = 0;
-            __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_7, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 89, __pyx_L3_error)
+            __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_7, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 88, __pyx_L3_error)
             __Pyx_GOTREF(__pyx_t_8);
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
           }
         }
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __pyx_t_12 = __Pyx_PyInt_As_int(__pyx_t_8); if (unlikely((__pyx_t_12 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 89, __pyx_L3_error)
+        __pyx_t_12 = __Pyx_PyInt_As_int(__pyx_t_8); if (unlikely((__pyx_t_12 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 88, __pyx_L3_error)
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
         (__pyx_v_sentPointer[__pyx_v_tsize]) = __pyx_t_12;
 
-        /* "cySent.pyx":90
+        /* "cySent.pyx":89
  *                 # saving sentiment of tweet
  *                 sentPointer[tsize] = self.get_tweet_sentiment(tweet.text)
  *                 tsize=tsize+1             # <<<<<<<<<<<<<<
@@ -3054,42 +3035,48 @@ static PyObject *__pyx_pf_6cySent_13TwitterClient_6get_tweets(CYTHON_UNUSED PyOb
  */
         __pyx_v_tsize = (__pyx_v_tsize + 1);
 
-        /* "cySent.pyx":92
+        /* "cySent.pyx":91
  *                 tsize=tsize+1
  *                 # appending parsed tweet to tweets list
  *                 if tweet.retweet_count > 0:             # <<<<<<<<<<<<<<
  *                     # if tweet has retweets, ensure that it is appended only once
  *                     if parsed_tweet not in tweets:
  */
-        __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_tweet, __pyx_n_s_retweet_count); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 92, __pyx_L3_error)
+        __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_tweet, __pyx_n_s_retweet_count); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 91, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_8);
-        __pyx_t_5 = PyObject_RichCompare(__pyx_t_8, __pyx_int_0, Py_GT); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 92, __pyx_L3_error)
+        __pyx_t_5 = PyObject_RichCompare(__pyx_t_8, __pyx_int_0, Py_GT); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 91, __pyx_L3_error)
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-        __pyx_t_13 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_13 < 0)) __PYX_ERR(0, 92, __pyx_L3_error)
+        __pyx_t_13 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_13 < 0)) __PYX_ERR(0, 91, __pyx_L3_error)
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         if (__pyx_t_13) {
 
-          /* "cySent.pyx":94
+          /* "cySent.pyx":93
  *                 if tweet.retweet_count > 0:
  *                     # if tweet has retweets, ensure that it is appended only once
  *                     if parsed_tweet not in tweets:             # <<<<<<<<<<<<<<
  *                         tweets.append(parsed_tweet)
  *                 else:
  */
-          __pyx_t_13 = (__Pyx_PySequence_ContainsTF(__pyx_v_parsed_tweet, __pyx_v_tweets, Py_NE)); if (unlikely(__pyx_t_13 < 0)) __PYX_ERR(0, 94, __pyx_L3_error)
+          __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_tweets); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 93, __pyx_L3_error)
+          __Pyx_GOTREF(__pyx_t_5);
+          __pyx_t_13 = (__Pyx_PySequence_ContainsTF(__pyx_v_parsed_tweet, __pyx_t_5, Py_NE)); if (unlikely(__pyx_t_13 < 0)) __PYX_ERR(0, 93, __pyx_L3_error)
+          __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __pyx_t_14 = (__pyx_t_13 != 0);
           if (__pyx_t_14) {
 
-            /* "cySent.pyx":95
+            /* "cySent.pyx":94
  *                     # if tweet has retweets, ensure that it is appended only once
  *                     if parsed_tweet not in tweets:
  *                         tweets.append(parsed_tweet)             # <<<<<<<<<<<<<<
  *                 else:
  *                     tweets.append(parsed_tweet)
  */
-            __pyx_t_15 = __Pyx_PyList_Append(__pyx_v_tweets, __pyx_v_parsed_tweet); if (unlikely(__pyx_t_15 == ((int)-1))) __PYX_ERR(0, 95, __pyx_L3_error)
+            __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_tweets); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 94, __pyx_L3_error)
+            __Pyx_GOTREF(__pyx_t_5);
+            __pyx_t_15 = __Pyx_PyObject_Append(__pyx_t_5, __pyx_v_parsed_tweet); if (unlikely(__pyx_t_15 == ((int)-1))) __PYX_ERR(0, 94, __pyx_L3_error)
+            __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-            /* "cySent.pyx":94
+            /* "cySent.pyx":93
  *                 if tweet.retweet_count > 0:
  *                     # if tweet has retweets, ensure that it is appended only once
  *                     if parsed_tweet not in tweets:             # <<<<<<<<<<<<<<
@@ -3098,7 +3085,7 @@ static PyObject *__pyx_pf_6cySent_13TwitterClient_6get_tweets(CYTHON_UNUSED PyOb
  */
           }
 
-          /* "cySent.pyx":92
+          /* "cySent.pyx":91
  *                 tsize=tsize+1
  *                 # appending parsed tweet to tweets list
  *                 if tweet.retweet_count > 0:             # <<<<<<<<<<<<<<
@@ -3108,7 +3095,7 @@ static PyObject *__pyx_pf_6cySent_13TwitterClient_6get_tweets(CYTHON_UNUSED PyOb
           goto __pyx_L13;
         }
 
-        /* "cySent.pyx":97
+        /* "cySent.pyx":96
  *                         tweets.append(parsed_tweet)
  *                 else:
  *                     tweets.append(parsed_tweet)             # <<<<<<<<<<<<<<
@@ -3116,21 +3103,24 @@ static PyObject *__pyx_pf_6cySent_13TwitterClient_6get_tweets(CYTHON_UNUSED PyOb
  *             return sentPointer
  */
         /*else*/ {
-          __pyx_t_15 = __Pyx_PyList_Append(__pyx_v_tweets, __pyx_v_parsed_tweet); if (unlikely(__pyx_t_15 == ((int)-1))) __PYX_ERR(0, 97, __pyx_L3_error)
+          __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_tweets); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 96, __pyx_L3_error)
+          __Pyx_GOTREF(__pyx_t_5);
+          __pyx_t_15 = __Pyx_PyObject_Append(__pyx_t_5, __pyx_v_parsed_tweet); if (unlikely(__pyx_t_15 == ((int)-1))) __PYX_ERR(0, 96, __pyx_L3_error)
+          __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         }
         __pyx_L13:;
 
-        /* "cySent.pyx":82
- *             tsize = len(fetched_tweets)
+        /* "cySent.pyx":81
+ *             fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
  *             # parsing tweets one by one
  *             for tweet in fetched_tweets:             # <<<<<<<<<<<<<<
  *                 # empty dictionary to store required params of a tweet
  *                 parsed_tweet = {}
  */
       }
-      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "cySent.pyx":99
+      /* "cySent.pyx":98
  *                     tweets.append(parsed_tweet)
  *                                 # return parsed tweets
  *             return sentPointer             # <<<<<<<<<<<<<<
@@ -3138,14 +3128,14 @@ static PyObject *__pyx_pf_6cySent_13TwitterClient_6get_tweets(CYTHON_UNUSED PyOb
  *         except tweepy.TweepError as e:
  */
       __Pyx_XDECREF(__pyx_r);
-      __pyx_t_1 = __Pyx_carray_to_py_int(__pyx_v_sentPointer, 0x190); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 99, __pyx_L3_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __pyx_r = __pyx_t_1;
-      __pyx_t_1 = 0;
+      __pyx_t_4 = __Pyx_carray_to_py_int(__pyx_v_sentPointer, 0x3E8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 98, __pyx_L3_error)
+      __Pyx_GOTREF(__pyx_t_4);
+      __pyx_r = __pyx_t_4;
+      __pyx_t_4 = 0;
       goto __pyx_L7_try_return;
 
       /* "cySent.pyx":76
- *         cpdef int[400] sentPointer
+ *         cpdef int[1000] sentPointer
  *         cdef int tsize = 0
  *         try:             # <<<<<<<<<<<<<<
  *             # call twitter api to fetch tweets
@@ -3158,53 +3148,53 @@ static PyObject *__pyx_pf_6cySent_13TwitterClient_6get_tweets(CYTHON_UNUSED PyOb
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "cySent.pyx":101
+    /* "cySent.pyx":100
  *             return sentPointer
  * 
  *         except tweepy.TweepError as e:             # <<<<<<<<<<<<<<
  *             # print error (if any)
  *             print("Error : " + str(e))
  */
-    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_tweepy); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 101, __pyx_L5_except_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_TweepError); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 101, __pyx_L5_except_error)
+    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_tweepy); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 100, __pyx_L5_except_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_TweepError); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 100, __pyx_L5_except_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_12 = __Pyx_PyErr_ExceptionMatches(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     if (__pyx_t_12) {
       __Pyx_AddTraceback("cySent.TwitterClient.get_tweets", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_5, &__pyx_t_1, &__pyx_t_8) < 0) __PYX_ERR(0, 101, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_5, &__pyx_t_4, &__pyx_t_8) < 0) __PYX_ERR(0, 100, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_GOTREF(__pyx_t_4);
       __Pyx_GOTREF(__pyx_t_8);
-      __Pyx_INCREF(__pyx_t_1);
-      __pyx_v_e = __pyx_t_1;
+      __Pyx_INCREF(__pyx_t_4);
+      __pyx_v_e = __pyx_t_4;
 
-      /* "cySent.pyx":103
+      /* "cySent.pyx":102
  *         except tweepy.TweepError as e:
  *             # print error (if any)
  *             print("Error : " + str(e))             # <<<<<<<<<<<<<<
+ * 
  * respMain=""
- * def addline(aLine):
  */
-      __pyx_t_7 = PyTuple_New(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 103, __pyx_L5_except_error)
+      __pyx_t_7 = PyTuple_New(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 102, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_INCREF(__pyx_v_e);
       __Pyx_GIVEREF(__pyx_v_e);
       PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_v_e);
-      __pyx_t_6 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_7, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 103, __pyx_L5_except_error)
+      __pyx_t_6 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_7, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 102, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __pyx_t_7 = PyNumber_Add(__pyx_kp_s_Error, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 103, __pyx_L5_except_error)
+      __pyx_t_7 = PyNumber_Add(__pyx_kp_s_Error, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 102, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (__Pyx_PrintOne(0, __pyx_t_7) < 0) __PYX_ERR(0, 103, __pyx_L5_except_error)
+      if (__Pyx_PrintOne(0, __pyx_t_7) < 0) __PYX_ERR(0, 102, __pyx_L5_except_error)
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       goto __pyx_L4_exception_handled;
     }
@@ -3212,32 +3202,32 @@ static PyObject *__pyx_pf_6cySent_13TwitterClient_6get_tweets(CYTHON_UNUSED PyOb
     __pyx_L5_except_error:;
 
     /* "cySent.pyx":76
- *         cpdef int[400] sentPointer
+ *         cpdef int[1000] sentPointer
  *         cdef int tsize = 0
  *         try:             # <<<<<<<<<<<<<<
  *             # call twitter api to fetch tweets
  *             #fetched_tweets = self.api.search(q = query, count = count)
  */
+    __Pyx_XGIVEREF(__pyx_t_1);
     __Pyx_XGIVEREF(__pyx_t_2);
     __Pyx_XGIVEREF(__pyx_t_3);
-    __Pyx_XGIVEREF(__pyx_t_4);
-    __Pyx_ExceptionReset(__pyx_t_2, __pyx_t_3, __pyx_t_4);
+    __Pyx_ExceptionReset(__pyx_t_1, __pyx_t_2, __pyx_t_3);
     goto __pyx_L1_error;
     __pyx_L7_try_return:;
+    __Pyx_XGIVEREF(__pyx_t_1);
     __Pyx_XGIVEREF(__pyx_t_2);
     __Pyx_XGIVEREF(__pyx_t_3);
-    __Pyx_XGIVEREF(__pyx_t_4);
-    __Pyx_ExceptionReset(__pyx_t_2, __pyx_t_3, __pyx_t_4);
+    __Pyx_ExceptionReset(__pyx_t_1, __pyx_t_2, __pyx_t_3);
     goto __pyx_L0;
     __pyx_L4_exception_handled:;
+    __Pyx_XGIVEREF(__pyx_t_1);
     __Pyx_XGIVEREF(__pyx_t_2);
     __Pyx_XGIVEREF(__pyx_t_3);
-    __Pyx_XGIVEREF(__pyx_t_4);
-    __Pyx_ExceptionReset(__pyx_t_2, __pyx_t_3, __pyx_t_4);
+    __Pyx_ExceptionReset(__pyx_t_1, __pyx_t_2, __pyx_t_3);
   }
 
   /* "cySent.pyx":68
- *             return fucker
+ *             return norman
  * 
  *     def get_tweets(self, query, count):             # <<<<<<<<<<<<<<
  *         '''
@@ -3248,7 +3238,7 @@ static PyObject *__pyx_pf_6cySent_13TwitterClient_6get_tweets(CYTHON_UNUSED PyOb
   __pyx_r = Py_None; __Pyx_INCREF(Py_None);
   goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
@@ -3257,7 +3247,6 @@ static PyObject *__pyx_pf_6cySent_13TwitterClient_6get_tweets(CYTHON_UNUSED PyOb
   __Pyx_AddTraceback("cySent.TwitterClient.get_tweets", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
-  __Pyx_XDECREF(__pyx_v_tweets);
   __Pyx_XDECREF(__pyx_v_fetched_tweets);
   __Pyx_XDECREF(__pyx_v_tweet);
   __Pyx_XDECREF(__pyx_v_parsed_tweet);
@@ -3268,9 +3257,9 @@ static PyObject *__pyx_pf_6cySent_13TwitterClient_6get_tweets(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "cySent.pyx":105
- *             print("Error : " + str(e))
+/* "cySent.pyx":106
  * respMain=""
+ * tweets = []
  * def addline(aLine):             # <<<<<<<<<<<<<<
  *     global respMain
  *     respMain=respMain+"\r\n<br />"+aLine
@@ -3297,25 +3286,25 @@ static PyObject *__pyx_pf_6cySent_addline(CYTHON_UNUSED PyObject *__pyx_self, Py
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("addline", 0);
 
-  /* "cySent.pyx":107
+  /* "cySent.pyx":108
  * def addline(aLine):
  *     global respMain
  *     respMain=respMain+"\r\n<br />"+aLine             # <<<<<<<<<<<<<<
  *     return
  * #@Cython.boundscheck(False)
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_respMain); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_respMain); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_kp_s_br); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_kp_s_br); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyNumber_Add(__pyx_t_2, __pyx_v_aLine); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Add(__pyx_t_2, __pyx_v_aLine); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_respMain, __pyx_t_1) < 0) __PYX_ERR(0, 107, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_respMain, __pyx_t_1) < 0) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cySent.pyx":108
+  /* "cySent.pyx":109
  *     global respMain
  *     respMain=respMain+"\r\n<br />"+aLine
  *     return             # <<<<<<<<<<<<<<
@@ -3326,9 +3315,9 @@ static PyObject *__pyx_pf_6cySent_addline(CYTHON_UNUSED PyObject *__pyx_self, Py
   __pyx_r = Py_None; __Pyx_INCREF(Py_None);
   goto __pyx_L0;
 
-  /* "cySent.pyx":105
- *             print("Error : " + str(e))
+  /* "cySent.pyx":106
  * respMain=""
+ * tweets = []
  * def addline(aLine):             # <<<<<<<<<<<<<<
  *     global respMain
  *     respMain=respMain+"\r\n<br />"+aLine
@@ -3346,12 +3335,12 @@ static PyObject *__pyx_pf_6cySent_addline(CYTHON_UNUSED PyObject *__pyx_self, Py
   return __pyx_r;
 }
 
-/* "cySent.pyx":117
+/* "cySent.pyx":118
  * #        N = N +(param[i]==1)
  * #    return N
  * def main():             # <<<<<<<<<<<<<<
  *     global tweets
- *     # creating object of TwitterClient Class
+ * 
  */
 
 /* Python wrapper */
@@ -3371,11 +3360,12 @@ static PyObject *__pyx_pw_6cySent_3main(PyObject *__pyx_self, CYTHON_UNUSED PyOb
 static PyObject *__pyx_pf_6cySent_2main(CYTHON_UNUSED PyObject *__pyx_self) {
   PyObject *__pyx_v_myTime = NULL;
   PyObject *__pyx_v_api = NULL;
-  int __pyx_v_point[0x190];
+  int __pyx_v_point[0x3E8];
   CYTHON_UNUSED int __pyx_v_k;
   int __pyx_v_i;
   int __pyx_v_N;
   PyObject *__pyx_v_ptweets = NULL;
+  int __pyx_v_M;
   PyObject *__pyx_v_ntweets = NULL;
   PyObject *__pyx_v_tweet = NULL;
   PyObject *__pyx_v_f = NULL;
@@ -3385,31 +3375,29 @@ static PyObject *__pyx_pf_6cySent_2main(CYTHON_UNUSED PyObject *__pyx_self) {
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
-  int __pyx_t_4[0x190];
-  Py_ssize_t __pyx_t_5;
+  int __pyx_t_4[0x3E8];
+  PyObject *__pyx_t_5 = NULL;
   PyObject *__pyx_t_6 = NULL;
-  PyObject *__pyx_t_7 = NULL;
+  Py_ssize_t __pyx_t_7;
   int __pyx_t_8;
   int __pyx_t_9;
   int __pyx_t_10;
   double __pyx_t_11;
-  Py_ssize_t __pyx_t_12;
+  PyObject *__pyx_t_12 = NULL;
   PyObject *__pyx_t_13 = NULL;
-  PyObject *__pyx_t_14 = NULL;
-  PyObject *(*__pyx_t_15)(PyObject *);
-  int __pyx_t_16;
+  PyObject *(*__pyx_t_14)(PyObject *);
   __Pyx_RefNannySetupContext("main", 0);
 
-  /* "cySent.pyx":120
- *     global tweets
+  /* "cySent.pyx":122
+ * 
  *     # creating object of TwitterClient Class
  *     myTime = time.time()             # <<<<<<<<<<<<<<
  *     api = TwitterClient()
  *     # calling function to get tweets
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_time); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 120, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_time); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 122, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_time); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 120, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_time); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 122, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -3423,24 +3411,24 @@ static PyObject *__pyx_pf_6cySent_2main(CYTHON_UNUSED PyObject *__pyx_self) {
     }
   }
   if (__pyx_t_2) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 120, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 122, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 120, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 122, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_myTime = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cySent.pyx":121
+  /* "cySent.pyx":123
  *     # creating object of TwitterClient Class
  *     myTime = time.time()
  *     api = TwitterClient()             # <<<<<<<<<<<<<<
  *     # calling function to get tweets
- *     cpdef int point[400]
+ *     cpdef int point[1000]
  */
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_TwitterClient); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 121, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_TwitterClient); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 123, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_2 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -3453,150 +3441,244 @@ static PyObject *__pyx_pf_6cySent_2main(CYTHON_UNUSED PyObject *__pyx_self) {
     }
   }
   if (__pyx_t_2) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 121, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 123, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 121, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 123, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_api = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cySent.pyx":124
+  /* "cySent.pyx":126
  *     # calling function to get tweets
- *     cpdef int point[400]
- *     point = api.get_tweets(query = 'anime -filter:links lang:en', count = 400)             # <<<<<<<<<<<<<<
+ *     cpdef int point[1000]
+ *     point = api.get_tweets(query = 'anime -filter:links lang:en', count = 1000)             # <<<<<<<<<<<<<<
+ *     addline("Time is: " + str(time.time()-myTime))
  *     addline("total "+str(len(tweets)))
- *     cdef int k =len(tweets)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_api, __pyx_n_s_get_tweets); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_api, __pyx_n_s_get_tweets); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_query, __pyx_kp_s_anime_filter_links_lang_en) < 0) __PYX_ERR(0, 124, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_count, __pyx_int_400) < 0) __PYX_ERR(0, 124, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 124, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_query, __pyx_kp_s_anime_filter_links_lang_en) < 0) __PYX_ERR(0, 126, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_count, __pyx_int_1000) < 0) __PYX_ERR(0, 126, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(__Pyx_carray_from_py_int(__pyx_t_2, __pyx_t_4, 0x190) < 0)) __PYX_ERR(0, 124, __pyx_L1_error)
+  if (unlikely(__Pyx_carray_from_py_int(__pyx_t_2, __pyx_t_4, 0x3E8) < 0)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely((0x190) != (0x190))) {
-    PyErr_Format(PyExc_ValueError, "Assignment to slice of wrong length, expected %" CYTHON_FORMAT_SSIZE_T "d, got %" CYTHON_FORMAT_SSIZE_T "d", (Py_ssize_t)(0x190), (Py_ssize_t)(0x190));
-    __PYX_ERR(0, 124, __pyx_L1_error)
+  if (unlikely((0x3E8) != (0x3E8))) {
+    PyErr_Format(PyExc_ValueError, "Assignment to slice of wrong length, expected %" CYTHON_FORMAT_SSIZE_T "d, got %" CYTHON_FORMAT_SSIZE_T "d", (Py_ssize_t)(0x3E8), (Py_ssize_t)(0x3E8));
+    __PYX_ERR(0, 126, __pyx_L1_error)
   }
-  memcpy(&(__pyx_v_point[0]), __pyx_t_4, sizeof(__pyx_v_point[0]) * (0x190));
+  memcpy(&(__pyx_v_point[0]), __pyx_t_4, sizeof(__pyx_v_point[0]) * (0x3E8));
 
-  /* "cySent.pyx":125
- *     cpdef int point[400]
- *     point = api.get_tweets(query = 'anime -filter:links lang:en', count = 400)
- *     addline("total "+str(len(tweets)))             # <<<<<<<<<<<<<<
+  /* "cySent.pyx":127
+ *     cpdef int point[1000]
+ *     point = api.get_tweets(query = 'anime -filter:links lang:en', count = 1000)
+ *     addline("Time is: " + str(time.time()-myTime))             # <<<<<<<<<<<<<<
+ *     addline("total "+str(len(tweets)))
  *     cdef int k =len(tweets)
- *     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
  */
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_addline); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_addline); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_tweets); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 125, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyInt_FromSsize_t(__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_time); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 127, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_time); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_GIVEREF(__pyx_t_1);
-  PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_1);
-  __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_6))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_6);
+    if (likely(__pyx_t_5)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
+      __Pyx_INCREF(__pyx_t_5);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_6, function);
+    }
+  }
+  if (__pyx_t_5) {
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  } else {
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L1_error)
+  }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = PyNumber_Add(__pyx_kp_s_total, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __pyx_t_6 = PyNumber_Subtract(__pyx_t_1, __pyx_v_myTime); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = NULL;
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_6);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_6);
+  __pyx_t_6 = 0;
+  __pyx_t_6 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_1, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 127, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyNumber_Add(__pyx_kp_s_Time_is, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
-    __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_3);
-    if (likely(__pyx_t_1)) {
+    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_6)) {
       PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-      __Pyx_INCREF(__pyx_t_1);
+      __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(function);
       __Pyx_DECREF_SET(__pyx_t_3, function);
     }
   }
-  if (!__pyx_t_1) {
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 125, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  if (!__pyx_t_6) {
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_GOTREF(__pyx_t_2);
   } else {
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_3)) {
-      PyObject *__pyx_temp[2] = {__pyx_t_1, __pyx_t_6};
-      __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 125, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
+      PyObject *__pyx_temp[2] = {__pyx_t_6, __pyx_t_1};
+      __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     } else
     #endif
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
-      PyObject *__pyx_temp[2] = {__pyx_t_1, __pyx_t_6};
-      __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 125, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
+      PyObject *__pyx_temp[2] = {__pyx_t_6, __pyx_t_1};
+      __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     } else
     #endif
     {
-      __pyx_t_7 = PyTuple_New(1+1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 125, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_7);
-      __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_1); __pyx_t_1 = NULL;
-      __Pyx_GIVEREF(__pyx_t_6);
-      PyTuple_SET_ITEM(__pyx_t_7, 0+1, __pyx_t_6);
-      __pyx_t_6 = 0;
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 125, __pyx_L1_error)
+      __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 127, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_6); __pyx_t_6 = NULL;
+      __Pyx_GIVEREF(__pyx_t_1);
+      PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_t_1);
+      __pyx_t_1 = 0;
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cySent.pyx":126
- *     point = api.get_tweets(query = 'anime -filter:links lang:en', count = 400)
+  /* "cySent.pyx":128
+ *     point = api.get_tweets(query = 'anime -filter:links lang:en', count = 1000)
+ *     addline("Time is: " + str(time.time()-myTime))
+ *     addline("total "+str(len(tweets)))             # <<<<<<<<<<<<<<
+ *     cdef int k =len(tweets)
+ *     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
+ */
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_addline); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_tweets); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_7 = PyObject_Length(__pyx_t_5); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 128, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = PyInt_FromSsize_t(__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_5);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_5);
+  __pyx_t_5 = 0;
+  __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_1, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyNumber_Add(__pyx_kp_s_total, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_5)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_5);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+    }
+  }
+  if (!__pyx_t_5) {
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 128, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_GOTREF(__pyx_t_2);
+  } else {
+    #if CYTHON_FAST_PYCALL
+    if (PyFunction_Check(__pyx_t_3)) {
+      PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_t_1};
+      __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 128, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    } else
+    #endif
+    #if CYTHON_FAST_PYCCALL
+    if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
+      PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_t_1};
+      __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 128, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    } else
+    #endif
+    {
+      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 128, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_6);
+      __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5); __pyx_t_5 = NULL;
+      __Pyx_GIVEREF(__pyx_t_1);
+      PyTuple_SET_ITEM(__pyx_t_6, 0+1, __pyx_t_1);
+      __pyx_t_1 = 0;
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 128, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    }
+  }
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "cySent.pyx":129
+ *     addline("Time is: " + str(time.time()-myTime))
  *     addline("total "+str(len(tweets)))
  *     cdef int k =len(tweets)             # <<<<<<<<<<<<<<
  *     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
  *     cdef int i =0
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_tweets); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 126, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_tweets); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 129, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 126, __pyx_L1_error)
+  __pyx_t_7 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 129, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_v_k = __pyx_t_5;
+  __pyx_v_k = __pyx_t_7;
 
-  /* "cySent.pyx":128
+  /* "cySent.pyx":131
  *     cdef int k =len(tweets)
  *     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
  *     cdef int i =0             # <<<<<<<<<<<<<<
  *     cdef int N = 0
- *     for i in prange(k, schedule='static', nogil=True):
+ *     for i in prange(k, schedule='dynamic', nogil=True, num_threads=64):
  */
   __pyx_v_i = 0;
 
-  /* "cySent.pyx":129
+  /* "cySent.pyx":132
  *     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
  *     cdef int i =0
  *     cdef int N = 0             # <<<<<<<<<<<<<<
- *     for i in prange(k, schedule='static', nogil=True):
+ *     for i in prange(k, schedule='dynamic', nogil=True, num_threads=64):
  *         N += (point[i]==1)
  */
   __pyx_v_N = 0;
 
-  /* "cySent.pyx":130
+  /* "cySent.pyx":133
  *     cdef int i =0
  *     cdef int N = 0
- *     for i in prange(k, schedule='static', nogil=True):             # <<<<<<<<<<<<<<
+ *     for i in prange(k, schedule='dynamic', nogil=True, num_threads=64):             # <<<<<<<<<<<<<<
  *         N += (point[i]==1)
  *     ptweets = N
  */
@@ -3620,19 +3702,19 @@ static PyObject *__pyx_pf_6cySent_2main(CYTHON_UNUSED PyObject *__pyx_self) {
             if (__pyx_t_10 > 0)
             {
                 #ifdef _OPENMP
-                #pragma omp parallel reduction(+:__pyx_v_N)
+                #pragma omp parallel reduction(+:__pyx_v_N) num_threads(64)
                 #endif /* _OPENMP */
                 {
                     #ifdef _OPENMP
-                    #pragma omp for firstprivate(__pyx_v_i) lastprivate(__pyx_v_i) schedule(static)
+                    #pragma omp for firstprivate(__pyx_v_i) lastprivate(__pyx_v_i) schedule(dynamic)
                     #endif /* _OPENMP */
                     for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_10; __pyx_t_9++){
                         {
                             __pyx_v_i = (int)(0 + 1 * __pyx_t_9);
 
-                            /* "cySent.pyx":131
+                            /* "cySent.pyx":134
  *     cdef int N = 0
- *     for i in prange(k, schedule='static', nogil=True):
+ *     for i in prange(k, schedule='dynamic', nogil=True, num_threads=64):
  *         N += (point[i]==1)             # <<<<<<<<<<<<<<
  *     ptweets = N
  *     #ptweets = parallelPositiveTweets(*point, k)
@@ -3651,10 +3733,10 @@ static PyObject *__pyx_pf_6cySent_2main(CYTHON_UNUSED PyObject *__pyx_self) {
         #endif
       }
 
-      /* "cySent.pyx":130
+      /* "cySent.pyx":133
  *     cdef int i =0
  *     cdef int N = 0
- *     for i in prange(k, schedule='static', nogil=True):             # <<<<<<<<<<<<<<
+ *     for i in prange(k, schedule='dynamic', nogil=True, num_threads=64):             # <<<<<<<<<<<<<<
  *         N += (point[i]==1)
  *     ptweets = N
  */
@@ -3670,654 +3752,48 @@ static PyObject *__pyx_pf_6cySent_2main(CYTHON_UNUSED PyObject *__pyx_self) {
       }
   }
 
-  /* "cySent.pyx":132
- *     for i in prange(k, schedule='static', nogil=True):
+  /* "cySent.pyx":135
+ *     for i in prange(k, schedule='dynamic', nogil=True, num_threads=64):
  *         N += (point[i]==1)
  *     ptweets = N             # <<<<<<<<<<<<<<
  *     #ptweets = parallelPositiveTweets(*point, k)
  *     #addline("positive "+str(float(len(ptweets))/float(len(tweets))))
  */
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_N); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_N); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_ptweets = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "cySent.pyx":135
+  /* "cySent.pyx":138
  *     #ptweets = parallelPositiveTweets(*point, k)
  *     #addline("positive "+str(float(len(ptweets))/float(len(tweets))))
  *     addline("positive "+str(float(ptweets)/float(len(tweets))))             # <<<<<<<<<<<<<<
  *     # percentage of positive tweets
- *     addline("Positive tweets percentage: "+''.format(100*len(ptweets)/len(tweets)))
+ *     addline("Positive tweets percentage: "+''.format(100*ptweets/len(tweets)))
  */
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_addline); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_addline); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_11 = __Pyx_PyObject_AsDouble(__pyx_v_ptweets); if (unlikely(__pyx_t_11 == ((double)((double)-1)) && PyErr_Occurred())) __PYX_ERR(0, 135, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_tweets); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 135, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_5 = PyObject_Length(__pyx_t_7); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 135, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (unlikely(((double)__pyx_t_5) == 0)) {
+  __pyx_t_11 = __Pyx_PyObject_AsDouble(__pyx_v_ptweets); if (unlikely(__pyx_t_11 == ((double)((double)-1)) && PyErr_Occurred())) __PYX_ERR(0, 138, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_tweets); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_7 = PyObject_Length(__pyx_t_6); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 138, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  if (unlikely(((double)__pyx_t_7) == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 135, __pyx_L1_error)
+    __PYX_ERR(0, 138, __pyx_L1_error)
   }
-  __pyx_t_7 = PyFloat_FromDouble((__pyx_t_11 / ((double)__pyx_t_5))); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 135, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble((__pyx_t_11 / ((double)__pyx_t_7))); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_GIVEREF(__pyx_t_7);
-  PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_7);
-  __pyx_t_7 = 0;
-  __pyx_t_7 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_6, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 135, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = PyNumber_Add(__pyx_kp_s_positive, __pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 135, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = NULL;
-  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
-    __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_3);
-    if (likely(__pyx_t_7)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-      __Pyx_INCREF(__pyx_t_7);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_3, function);
-    }
-  }
-  if (!__pyx_t_7) {
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __Pyx_GOTREF(__pyx_t_2);
-  } else {
-    #if CYTHON_FAST_PYCALL
-    if (PyFunction_Check(__pyx_t_3)) {
-      PyObject *__pyx_temp[2] = {__pyx_t_7, __pyx_t_6};
-      __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    } else
-    #endif
-    #if CYTHON_FAST_PYCCALL
-    if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
-      PyObject *__pyx_temp[2] = {__pyx_t_7, __pyx_t_6};
-      __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    } else
-    #endif
-    {
-      __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 135, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_7); __pyx_t_7 = NULL;
-      __Pyx_GIVEREF(__pyx_t_6);
-      PyTuple_SET_ITEM(__pyx_t_1, 0+1, __pyx_t_6);
-      __pyx_t_6 = 0;
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    }
-  }
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-  /* "cySent.pyx":137
- *     addline("positive "+str(float(ptweets)/float(len(tweets))))
- *     # percentage of positive tweets
- *     addline("Positive tweets percentage: "+''.format(100*len(ptweets)/len(tweets)))             # <<<<<<<<<<<<<<
- *     # picking negative tweets from tweets
- *     ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 0]
- */
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_addline); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 137, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s__2, __pyx_n_s_format); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 137, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_5 = PyObject_Length(__pyx_v_ptweets); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 137, __pyx_L1_error)
-  __pyx_t_12 = (0x64 * __pyx_t_5);
-  __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_tweets); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 137, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_5 = PyObject_Length(__pyx_t_7); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 137, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (unlikely(__pyx_t_5 == 0)) {
-    PyErr_SetString(PyExc_ZeroDivisionError, "integer division or modulo by zero");
-    __PYX_ERR(0, 137, __pyx_L1_error)
-  }
-  else if (sizeof(Py_ssize_t) == sizeof(long) && (!(((Py_ssize_t)-1) > 0)) && unlikely(__pyx_t_5 == (Py_ssize_t)-1)  && unlikely(UNARY_NEG_WOULD_OVERFLOW(__pyx_t_12))) {
-    PyErr_SetString(PyExc_OverflowError, "value too large to perform division");
-    __PYX_ERR(0, 137, __pyx_L1_error)
-  }
-  __pyx_t_7 = PyInt_FromSsize_t(__Pyx_div_Py_ssize_t(__pyx_t_12, __pyx_t_5)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 137, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_13 = NULL;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
-    __pyx_t_13 = PyMethod_GET_SELF(__pyx_t_6);
-    if (likely(__pyx_t_13)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
-      __Pyx_INCREF(__pyx_t_13);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_6, function);
-    }
-  }
-  if (!__pyx_t_13) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 137, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __Pyx_GOTREF(__pyx_t_1);
-  } else {
-    #if CYTHON_FAST_PYCALL
-    if (PyFunction_Check(__pyx_t_6)) {
-      PyObject *__pyx_temp[2] = {__pyx_t_13, __pyx_t_7};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 137, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    } else
-    #endif
-    #if CYTHON_FAST_PYCCALL
-    if (__Pyx_PyFastCFunction_Check(__pyx_t_6)) {
-      PyObject *__pyx_temp[2] = {__pyx_t_13, __pyx_t_7};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 137, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    } else
-    #endif
-    {
-      __pyx_t_14 = PyTuple_New(1+1); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 137, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_14);
-      __Pyx_GIVEREF(__pyx_t_13); PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13); __pyx_t_13 = NULL;
-      __Pyx_GIVEREF(__pyx_t_7);
-      PyTuple_SET_ITEM(__pyx_t_14, 0+1, __pyx_t_7);
-      __pyx_t_7 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_14, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 137, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-    }
-  }
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = PyNumber_Add(__pyx_kp_s_Positive_tweets_percentage, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 137, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = NULL;
-  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
-    __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_3);
-    if (likely(__pyx_t_1)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-      __Pyx_INCREF(__pyx_t_1);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_3, function);
-    }
-  }
-  if (!__pyx_t_1) {
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 137, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __Pyx_GOTREF(__pyx_t_2);
-  } else {
-    #if CYTHON_FAST_PYCALL
-    if (PyFunction_Check(__pyx_t_3)) {
-      PyObject *__pyx_temp[2] = {__pyx_t_1, __pyx_t_6};
-      __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 137, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    } else
-    #endif
-    #if CYTHON_FAST_PYCCALL
-    if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
-      PyObject *__pyx_temp[2] = {__pyx_t_1, __pyx_t_6};
-      __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 137, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    } else
-    #endif
-    {
-      __pyx_t_14 = PyTuple_New(1+1); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 137, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_14);
-      __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_1); __pyx_t_1 = NULL;
-      __Pyx_GIVEREF(__pyx_t_6);
-      PyTuple_SET_ITEM(__pyx_t_14, 0+1, __pyx_t_6);
-      __pyx_t_6 = 0;
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_14, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 137, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-    }
-  }
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-  /* "cySent.pyx":139
- *     addline("Positive tweets percentage: "+''.format(100*len(ptweets)/len(tweets)))
- *     # picking negative tweets from tweets
- *     ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 0]             # <<<<<<<<<<<<<<
- *     # percentage of negative tweets
- *     addline("negative "+str(float(len(ntweets))/float(len(tweets))))
- */
-  __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 139, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_tweets); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 139, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  if (likely(PyList_CheckExact(__pyx_t_3)) || PyTuple_CheckExact(__pyx_t_3)) {
-    __pyx_t_14 = __pyx_t_3; __Pyx_INCREF(__pyx_t_14); __pyx_t_5 = 0;
-    __pyx_t_15 = NULL;
-  } else {
-    __pyx_t_5 = -1; __pyx_t_14 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 139, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_14);
-    __pyx_t_15 = Py_TYPE(__pyx_t_14)->tp_iternext; if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 139, __pyx_L1_error)
-  }
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  for (;;) {
-    if (likely(!__pyx_t_15)) {
-      if (likely(PyList_CheckExact(__pyx_t_14))) {
-        if (__pyx_t_5 >= PyList_GET_SIZE(__pyx_t_14)) break;
-        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_14, __pyx_t_5); __Pyx_INCREF(__pyx_t_3); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 139, __pyx_L1_error)
-        #else
-        __pyx_t_3 = PySequence_ITEM(__pyx_t_14, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 139, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_3);
-        #endif
-      } else {
-        if (__pyx_t_5 >= PyTuple_GET_SIZE(__pyx_t_14)) break;
-        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_14, __pyx_t_5); __Pyx_INCREF(__pyx_t_3); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 139, __pyx_L1_error)
-        #else
-        __pyx_t_3 = PySequence_ITEM(__pyx_t_14, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 139, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_3);
-        #endif
-      }
-    } else {
-      __pyx_t_3 = __pyx_t_15(__pyx_t_14);
-      if (unlikely(!__pyx_t_3)) {
-        PyObject* exc_type = PyErr_Occurred();
-        if (exc_type) {
-          if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 139, __pyx_L1_error)
-        }
-        break;
-      }
-      __Pyx_GOTREF(__pyx_t_3);
-    }
-    __Pyx_XDECREF_SET(__pyx_v_tweet, __pyx_t_3);
-    __pyx_t_3 = 0;
-    __pyx_t_3 = PyObject_GetItem(__pyx_v_tweet, __pyx_n_s_sentiment); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 139, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_6 = __Pyx_PyInt_EqObjC(__pyx_t_3, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 139, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_16 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_16 < 0)) __PYX_ERR(0, 139, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (__pyx_t_16) {
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_2, (PyObject*)__pyx_v_tweet))) __PYX_ERR(0, 139, __pyx_L1_error)
-    }
-  }
-  __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-  __pyx_v_ntweets = ((PyObject*)__pyx_t_2);
-  __pyx_t_2 = 0;
-
-  /* "cySent.pyx":141
- *     ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 0]
- *     # percentage of negative tweets
- *     addline("negative "+str(float(len(ntweets))/float(len(tweets))))             # <<<<<<<<<<<<<<
- *     addline("Negative tweets percentage: "+''.format(100*len(ntweets)/len(tweets)))
- *     # percentage of neutral tweets
- */
-  __pyx_t_14 = __Pyx_GetModuleGlobalName(__pyx_n_s_addline); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 141, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_14);
-  __pyx_t_5 = PyList_GET_SIZE(__pyx_v_ntweets); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 141, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_tweets); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 141, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_12 = PyObject_Length(__pyx_t_6); if (unlikely(__pyx_t_12 == ((Py_ssize_t)-1))) __PYX_ERR(0, 141, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(((double)__pyx_t_12) == 0)) {
-    PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 141, __pyx_L1_error)
-  }
-  __pyx_t_6 = PyFloat_FromDouble((((double)__pyx_t_5) / ((double)__pyx_t_12))); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 141, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 141, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_6);
-  PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_6);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_6);
   __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_3, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 141, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_1, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyNumber_Add(__pyx_kp_s_negative, __pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 141, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = NULL;
-  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_14))) {
-    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_14);
-    if (likely(__pyx_t_6)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_14);
-      __Pyx_INCREF(__pyx_t_6);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_14, function);
-    }
-  }
-  if (!__pyx_t_6) {
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_14, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 141, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_GOTREF(__pyx_t_2);
-  } else {
-    #if CYTHON_FAST_PYCALL
-    if (PyFunction_Check(__pyx_t_14)) {
-      PyObject *__pyx_temp[2] = {__pyx_t_6, __pyx_t_3};
-      __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_14, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 141, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    } else
-    #endif
-    #if CYTHON_FAST_PYCCALL
-    if (__Pyx_PyFastCFunction_Check(__pyx_t_14)) {
-      PyObject *__pyx_temp[2] = {__pyx_t_6, __pyx_t_3};
-      __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_14, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 141, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    } else
-    #endif
-    {
-      __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 141, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_6); __pyx_t_6 = NULL;
-      __Pyx_GIVEREF(__pyx_t_3);
-      PyTuple_SET_ITEM(__pyx_t_1, 0+1, __pyx_t_3);
-      __pyx_t_3 = 0;
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 141, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    }
-  }
-  __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-  /* "cySent.pyx":142
- *     # percentage of negative tweets
- *     addline("negative "+str(float(len(ntweets))/float(len(tweets))))
- *     addline("Negative tweets percentage: "+''.format(100*len(ntweets)/len(tweets)))             # <<<<<<<<<<<<<<
- *     # percentage of neutral tweets
- *     #print("Neutral tweets percentage: "+''.format(100*len(tweets - ntweets - ptweets)/len(tweets)))
- */
-  __pyx_t_14 = __Pyx_GetModuleGlobalName(__pyx_n_s_addline); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 142, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_14);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s__2, __pyx_n_s_format); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 142, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_12 = PyList_GET_SIZE(__pyx_v_ntweets); if (unlikely(__pyx_t_12 == ((Py_ssize_t)-1))) __PYX_ERR(0, 142, __pyx_L1_error)
-  __pyx_t_5 = (0x64 * __pyx_t_12);
-  __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_tweets); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 142, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_12 = PyObject_Length(__pyx_t_6); if (unlikely(__pyx_t_12 == ((Py_ssize_t)-1))) __PYX_ERR(0, 142, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(__pyx_t_12 == 0)) {
-    PyErr_SetString(PyExc_ZeroDivisionError, "integer division or modulo by zero");
-    __PYX_ERR(0, 142, __pyx_L1_error)
-  }
-  else if (sizeof(Py_ssize_t) == sizeof(long) && (!(((Py_ssize_t)-1) > 0)) && unlikely(__pyx_t_12 == (Py_ssize_t)-1)  && unlikely(UNARY_NEG_WOULD_OVERFLOW(__pyx_t_5))) {
-    PyErr_SetString(PyExc_OverflowError, "value too large to perform division");
-    __PYX_ERR(0, 142, __pyx_L1_error)
-  }
-  __pyx_t_6 = PyInt_FromSsize_t(__Pyx_div_Py_ssize_t(__pyx_t_5, __pyx_t_12)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 142, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = NULL;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
-    __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_3);
-    if (likely(__pyx_t_7)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-      __Pyx_INCREF(__pyx_t_7);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_3, function);
-    }
-  }
-  if (!__pyx_t_7) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __Pyx_GOTREF(__pyx_t_1);
-  } else {
-    #if CYTHON_FAST_PYCALL
-    if (PyFunction_Check(__pyx_t_3)) {
-      PyObject *__pyx_temp[2] = {__pyx_t_7, __pyx_t_6};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    } else
-    #endif
-    #if CYTHON_FAST_PYCCALL
-    if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
-      PyObject *__pyx_temp[2] = {__pyx_t_7, __pyx_t_6};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    } else
-    #endif
-    {
-      __pyx_t_13 = PyTuple_New(1+1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 142, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_13);
-      __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_7); __pyx_t_7 = NULL;
-      __Pyx_GIVEREF(__pyx_t_6);
-      PyTuple_SET_ITEM(__pyx_t_13, 0+1, __pyx_t_6);
-      __pyx_t_6 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_13, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-    }
-  }
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyNumber_Add(__pyx_kp_s_Negative_tweets_percentage, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 142, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = NULL;
-  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_14))) {
-    __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_14);
-    if (likely(__pyx_t_1)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_14);
-      __Pyx_INCREF(__pyx_t_1);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_14, function);
-    }
-  }
-  if (!__pyx_t_1) {
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_14, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 142, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_GOTREF(__pyx_t_2);
-  } else {
-    #if CYTHON_FAST_PYCALL
-    if (PyFunction_Check(__pyx_t_14)) {
-      PyObject *__pyx_temp[2] = {__pyx_t_1, __pyx_t_3};
-      __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_14, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 142, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    } else
-    #endif
-    #if CYTHON_FAST_PYCCALL
-    if (__Pyx_PyFastCFunction_Check(__pyx_t_14)) {
-      PyObject *__pyx_temp[2] = {__pyx_t_1, __pyx_t_3};
-      __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_14, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 142, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    } else
-    #endif
-    {
-      __pyx_t_13 = PyTuple_New(1+1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 142, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_13);
-      __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_1); __pyx_t_1 = NULL;
-      __Pyx_GIVEREF(__pyx_t_3);
-      PyTuple_SET_ITEM(__pyx_t_13, 0+1, __pyx_t_3);
-      __pyx_t_3 = 0;
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_t_13, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 142, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-    }
-  }
-  __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-  /* "cySent.pyx":145
- *     # percentage of neutral tweets
- *     #print("Neutral tweets percentage: "+''.format(100*len(tweets - ntweets - ptweets)/len(tweets)))
- *     addline("========================================================================")             # <<<<<<<<<<<<<<
- *     for tweet in tweets:
- *         addline(tweet['text'])
- */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_addline); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 145, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 145, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_14);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-
-  /* "cySent.pyx":146
- *     #print("Neutral tweets percentage: "+''.format(100*len(tweets - ntweets - ptweets)/len(tweets)))
- *     addline("========================================================================")
- *     for tweet in tweets:             # <<<<<<<<<<<<<<
- *         addline(tweet['text'])
- *     addline("========================================================================")
- */
-  __pyx_t_14 = __Pyx_GetModuleGlobalName(__pyx_n_s_tweets); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 146, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_14);
-  if (likely(PyList_CheckExact(__pyx_t_14)) || PyTuple_CheckExact(__pyx_t_14)) {
-    __pyx_t_2 = __pyx_t_14; __Pyx_INCREF(__pyx_t_2); __pyx_t_12 = 0;
-    __pyx_t_15 = NULL;
-  } else {
-    __pyx_t_12 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_14); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 146, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_15 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 146, __pyx_L1_error)
-  }
-  __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-  for (;;) {
-    if (likely(!__pyx_t_15)) {
-      if (likely(PyList_CheckExact(__pyx_t_2))) {
-        if (__pyx_t_12 >= PyList_GET_SIZE(__pyx_t_2)) break;
-        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_14 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_12); __Pyx_INCREF(__pyx_t_14); __pyx_t_12++; if (unlikely(0 < 0)) __PYX_ERR(0, 146, __pyx_L1_error)
-        #else
-        __pyx_t_14 = PySequence_ITEM(__pyx_t_2, __pyx_t_12); __pyx_t_12++; if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 146, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_14);
-        #endif
-      } else {
-        if (__pyx_t_12 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
-        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_14 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_12); __Pyx_INCREF(__pyx_t_14); __pyx_t_12++; if (unlikely(0 < 0)) __PYX_ERR(0, 146, __pyx_L1_error)
-        #else
-        __pyx_t_14 = PySequence_ITEM(__pyx_t_2, __pyx_t_12); __pyx_t_12++; if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 146, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_14);
-        #endif
-      }
-    } else {
-      __pyx_t_14 = __pyx_t_15(__pyx_t_2);
-      if (unlikely(!__pyx_t_14)) {
-        PyObject* exc_type = PyErr_Occurred();
-        if (exc_type) {
-          if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 146, __pyx_L1_error)
-        }
-        break;
-      }
-      __Pyx_GOTREF(__pyx_t_14);
-    }
-    __Pyx_XDECREF_SET(__pyx_v_tweet, __pyx_t_14);
-    __pyx_t_14 = 0;
-
-    /* "cySent.pyx":147
- *     addline("========================================================================")
- *     for tweet in tweets:
- *         addline(tweet['text'])             # <<<<<<<<<<<<<<
- *     addline("========================================================================")
- *     addline("Time is: " + str(time.time()-myTime))
- */
-    __pyx_t_13 = __Pyx_GetModuleGlobalName(__pyx_n_s_addline); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 147, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_13);
-    __pyx_t_3 = PyObject_GetItem(__pyx_v_tweet, __pyx_n_s_text); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 147, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = NULL;
-    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_13))) {
-      __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_13);
-      if (likely(__pyx_t_1)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_13);
-        __Pyx_INCREF(__pyx_t_1);
-        __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_13, function);
-      }
-    }
-    if (!__pyx_t_1) {
-      __pyx_t_14 = __Pyx_PyObject_CallOneArg(__pyx_t_13, __pyx_t_3); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 147, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __Pyx_GOTREF(__pyx_t_14);
-    } else {
-      #if CYTHON_FAST_PYCALL
-      if (PyFunction_Check(__pyx_t_13)) {
-        PyObject *__pyx_temp[2] = {__pyx_t_1, __pyx_t_3};
-        __pyx_t_14 = __Pyx_PyFunction_FastCall(__pyx_t_13, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 147, __pyx_L1_error)
-        __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-        __Pyx_GOTREF(__pyx_t_14);
-        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      } else
-      #endif
-      #if CYTHON_FAST_PYCCALL
-      if (__Pyx_PyFastCFunction_Check(__pyx_t_13)) {
-        PyObject *__pyx_temp[2] = {__pyx_t_1, __pyx_t_3};
-        __pyx_t_14 = __Pyx_PyCFunction_FastCall(__pyx_t_13, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 147, __pyx_L1_error)
-        __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-        __Pyx_GOTREF(__pyx_t_14);
-        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      } else
-      #endif
-      {
-        __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 147, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_6);
-        __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_1); __pyx_t_1 = NULL;
-        __Pyx_GIVEREF(__pyx_t_3);
-        PyTuple_SET_ITEM(__pyx_t_6, 0+1, __pyx_t_3);
-        __pyx_t_3 = 0;
-        __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_13, __pyx_t_6, NULL); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 147, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_14);
-        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      }
-    }
-    __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-    __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-
-    /* "cySent.pyx":146
- *     #print("Neutral tweets percentage: "+''.format(100*len(tweets - ntweets - ptweets)/len(tweets)))
- *     addline("========================================================================")
- *     for tweet in tweets:             # <<<<<<<<<<<<<<
- *         addline(tweet['text'])
- *     addline("========================================================================")
- */
-  }
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-  /* "cySent.pyx":148
- *     for tweet in tweets:
- *         addline(tweet['text'])
- *     addline("========================================================================")             # <<<<<<<<<<<<<<
- *     addline("Time is: " + str(time.time()-myTime))
- *     f = open('Sentiment.txt','w')
- */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_addline); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 148, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 148, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_14);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-
-  /* "cySent.pyx":149
- *         addline(tweet['text'])
- *     addline("========================================================================")
- *     addline("Time is: " + str(time.time()-myTime))             # <<<<<<<<<<<<<<
- *     f = open('Sentiment.txt','w')
- *     f.write(respMain)
- */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_addline); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 149, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_time); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 149, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_time); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 149, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_1 = PyNumber_Add(__pyx_kp_s_positive, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -4329,198 +3805,835 @@ static PyObject *__pyx_pf_6cySent_2main(CYTHON_UNUSED PyObject *__pyx_self) {
       __Pyx_DECREF_SET(__pyx_t_3, function);
     }
   }
-  if (__pyx_t_6) {
-    __pyx_t_13 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_6); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 149, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  } else {
-    __pyx_t_13 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 149, __pyx_L1_error)
-  }
-  __Pyx_GOTREF(__pyx_t_13);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyNumber_Subtract(__pyx_t_13, __pyx_v_myTime); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 149, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-  __pyx_t_13 = PyTuple_New(1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 149, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_13);
-  __Pyx_GIVEREF(__pyx_t_3);
-  PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_3);
-  __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_13, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 149, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-  __pyx_t_13 = PyNumber_Add(__pyx_kp_s_Time_is, __pyx_t_3); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 149, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_13);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = NULL;
-  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_3)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_3);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_2, function);
-    }
-  }
-  if (!__pyx_t_3) {
-    __pyx_t_14 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_13); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 149, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-    __Pyx_GOTREF(__pyx_t_14);
+  if (!__pyx_t_6) {
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_GOTREF(__pyx_t_2);
   } else {
     #if CYTHON_FAST_PYCALL
-    if (PyFunction_Check(__pyx_t_2)) {
-      PyObject *__pyx_temp[2] = {__pyx_t_3, __pyx_t_13};
-      __pyx_t_14 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 149, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __Pyx_GOTREF(__pyx_t_14);
+    if (PyFunction_Check(__pyx_t_3)) {
+      PyObject *__pyx_temp[2] = {__pyx_t_6, __pyx_t_1};
+      __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 138, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    } else
+    #endif
+    #if CYTHON_FAST_PYCCALL
+    if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
+      PyObject *__pyx_temp[2] = {__pyx_t_6, __pyx_t_1};
+      __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 138, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    } else
+    #endif
+    {
+      __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 138, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_6); __pyx_t_6 = NULL;
+      __Pyx_GIVEREF(__pyx_t_1);
+      PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_t_1);
+      __pyx_t_1 = 0;
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 138, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    }
+  }
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "cySent.pyx":140
+ *     addline("positive "+str(float(ptweets)/float(len(tweets))))
+ *     # percentage of positive tweets
+ *     addline("Positive tweets percentage: "+''.format(100*ptweets/len(tweets)))             # <<<<<<<<<<<<<<
+ *     # picking negative tweets from tweets
+ *     ######ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 0]
+ */
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_addline); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 140, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s__2, __pyx_n_s_format); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 140, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_6 = PyNumber_Multiply(__pyx_int_100, __pyx_v_ptweets); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 140, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_tweets); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 140, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_12);
+  __pyx_t_7 = PyObject_Length(__pyx_t_12); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 140, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+  __pyx_t_12 = PyInt_FromSsize_t(__pyx_t_7); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 140, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_12);
+  __pyx_t_13 = __Pyx_PyNumber_Divide(__pyx_t_6, __pyx_t_12); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 140, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_13);
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+  __pyx_t_12 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
+    __pyx_t_12 = PyMethod_GET_SELF(__pyx_t_1);
+    if (likely(__pyx_t_12)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+      __Pyx_INCREF(__pyx_t_12);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_1, function);
+    }
+  }
+  if (!__pyx_t_12) {
+    __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_13); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 140, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
+    __Pyx_GOTREF(__pyx_t_5);
+  } else {
+    #if CYTHON_FAST_PYCALL
+    if (PyFunction_Check(__pyx_t_1)) {
+      PyObject *__pyx_temp[2] = {__pyx_t_12, __pyx_t_13};
+      __pyx_t_5 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 140, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
+      __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
     } else
     #endif
     #if CYTHON_FAST_PYCCALL
-    if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
-      PyObject *__pyx_temp[2] = {__pyx_t_3, __pyx_t_13};
-      __pyx_t_14 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 149, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __Pyx_GOTREF(__pyx_t_14);
+    if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
+      PyObject *__pyx_temp[2] = {__pyx_t_12, __pyx_t_13};
+      __pyx_t_5 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 140, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
+      __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
     } else
     #endif
     {
-      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 149, __pyx_L1_error)
+      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 140, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_3); __pyx_t_3 = NULL;
+      __Pyx_GIVEREF(__pyx_t_12); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_12); __pyx_t_12 = NULL;
       __Pyx_GIVEREF(__pyx_t_13);
       PyTuple_SET_ITEM(__pyx_t_6, 0+1, __pyx_t_13);
       __pyx_t_13 = 0;
-      __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_6, NULL); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 149, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_14);
+      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 140, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     }
   }
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyNumber_Add(__pyx_kp_s_Positive_tweets_percentage, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 140, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_5)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_5);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+    }
+  }
+  if (!__pyx_t_5) {
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 140, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_GOTREF(__pyx_t_2);
+  } else {
+    #if CYTHON_FAST_PYCALL
+    if (PyFunction_Check(__pyx_t_3)) {
+      PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_t_1};
+      __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 140, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    } else
+    #endif
+    #if CYTHON_FAST_PYCCALL
+    if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
+      PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_t_1};
+      __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 140, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    } else
+    #endif
+    {
+      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 140, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_6);
+      __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5); __pyx_t_5 = NULL;
+      __Pyx_GIVEREF(__pyx_t_1);
+      PyTuple_SET_ITEM(__pyx_t_6, 0+1, __pyx_t_1);
+      __pyx_t_1 = 0;
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 140, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    }
+  }
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
+
+  /* "cySent.pyx":143
+ *     # picking negative tweets from tweets
+ *     ######ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 0]
+ *     cdef int M = 0             # <<<<<<<<<<<<<<
+ *     i = 0
+ *     for i in prange(k, schedule='dynamic', nogil=True, num_threads=64):
+ */
+  __pyx_v_M = 0;
+
+  /* "cySent.pyx":144
+ *     ######ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 0]
+ *     cdef int M = 0
+ *     i = 0             # <<<<<<<<<<<<<<
+ *     for i in prange(k, schedule='dynamic', nogil=True, num_threads=64):
+ *         M += (point[i]==0)
+ */
+  __pyx_v_i = 0;
+
+  /* "cySent.pyx":145
+ *     cdef int M = 0
+ *     i = 0
+ *     for i in prange(k, schedule='dynamic', nogil=True, num_threads=64):             # <<<<<<<<<<<<<<
+ *         M += (point[i]==0)
+ *     ntweets = M
+ */
+  {
+      #ifdef WITH_THREAD
+      PyThreadState *_save;
+      Py_UNBLOCK_THREADS
+      __Pyx_FastGIL_Remember();
+      #endif
+      /*try:*/ {
+        __pyx_t_10 = __pyx_v_k;
+        if (1 == 0) abort();
+        {
+            #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
+                #undef likely
+                #undef unlikely
+                #define likely(x)   (x)
+                #define unlikely(x) (x)
+            #endif
+            __pyx_t_8 = (__pyx_t_10 - 0 + 1 - 1/abs(1)) / 1;
+            if (__pyx_t_8 > 0)
+            {
+                #ifdef _OPENMP
+                #pragma omp parallel reduction(+:__pyx_v_M) num_threads(64)
+                #endif /* _OPENMP */
+                {
+                    #ifdef _OPENMP
+                    #pragma omp for firstprivate(__pyx_v_i) lastprivate(__pyx_v_i) schedule(dynamic)
+                    #endif /* _OPENMP */
+                    for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9++){
+                        {
+                            __pyx_v_i = (int)(0 + 1 * __pyx_t_9);
+
+                            /* "cySent.pyx":146
+ *     i = 0
+ *     for i in prange(k, schedule='dynamic', nogil=True, num_threads=64):
+ *         M += (point[i]==0)             # <<<<<<<<<<<<<<
+ *     ntweets = M
+ *     # percentage of negative tweets
+ */
+                            __pyx_v_M = (__pyx_v_M + ((__pyx_v_point[__pyx_v_i]) == 0));
+                        }
+                    }
+                }
+            }
+        }
+        #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
+            #undef likely
+            #undef unlikely
+            #define likely(x)   __builtin_expect(!!(x), 1)
+            #define unlikely(x) __builtin_expect(!!(x), 0)
+        #endif
+      }
+
+      /* "cySent.pyx":145
+ *     cdef int M = 0
+ *     i = 0
+ *     for i in prange(k, schedule='dynamic', nogil=True, num_threads=64):             # <<<<<<<<<<<<<<
+ *         M += (point[i]==0)
+ *     ntweets = M
+ */
+      /*finally:*/ {
+        /*normal exit:*/{
+          #ifdef WITH_THREAD
+          __Pyx_FastGIL_Forget();
+          Py_BLOCK_THREADS
+          #endif
+          goto __pyx_L14;
+        }
+        __pyx_L14:;
+      }
+  }
+
+  /* "cySent.pyx":147
+ *     for i in prange(k, schedule='dynamic', nogil=True, num_threads=64):
+ *         M += (point[i]==0)
+ *     ntweets = M             # <<<<<<<<<<<<<<
+ *     # percentage of negative tweets
+ *     addline("negative "+str(float(ntweets)/float(len(tweets))))
+ */
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_M); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_v_ntweets = __pyx_t_2;
+  __pyx_t_2 = 0;
+
+  /* "cySent.pyx":149
+ *     ntweets = M
+ *     # percentage of negative tweets
+ *     addline("negative "+str(float(ntweets)/float(len(tweets))))             # <<<<<<<<<<<<<<
+ *     addline("Negative tweets percentage: "+''.format(100*ntweets/len(tweets)))
+ *     # percentage of neutral tweets
+ */
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_addline); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 149, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_11 = __Pyx_PyObject_AsDouble(__pyx_v_ntweets); if (unlikely(__pyx_t_11 == ((double)((double)-1)) && PyErr_Occurred())) __PYX_ERR(0, 149, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_tweets); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 149, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_7 = PyObject_Length(__pyx_t_6); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 149, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  if (unlikely(((double)__pyx_t_7) == 0)) {
+    PyErr_SetString(PyExc_ZeroDivisionError, "float division");
+    __PYX_ERR(0, 149, __pyx_L1_error)
+  }
+  __pyx_t_6 = PyFloat_FromDouble((__pyx_t_11 / ((double)__pyx_t_7))); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 149, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 149, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_6);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_6);
+  __pyx_t_6 = 0;
+  __pyx_t_6 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_1, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 149, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyNumber_Add(__pyx_kp_s_negative, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 149, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_6 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_6)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_6);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+    }
+  }
+  if (!__pyx_t_6) {
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 149, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_GOTREF(__pyx_t_2);
+  } else {
+    #if CYTHON_FAST_PYCALL
+    if (PyFunction_Check(__pyx_t_3)) {
+      PyObject *__pyx_temp[2] = {__pyx_t_6, __pyx_t_1};
+      __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 149, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    } else
+    #endif
+    #if CYTHON_FAST_PYCCALL
+    if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
+      PyObject *__pyx_temp[2] = {__pyx_t_6, __pyx_t_1};
+      __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 149, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    } else
+    #endif
+    {
+      __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 149, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_6); __pyx_t_6 = NULL;
+      __Pyx_GIVEREF(__pyx_t_1);
+      PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_t_1);
+      __pyx_t_1 = 0;
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 149, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    }
+  }
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "cySent.pyx":150
+ *     # percentage of negative tweets
+ *     addline("negative "+str(float(ntweets)/float(len(tweets))))
+ *     addline("Negative tweets percentage: "+''.format(100*ntweets/len(tweets)))             # <<<<<<<<<<<<<<
+ *     # percentage of neutral tweets
+ *     #print("Neutral tweets percentage: "+''.format(100*len(tweets - ntweets - ptweets)/len(tweets)))
+ */
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_addline); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s__2, __pyx_n_s_format); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_6 = PyNumber_Multiply(__pyx_int_100, __pyx_v_ntweets); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_13 = __Pyx_GetModuleGlobalName(__pyx_n_s_tweets); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_13);
+  __pyx_t_7 = PyObject_Length(__pyx_t_13); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 150, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
+  __pyx_t_13 = PyInt_FromSsize_t(__pyx_t_7); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_13);
+  __pyx_t_12 = __Pyx_PyNumber_Divide(__pyx_t_6, __pyx_t_13); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_12);
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
+  __pyx_t_13 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
+    __pyx_t_13 = PyMethod_GET_SELF(__pyx_t_1);
+    if (likely(__pyx_t_13)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+      __Pyx_INCREF(__pyx_t_13);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_1, function);
+    }
+  }
+  if (!__pyx_t_13) {
+    __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_12); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 150, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+    __Pyx_GOTREF(__pyx_t_5);
+  } else {
+    #if CYTHON_FAST_PYCALL
+    if (PyFunction_Check(__pyx_t_1)) {
+      PyObject *__pyx_temp[2] = {__pyx_t_13, __pyx_t_12};
+      __pyx_t_5 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 150, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
+      __Pyx_GOTREF(__pyx_t_5);
+      __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+    } else
+    #endif
+    #if CYTHON_FAST_PYCCALL
+    if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
+      PyObject *__pyx_temp[2] = {__pyx_t_13, __pyx_t_12};
+      __pyx_t_5 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 150, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
+      __Pyx_GOTREF(__pyx_t_5);
+      __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+    } else
+    #endif
+    {
+      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 150, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_6);
+      __Pyx_GIVEREF(__pyx_t_13); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_13); __pyx_t_13 = NULL;
+      __Pyx_GIVEREF(__pyx_t_12);
+      PyTuple_SET_ITEM(__pyx_t_6, 0+1, __pyx_t_12);
+      __pyx_t_12 = 0;
+      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 150, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    }
+  }
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyNumber_Add(__pyx_kp_s_Negative_tweets_percentage, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_5)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_5);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+    }
+  }
+  if (!__pyx_t_5) {
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 150, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_GOTREF(__pyx_t_2);
+  } else {
+    #if CYTHON_FAST_PYCALL
+    if (PyFunction_Check(__pyx_t_3)) {
+      PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_t_1};
+      __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 150, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    } else
+    #endif
+    #if CYTHON_FAST_PYCCALL
+    if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
+      PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_t_1};
+      __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 150, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    } else
+    #endif
+    {
+      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 150, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_6);
+      __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5); __pyx_t_5 = NULL;
+      __Pyx_GIVEREF(__pyx_t_1);
+      PyTuple_SET_ITEM(__pyx_t_6, 0+1, __pyx_t_1);
+      __pyx_t_1 = 0;
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 150, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    }
+  }
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "cySent.pyx":153
+ *     # percentage of neutral tweets
+ *     #print("Neutral tweets percentage: "+''.format(100*len(tweets - ntweets - ptweets)/len(tweets)))
+ *     addline("========================================================================")             # <<<<<<<<<<<<<<
+ *     for tweet in tweets:
+ *         addline(tweet['text'])
+ */
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_addline); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 153, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 153, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "cySent.pyx":154
+ *     #print("Neutral tweets percentage: "+''.format(100*len(tweets - ntweets - ptweets)/len(tweets)))
+ *     addline("========================================================================")
+ *     for tweet in tweets:             # <<<<<<<<<<<<<<
+ *         addline(tweet['text'])
+ *     addline("========================================================================")
+ */
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_tweets); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 154, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (likely(PyList_CheckExact(__pyx_t_3)) || PyTuple_CheckExact(__pyx_t_3)) {
+    __pyx_t_2 = __pyx_t_3; __Pyx_INCREF(__pyx_t_2); __pyx_t_7 = 0;
+    __pyx_t_14 = NULL;
+  } else {
+    __pyx_t_7 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 154, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_14 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 154, __pyx_L1_error)
+  }
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  for (;;) {
+    if (likely(!__pyx_t_14)) {
+      if (likely(PyList_CheckExact(__pyx_t_2))) {
+        if (__pyx_t_7 >= PyList_GET_SIZE(__pyx_t_2)) break;
+        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_7); __Pyx_INCREF(__pyx_t_3); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 154, __pyx_L1_error)
+        #else
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 154, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_3);
+        #endif
+      } else {
+        if (__pyx_t_7 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
+        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+        __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_7); __Pyx_INCREF(__pyx_t_3); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 154, __pyx_L1_error)
+        #else
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 154, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_3);
+        #endif
+      }
+    } else {
+      __pyx_t_3 = __pyx_t_14(__pyx_t_2);
+      if (unlikely(!__pyx_t_3)) {
+        PyObject* exc_type = PyErr_Occurred();
+        if (exc_type) {
+          if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
+          else __PYX_ERR(0, 154, __pyx_L1_error)
+        }
+        break;
+      }
+      __Pyx_GOTREF(__pyx_t_3);
+    }
+    __Pyx_XDECREF_SET(__pyx_v_tweet, __pyx_t_3);
+    __pyx_t_3 = 0;
+
+    /* "cySent.pyx":155
+ *     addline("========================================================================")
+ *     for tweet in tweets:
+ *         addline(tweet['text'])             # <<<<<<<<<<<<<<
+ *     addline("========================================================================")
+ *     addline("Time is: " + str(time.time()-myTime))
+ */
+    __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_addline); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 155, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_1 = PyObject_GetItem(__pyx_v_tweet, __pyx_n_s_text); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 155, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_5 = NULL;
+    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_6))) {
+      __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_6);
+      if (likely(__pyx_t_5)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
+        __Pyx_INCREF(__pyx_t_5);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_6, function);
+      }
+    }
+    if (!__pyx_t_5) {
+      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 155, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      __Pyx_GOTREF(__pyx_t_3);
+    } else {
+      #if CYTHON_FAST_PYCALL
+      if (PyFunction_Check(__pyx_t_6)) {
+        PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_t_1};
+        __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 155, __pyx_L1_error)
+        __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+        __Pyx_GOTREF(__pyx_t_3);
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      } else
+      #endif
+      #if CYTHON_FAST_PYCCALL
+      if (__Pyx_PyFastCFunction_Check(__pyx_t_6)) {
+        PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_t_1};
+        __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 155, __pyx_L1_error)
+        __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+        __Pyx_GOTREF(__pyx_t_3);
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      } else
+      #endif
+      {
+        __pyx_t_12 = PyTuple_New(1+1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 155, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_12);
+        __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_5); __pyx_t_5 = NULL;
+        __Pyx_GIVEREF(__pyx_t_1);
+        PyTuple_SET_ITEM(__pyx_t_12, 0+1, __pyx_t_1);
+        __pyx_t_1 = 0;
+        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_12, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 155, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_3);
+        __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+      }
+    }
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+    /* "cySent.pyx":154
+ *     #print("Neutral tweets percentage: "+''.format(100*len(tweets - ntweets - ptweets)/len(tweets)))
+ *     addline("========================================================================")
+ *     for tweet in tweets:             # <<<<<<<<<<<<<<
+ *         addline(tweet['text'])
+ *     addline("========================================================================")
+ */
+  }
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "cySent.pyx":156
+ *     for tweet in tweets:
+ *         addline(tweet['text'])
+ *     addline("========================================================================")             # <<<<<<<<<<<<<<
+ *     addline("Time is: " + str(time.time()-myTime))
+ *     f = open('Sentiment.txt','w')
+ */
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_addline); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 156, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 156, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "cySent.pyx":157
+ *         addline(tweet['text'])
+ *     addline("========================================================================")
+ *     addline("Time is: " + str(time.time()-myTime))             # <<<<<<<<<<<<<<
+ *     f = open('Sentiment.txt','w')
+ *     f.write(respMain)
+ */
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_addline); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 157, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_time); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 157, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_12);
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_n_s_time); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 157, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+  __pyx_t_12 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_1))) {
+    __pyx_t_12 = PyMethod_GET_SELF(__pyx_t_1);
+    if (likely(__pyx_t_12)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+      __Pyx_INCREF(__pyx_t_12);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_1, function);
+    }
+  }
+  if (__pyx_t_12) {
+    __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_12); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 157, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+  } else {
+    __pyx_t_6 = __Pyx_PyObject_CallNoArg(__pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 157, __pyx_L1_error)
+  }
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyNumber_Subtract(__pyx_t_6, __pyx_v_myTime); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 157, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 157, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_GIVEREF(__pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_1);
+  __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 157, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_6 = PyNumber_Add(__pyx_kp_s_Time_is, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 157, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_1)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_1);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+    }
+  }
+  if (!__pyx_t_1) {
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 157, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_GOTREF(__pyx_t_3);
+  } else {
+    #if CYTHON_FAST_PYCALL
+    if (PyFunction_Check(__pyx_t_2)) {
+      PyObject *__pyx_temp[2] = {__pyx_t_1, __pyx_t_6};
+      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 157, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
+      __Pyx_GOTREF(__pyx_t_3);
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    } else
+    #endif
+    #if CYTHON_FAST_PYCCALL
+    if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
+      PyObject *__pyx_temp[2] = {__pyx_t_1, __pyx_t_6};
+      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 157, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
+      __Pyx_GOTREF(__pyx_t_3);
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    } else
+    #endif
+    {
+      __pyx_t_12 = PyTuple_New(1+1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 157, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_12);
+      __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_1); __pyx_t_1 = NULL;
+      __Pyx_GIVEREF(__pyx_t_6);
+      PyTuple_SET_ITEM(__pyx_t_12, 0+1, __pyx_t_6);
+      __pyx_t_6 = 0;
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_12, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 157, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+      __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+    }
+  }
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "cySent.pyx":158
  *     addline("========================================================================")
  *     addline("Time is: " + str(time.time()-myTime))
  *     f = open('Sentiment.txt','w')             # <<<<<<<<<<<<<<
  *     f.write(respMain)
  *     f.close()
  */
-  __pyx_t_14 = __Pyx_PyObject_Call(__pyx_builtin_open, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 150, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_14);
-  __pyx_v_f = __pyx_t_14;
-  __pyx_t_14 = 0;
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_open, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_v_f = __pyx_t_3;
+  __pyx_t_3 = 0;
 
-  /* "cySent.pyx":151
+  /* "cySent.pyx":159
  *     addline("Time is: " + str(time.time()-myTime))
  *     f = open('Sentiment.txt','w')
  *     f.write(respMain)             # <<<<<<<<<<<<<<
  *     f.close()
  *     global respMain
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_f, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 151, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_f, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 159, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_respMain); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 151, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_13 = NULL;
+  __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_respMain); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_12);
+  __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_13 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_13)) {
+    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_6)) {
       PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_13);
+      __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(function);
       __Pyx_DECREF_SET(__pyx_t_2, function);
     }
   }
-  if (!__pyx_t_13) {
-    __pyx_t_14 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_6); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 151, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __Pyx_GOTREF(__pyx_t_14);
+  if (!__pyx_t_6) {
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_12); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 159, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+    __Pyx_GOTREF(__pyx_t_3);
   } else {
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_2)) {
-      PyObject *__pyx_temp[2] = {__pyx_t_13, __pyx_t_6};
-      __pyx_t_14 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 151, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
-      __Pyx_GOTREF(__pyx_t_14);
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      PyObject *__pyx_temp[2] = {__pyx_t_6, __pyx_t_12};
+      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 159, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __Pyx_GOTREF(__pyx_t_3);
+      __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     } else
     #endif
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
-      PyObject *__pyx_temp[2] = {__pyx_t_13, __pyx_t_6};
-      __pyx_t_14 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 151, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
-      __Pyx_GOTREF(__pyx_t_14);
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      PyObject *__pyx_temp[2] = {__pyx_t_6, __pyx_t_12};
+      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 159, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __Pyx_GOTREF(__pyx_t_3);
+      __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     } else
     #endif
     {
-      __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 151, __pyx_L1_error)
+      __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 159, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_6); __pyx_t_6 = NULL;
+      __Pyx_GIVEREF(__pyx_t_12);
+      PyTuple_SET_ITEM(__pyx_t_1, 0+1, __pyx_t_12);
+      __pyx_t_12 = 0;
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 159, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_GIVEREF(__pyx_t_13); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_13); __pyx_t_13 = NULL;
-      __Pyx_GIVEREF(__pyx_t_6);
-      PyTuple_SET_ITEM(__pyx_t_3, 0+1, __pyx_t_6);
-      __pyx_t_6 = 0;
-      __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, NULL); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 151, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_14);
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     }
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cySent.pyx":152
+  /* "cySent.pyx":160
  *     f = open('Sentiment.txt','w')
  *     f.write(respMain)
  *     f.close()             # <<<<<<<<<<<<<<
  *     global respMain
  *     genRank = respMain
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_f, __pyx_n_s_close); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_f, __pyx_n_s_close); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 160, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = NULL;
+  __pyx_t_1 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_3)) {
+    __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_1)) {
       PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_1);
       __Pyx_INCREF(function);
       __Pyx_DECREF_SET(__pyx_t_2, function);
     }
   }
-  if (__pyx_t_3) {
-    __pyx_t_14 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 152, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (__pyx_t_1) {
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 160, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   } else {
-    __pyx_t_14 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 152, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 160, __pyx_L1_error)
   }
-  __Pyx_GOTREF(__pyx_t_14);
+  __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cySent.pyx":154
+  /* "cySent.pyx":162
  *     f.close()
  *     global respMain
  *     genRank = respMain             # <<<<<<<<<<<<<<
  *     respMain = ""
  *     return genRank
  */
-  __pyx_t_14 = __Pyx_GetModuleGlobalName(__pyx_n_s_respMain); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 154, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_14);
-  __pyx_v_genRank = __pyx_t_14;
-  __pyx_t_14 = 0;
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_respMain); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 162, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_v_genRank = __pyx_t_3;
+  __pyx_t_3 = 0;
 
-  /* "cySent.pyx":155
+  /* "cySent.pyx":163
  *     global respMain
  *     genRank = respMain
  *     respMain = ""             # <<<<<<<<<<<<<<
  *     return genRank
  * @app.route('/')
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_respMain, __pyx_kp_s__2) < 0) __PYX_ERR(0, 155, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_respMain, __pyx_kp_s__2) < 0) __PYX_ERR(0, 163, __pyx_L1_error)
 
-  /* "cySent.pyx":156
+  /* "cySent.pyx":164
  *     genRank = respMain
  *     respMain = ""
  *     return genRank             # <<<<<<<<<<<<<<
@@ -4532,12 +4645,12 @@ static PyObject *__pyx_pf_6cySent_2main(CYTHON_UNUSED PyObject *__pyx_self) {
   __pyx_r = __pyx_v_genRank;
   goto __pyx_L0;
 
-  /* "cySent.pyx":117
+  /* "cySent.pyx":118
  * #        N = N +(param[i]==1)
  * #    return N
  * def main():             # <<<<<<<<<<<<<<
  *     global tweets
- *     # creating object of TwitterClient Class
+ * 
  */
 
   /* function exit code */
@@ -4545,10 +4658,10 @@ static PyObject *__pyx_pf_6cySent_2main(CYTHON_UNUSED PyObject *__pyx_self) {
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_XDECREF(__pyx_t_7);
+  __Pyx_XDECREF(__pyx_t_12);
   __Pyx_XDECREF(__pyx_t_13);
-  __Pyx_XDECREF(__pyx_t_14);
   __Pyx_AddTraceback("cySent.main", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -4564,7 +4677,7 @@ static PyObject *__pyx_pf_6cySent_2main(CYTHON_UNUSED PyObject *__pyx_self) {
   return __pyx_r;
 }
 
-/* "cySent.pyx":158
+/* "cySent.pyx":166
  *     return genRank
  * @app.route('/')
  * def hello_world():             # <<<<<<<<<<<<<<
@@ -4594,7 +4707,7 @@ static PyObject *__pyx_pf_6cySent_4hello_world(CYTHON_UNUSED PyObject *__pyx_sel
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("hello_world", 0);
 
-  /* "cySent.pyx":159
+  /* "cySent.pyx":167
  * @app.route('/')
  * def hello_world():
  *     return main()             # <<<<<<<<<<<<<<
@@ -4602,7 +4715,7 @@ static PyObject *__pyx_pf_6cySent_4hello_world(CYTHON_UNUSED PyObject *__pyx_sel
  *     # calling main function
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_main); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_main); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 167, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -4615,10 +4728,10 @@ static PyObject *__pyx_pf_6cySent_4hello_world(CYTHON_UNUSED PyObject *__pyx_sel
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 159, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 167, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 159, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 167, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -4626,7 +4739,7 @@ static PyObject *__pyx_pf_6cySent_4hello_world(CYTHON_UNUSED PyObject *__pyx_sel
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "cySent.pyx":158
+  /* "cySent.pyx":166
  *     return genRank
  * @app.route('/')
  * def hello_world():             # <<<<<<<<<<<<<<
@@ -5853,7 +5966,7 @@ static struct PyModuleDef __pyx_moduledef = {
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_, __pyx_k_, sizeof(__pyx_k_), 0, 0, 1, 0},
-  {&__pyx_kp_s_138_197_158_105, __pyx_k_138_197_158_105, sizeof(__pyx_k_138_197_158_105), 0, 0, 1, 0},
+  {&__pyx_kp_s_138_197_173_59, __pyx_k_138_197_173_59, sizeof(__pyx_k_138_197_173_59), 0, 0, 1, 0},
   {&__pyx_kp_s_3008198358_Kduryv0qm7NvYHS1BmsXf, __pyx_k_3008198358_Kduryv0qm7NvYHS1BmsXf, sizeof(__pyx_k_3008198358_Kduryv0qm7NvYHS1BmsXf), 0, 0, 1, 0},
   {&__pyx_kp_s_3OOyW4Z3eDDy5me2QRLtcRCGk, __pyx_k_3OOyW4Z3eDDy5me2QRLtcRCGk, sizeof(__pyx_k_3OOyW4Z3eDDy5me2QRLtcRCGk), 0, 0, 1, 0},
   {&__pyx_n_s_API, __pyx_k_API, sizeof(__pyx_k_API), 0, 0, 1, 1},
@@ -5864,6 +5977,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_Flask, __pyx_k_Flask, sizeof(__pyx_k_Flask), 0, 0, 1, 1},
   {&__pyx_kp_s_Generic_Twitter_Class_for_senti, __pyx_k_Generic_Twitter_Class_for_senti, sizeof(__pyx_k_Generic_Twitter_Class_for_senti), 0, 0, 1, 0},
   {&__pyx_n_s_IndexError, __pyx_k_IndexError, sizeof(__pyx_k_IndexError), 0, 0, 1, 1},
+  {&__pyx_n_s_M, __pyx_k_M, sizeof(__pyx_k_M), 0, 0, 1, 1},
   {&__pyx_n_s_MemoryError, __pyx_k_MemoryError, sizeof(__pyx_k_MemoryError), 0, 0, 1, 1},
   {&__pyx_n_s_N, __pyx_k_N, sizeof(__pyx_k_N), 0, 0, 1, 1},
   {&__pyx_kp_s_Negative_tweets_percentage, __pyx_k_Negative_tweets_percentage, sizeof(__pyx_k_Negative_tweets_percentage), 0, 0, 1, 0},
@@ -5891,6 +6005,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_anime_filter_links_lang_en, __pyx_k_anime_filter_links_lang_en, sizeof(__pyx_k_anime_filter_links_lang_en), 0, 0, 1, 0},
   {&__pyx_n_s_api, __pyx_k_api, sizeof(__pyx_k_api), 0, 0, 1, 1},
   {&__pyx_n_s_app, __pyx_k_app, sizeof(__pyx_k_app), 0, 0, 1, 1},
+  {&__pyx_n_s_append, __pyx_k_append, sizeof(__pyx_k_append), 0, 0, 1, 1},
   {&__pyx_n_s_array, __pyx_k_array, sizeof(__pyx_k_array), 0, 0, 1, 1},
   {&__pyx_n_s_auth, __pyx_k_auth, sizeof(__pyx_k_auth), 0, 0, 1, 1},
   {&__pyx_n_s_b5mDtuukQXIGFo1suPiDUeui2ql05Hmu, __pyx_k_b5mDtuukQXIGFo1suPiDUeui2ql05Hmu, sizeof(__pyx_k_b5mDtuukQXIGFo1suPiDUeui2ql05Hmu), 0, 0, 1, 1},
@@ -5912,7 +6027,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_file, __pyx_k_file, sizeof(__pyx_k_file), 0, 0, 1, 1},
   {&__pyx_n_s_flask, __pyx_k_flask, sizeof(__pyx_k_flask), 0, 0, 1, 1},
   {&__pyx_n_s_format, __pyx_k_format, sizeof(__pyx_k_format), 0, 0, 1, 1},
-  {&__pyx_n_s_fucker, __pyx_k_fucker, sizeof(__pyx_k_fucker), 0, 0, 1, 1},
   {&__pyx_n_s_genRank, __pyx_k_genRank, sizeof(__pyx_k_genRank), 0, 0, 1, 1},
   {&__pyx_n_s_get_tweet_sentiment, __pyx_k_get_tweet_sentiment, sizeof(__pyx_k_get_tweet_sentiment), 0, 0, 1, 1},
   {&__pyx_n_s_get_tweets, __pyx_k_get_tweets, sizeof(__pyx_k_get_tweets), 0, 0, 1, 1},
@@ -5931,6 +6045,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_myTime, __pyx_k_myTime, sizeof(__pyx_k_myTime), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
   {&__pyx_kp_s_negative, __pyx_k_negative, sizeof(__pyx_k_negative), 0, 0, 1, 0},
+  {&__pyx_n_s_norman, __pyx_k_norman, sizeof(__pyx_k_norman), 0, 0, 1, 1},
   {&__pyx_n_s_ntweets, __pyx_k_ntweets, sizeof(__pyx_k_ntweets), 0, 0, 1, 1},
   {&__pyx_n_s_oTSeWtzgZBzhJ4qV9v0gY9nicM4g7SHr, __pyx_k_oTSeWtzgZBzhJ4qV9v0gY9nicM4g7SHr, sizeof(__pyx_k_oTSeWtzgZBzhJ4qV9v0gY9nicM4g7SHr), 0, 0, 1, 1},
   {&__pyx_n_s_object, __pyx_k_object, sizeof(__pyx_k_object), 0, 0, 1, 1},
@@ -5976,7 +6091,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 };
 static int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_object = __Pyx_GetBuiltinName(__pyx_n_s_object); if (!__pyx_builtin_object) __PYX_ERR(0, 17, __pyx_L1_error)
-  __pyx_builtin_open = __Pyx_GetBuiltinName(__pyx_n_s_open); if (!__pyx_builtin_open) __PYX_ERR(0, 150, __pyx_L1_error)
+  __pyx_builtin_open = __Pyx_GetBuiltinName(__pyx_n_s_open); if (!__pyx_builtin_open) __PYX_ERR(0, 158, __pyx_L1_error)
   __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(1, 109, __pyx_L1_error)
   __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(2, 116, __pyx_L1_error)
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(2, 81, __pyx_L1_error)
@@ -5992,36 +6107,36 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "cySent.pyx":145
+  /* "cySent.pyx":153
  *     # percentage of neutral tweets
  *     #print("Neutral tweets percentage: "+''.format(100*len(tweets - ntweets - ptweets)/len(tweets)))
  *     addline("========================================================================")             # <<<<<<<<<<<<<<
  *     for tweet in tweets:
  *         addline(tweet['text'])
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_s__3); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_s__3); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 153, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "cySent.pyx":148
+  /* "cySent.pyx":156
  *     for tweet in tweets:
  *         addline(tweet['text'])
  *     addline("========================================================================")             # <<<<<<<<<<<<<<
  *     addline("Time is: " + str(time.time()-myTime))
  *     f = open('Sentiment.txt','w')
  */
-  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_s__3); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 148, __pyx_L1_error)
+  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_s__3); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 156, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "cySent.pyx":150
+  /* "cySent.pyx":158
  *     addline("========================================================================")
  *     addline("Time is: " + str(time.time()-myTime))
  *     f = open('Sentiment.txt','w')             # <<<<<<<<<<<<<<
  *     f.write(respMain)
  *     f.close()
  */
-  __pyx_tuple__6 = PyTuple_Pack(2, __pyx_kp_s_Sentiment_txt, __pyx_n_s_w); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(2, __pyx_kp_s_Sentiment_txt, __pyx_n_s_w); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 158, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
@@ -6067,66 +6182,66 @@ static int __Pyx_InitCachedConstants(void) {
  *         '''
  *         Utility function to classify sentiment of passed tweet
  */
-  __pyx_tuple__12 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_tweet, __pyx_n_s_fucker, __pyx_n_s_analysis); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_tuple__12 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_tweet, __pyx_n_s_norman, __pyx_n_s_analysis); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__12);
   __Pyx_GIVEREF(__pyx_tuple__12);
   __pyx_codeobj__13 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cySent_pyx, __pyx_n_s_get_tweet_sentiment, 49, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__13)) __PYX_ERR(0, 49, __pyx_L1_error)
 
   /* "cySent.pyx":68
- *             return fucker
+ *             return norman
  * 
  *     def get_tweets(self, query, count):             # <<<<<<<<<<<<<<
  *         '''
  *         Main function to fetch tweets and parse them.
  */
-  __pyx_tuple__14 = PyTuple_Pack(11, __pyx_n_s_self, __pyx_n_s_query, __pyx_n_s_count, __pyx_n_s_tweets, __pyx_n_s_sentPointer, __pyx_n_s_tsize, __pyx_n_s_fetched_tweets, __pyx_n_s_tweet, __pyx_n_s_parsed_tweet, __pyx_n_s_e, __pyx_n_s_status); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __pyx_tuple__14 = PyTuple_Pack(10, __pyx_n_s_self, __pyx_n_s_query, __pyx_n_s_count, __pyx_n_s_sentPointer, __pyx_n_s_tsize, __pyx_n_s_fetched_tweets, __pyx_n_s_tweet, __pyx_n_s_parsed_tweet, __pyx_n_s_e, __pyx_n_s_status); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__14);
   __Pyx_GIVEREF(__pyx_tuple__14);
-  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(3, 0, 11, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cySent_pyx, __pyx_n_s_get_tweets, 68, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(3, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cySent_pyx, __pyx_n_s_get_tweets, 68, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 68, __pyx_L1_error)
 
-  /* "cySent.pyx":105
- *             print("Error : " + str(e))
+  /* "cySent.pyx":106
  * respMain=""
+ * tweets = []
  * def addline(aLine):             # <<<<<<<<<<<<<<
  *     global respMain
  *     respMain=respMain+"\r\n<br />"+aLine
  */
-  __pyx_tuple__16 = PyTuple_Pack(1, __pyx_n_s_aLine); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 105, __pyx_L1_error)
+  __pyx_tuple__16 = PyTuple_Pack(1, __pyx_n_s_aLine); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__16);
   __Pyx_GIVEREF(__pyx_tuple__16);
-  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cySent_pyx, __pyx_n_s_addline, 105, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 105, __pyx_L1_error)
+  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cySent_pyx, __pyx_n_s_addline, 106, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 106, __pyx_L1_error)
 
-  /* "cySent.pyx":117
+  /* "cySent.pyx":118
  * #        N = N +(param[i]==1)
  * #    return N
  * def main():             # <<<<<<<<<<<<<<
  *     global tweets
- *     # creating object of TwitterClient Class
+ * 
  */
-  __pyx_tuple__18 = PyTuple_Pack(11, __pyx_n_s_myTime, __pyx_n_s_api, __pyx_n_s_point, __pyx_n_s_k, __pyx_n_s_i, __pyx_n_s_N, __pyx_n_s_ptweets, __pyx_n_s_ntweets, __pyx_n_s_tweet, __pyx_n_s_f, __pyx_n_s_genRank); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_tuple__18 = PyTuple_Pack(12, __pyx_n_s_myTime, __pyx_n_s_api, __pyx_n_s_point, __pyx_n_s_k, __pyx_n_s_i, __pyx_n_s_N, __pyx_n_s_ptweets, __pyx_n_s_M, __pyx_n_s_ntweets, __pyx_n_s_tweet, __pyx_n_s_f, __pyx_n_s_genRank); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__18);
   __Pyx_GIVEREF(__pyx_tuple__18);
-  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(0, 0, 11, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cySent_pyx, __pyx_n_s_main, 117, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(0, 0, 12, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cySent_pyx, __pyx_n_s_main, 118, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(0, 118, __pyx_L1_error)
 
-  /* "cySent.pyx":157
+  /* "cySent.pyx":165
  *     respMain = ""
  *     return genRank
  * @app.route('/')             # <<<<<<<<<<<<<<
  * def hello_world():
  *     return main()
  */
-  __pyx_tuple__21 = PyTuple_Pack(1, __pyx_kp_s__20); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 157, __pyx_L1_error)
+  __pyx_tuple__21 = PyTuple_Pack(1, __pyx_kp_s__20); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 165, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__21);
   __Pyx_GIVEREF(__pyx_tuple__21);
 
-  /* "cySent.pyx":158
+  /* "cySent.pyx":166
  *     return genRank
  * @app.route('/')
  * def hello_world():             # <<<<<<<<<<<<<<
  *     return main()
  * if __name__ == "__main__":
  */
-  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(0, 0, 0, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cySent_pyx, __pyx_n_s_hello_world, 158, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(0, 0, 0, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cySent_pyx, __pyx_n_s_hello_world, 166, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 166, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -6145,7 +6260,7 @@ if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 1, __pyx_L1_error)
   if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_100 = PyInt_FromLong(100); if (unlikely(!__pyx_int_100)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __pyx_int_400 = PyInt_FromLong(400); if (unlikely(!__pyx_int_400)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_1000 = PyInt_FromLong(1000); if (unlikely(!__pyx_int_1000)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_6528 = PyInt_FromLong(6528); if (unlikely(!__pyx_int_6528)) __PYX_ERR(0, 1, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
@@ -6529,7 +6644,7 @@ static int __pyx_pymod_exec_cySent(PyObject *__pyx_pyinit_module)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
   /* "cySent.pyx":68
- *             return fucker
+ *             return norman
  * 
  *     def get_tweets(self, query, count):             # <<<<<<<<<<<<<<
  *         '''
@@ -6555,62 +6670,74 @@ static int __pyx_pymod_exec_cySent(PyObject *__pyx_pyinit_module)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "cySent.pyx":104
- *             # print error (if any)
  *             print("Error : " + str(e))
+ * 
  * respMain=""             # <<<<<<<<<<<<<<
+ * tweets = []
  * def addline(aLine):
- *     global respMain
  */
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_respMain, __pyx_kp_s__2) < 0) __PYX_ERR(0, 104, __pyx_L1_error)
 
   /* "cySent.pyx":105
- *             print("Error : " + str(e))
+ * 
  * respMain=""
+ * tweets = []             # <<<<<<<<<<<<<<
+ * def addline(aLine):
+ *     global respMain
+ */
+  __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 105, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_tweets, __pyx_t_2) < 0) __PYX_ERR(0, 105, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "cySent.pyx":106
+ * respMain=""
+ * tweets = []
  * def addline(aLine):             # <<<<<<<<<<<<<<
  *     global respMain
  *     respMain=respMain+"\r\n<br />"+aLine
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_6cySent_1addline, NULL, __pyx_n_s_cySent); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 105, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_6cySent_1addline, NULL, __pyx_n_s_cySent); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_addline, __pyx_t_2) < 0) __PYX_ERR(0, 105, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_addline, __pyx_t_2) < 0) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cySent.pyx":117
+  /* "cySent.pyx":118
  * #        N = N +(param[i]==1)
  * #    return N
  * def main():             # <<<<<<<<<<<<<<
  *     global tweets
- *     # creating object of TwitterClient Class
+ * 
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_6cySent_3main, NULL, __pyx_n_s_cySent); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_6cySent_3main, NULL, __pyx_n_s_cySent); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_main, __pyx_t_2) < 0) __PYX_ERR(0, 117, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_main, __pyx_t_2) < 0) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cySent.pyx":157
+  /* "cySent.pyx":165
  *     respMain = ""
  *     return genRank
  * @app.route('/')             # <<<<<<<<<<<<<<
  * def hello_world():
  *     return main()
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_app); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 157, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_app); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 165, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_route); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 157, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_route); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 165, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__21, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 157, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__21, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 165, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "cySent.pyx":158
+  /* "cySent.pyx":166
  *     return genRank
  * @app.route('/')
  * def hello_world():             # <<<<<<<<<<<<<<
  *     return main()
  * if __name__ == "__main__":
  */
-  __pyx_t_5 = PyCFunction_NewEx(&__pyx_mdef_6cySent_5hello_world, NULL, __pyx_n_s_cySent); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_t_5 = PyCFunction_NewEx(&__pyx_mdef_6cySent_5hello_world, NULL, __pyx_n_s_cySent); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 166, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_1))) {
@@ -6623,14 +6750,14 @@ static int __pyx_pymod_exec_cySent(PyObject *__pyx_pyinit_module)
     }
   }
   if (!__pyx_t_3) {
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 157, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 165, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_GOTREF(__pyx_t_2);
   } else {
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_1)) {
       PyObject *__pyx_temp[2] = {__pyx_t_3, __pyx_t_5};
-      __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 157, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 165, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -6639,67 +6766,67 @@ static int __pyx_pymod_exec_cySent(PyObject *__pyx_pyinit_module)
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
       PyObject *__pyx_temp[2] = {__pyx_t_3, __pyx_t_5};
-      __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 157, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 165, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     } else
     #endif
     {
-      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 157, __pyx_L1_error)
+      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 165, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
       __Pyx_GIVEREF(__pyx_t_5);
       PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_t_5);
       __pyx_t_5 = 0;
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_4, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 157, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_4, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 165, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_hello_world, __pyx_t_2) < 0) __PYX_ERR(0, 158, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_hello_world, __pyx_t_2) < 0) __PYX_ERR(0, 166, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cySent.pyx":160
+  /* "cySent.pyx":168
  * def hello_world():
  *     return main()
  * if __name__ == "__main__":             # <<<<<<<<<<<<<<
  *     # calling main function
- *    app.run(host='138.197.158.105', port=6528)
+ *    app.run(host='138.197.173.59', port=6528)
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 168, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_2, __pyx_n_s_main_2, Py_EQ)); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyString_Equals(__pyx_t_2, __pyx_n_s_main_2, Py_EQ)); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 168, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_6) {
 
-    /* "cySent.pyx":162
+    /* "cySent.pyx":170
  * if __name__ == "__main__":
  *     # calling main function
- *    app.run(host='138.197.158.105', port=6528)             # <<<<<<<<<<<<<<
+ *    app.run(host='138.197.173.59', port=6528)             # <<<<<<<<<<<<<<
  */
-    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_app); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 162, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_app); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_run); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 162, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_run); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 162, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_host, __pyx_kp_s_138_197_158_105) < 0) __PYX_ERR(0, 162, __pyx_L1_error)
-    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_port, __pyx_int_6528) < 0) __PYX_ERR(0, 162, __pyx_L1_error)
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 162, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_host, __pyx_kp_s_138_197_173_59) < 0) __PYX_ERR(0, 170, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_port, __pyx_int_6528) < 0) __PYX_ERR(0, 170, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "cySent.pyx":160
+    /* "cySent.pyx":168
  * def hello_world():
  *     return main()
  * if __name__ == "__main__":             # <<<<<<<<<<<<<<
  *     # calling main function
- *    app.run(host='138.197.158.105', port=6528)
+ *    app.run(host='138.197.173.59', port=6528)
  */
   }
 
@@ -7386,6 +7513,71 @@ static PyObject* __Pyx_PyInt_EqObjC(PyObject *op1, PyObject *op2, CYTHON_UNUSED 
 }
 #endif
 
+/* PyObjectCallMethod1 */
+      static PyObject* __Pyx__PyObject_CallMethod1(PyObject* method, PyObject* arg) {
+    PyObject *result = NULL;
+#if CYTHON_UNPACK_METHODS
+    if (likely(PyMethod_Check(method))) {
+        PyObject *self = PyMethod_GET_SELF(method);
+        if (likely(self)) {
+            PyObject *args;
+            PyObject *function = PyMethod_GET_FUNCTION(method);
+            #if CYTHON_FAST_PYCALL
+            if (PyFunction_Check(function)) {
+                PyObject *args[2] = {self, arg};
+                result = __Pyx_PyFunction_FastCall(function, args, 2);
+                goto done;
+            }
+            #endif
+            #if CYTHON_FAST_PYCCALL
+            if (__Pyx_PyFastCFunction_Check(function)) {
+                PyObject *args[2] = {self, arg};
+                result = __Pyx_PyCFunction_FastCall(function, args, 2);
+                goto done;
+            }
+            #endif
+            args = PyTuple_New(2);
+            if (unlikely(!args)) goto done;
+            Py_INCREF(self);
+            PyTuple_SET_ITEM(args, 0, self);
+            Py_INCREF(arg);
+            PyTuple_SET_ITEM(args, 1, arg);
+            Py_INCREF(function);
+            result = __Pyx_PyObject_Call(function, args, NULL);
+            Py_DECREF(args);
+            Py_DECREF(function);
+            return result;
+        }
+    }
+#endif
+    result = __Pyx_PyObject_CallOneArg(method, arg);
+    goto done;
+done:
+    return result;
+}
+static PyObject* __Pyx_PyObject_CallMethod1(PyObject* obj, PyObject* method_name, PyObject* arg) {
+    PyObject *method, *result = NULL;
+    method = __Pyx_PyObject_GetAttrStr(obj, method_name);
+    if (unlikely(!method)) goto done;
+    result = __Pyx__PyObject_CallMethod1(method, arg);
+done:
+    Py_XDECREF(method);
+    return result;
+}
+
+/* append */
+      static CYTHON_INLINE int __Pyx_PyObject_Append(PyObject* L, PyObject* x) {
+    if (likely(PyList_CheckExact(L))) {
+        if (unlikely(__Pyx_PyList_Append(L, x) < 0)) return -1;
+    } else {
+        PyObject* retval = __Pyx_PyObject_CallMethod1(L, __pyx_n_s_append, x);
+        if (unlikely(!retval))
+            return -1;
+        Py_DECREF(retval);
+    }
+    return 0;
+}
+
 /* PyErrExceptionMatches */
       #if CYTHON_FAST_THREAD_STATE
 static int __Pyx_PyErr_ExceptionMatchesTuple(PyObject *exc_type, PyObject *tuple) {
@@ -7449,14 +7641,6 @@ static CYTHON_INLINE int __Pyx_PyErr_ExceptionMatchesInState(PyThreadState* tsta
     }
 bad:
     return (double)-1;
-}
-
-/* None */
-      static CYTHON_INLINE Py_ssize_t __Pyx_div_Py_ssize_t(Py_ssize_t a, Py_ssize_t b) {
-    Py_ssize_t q = a / b;
-    Py_ssize_t r = a - q*b;
-    q -= ((r != 0) & ((r ^ b) < 0));
-    return q;
 }
 
 /* PyErrFetchRestore */

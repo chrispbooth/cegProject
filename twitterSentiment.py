@@ -64,6 +64,7 @@ class TwitterClient(object):
             #fetched_tweets = self.api.search(q = query, count = count)
             fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
             # parsing tweets one by one
+            addline("Time is: " + str(time.time()-myTime))
             for tweet in fetched_tweets:
                 # empty dictionary to store required params of a tweet
                 parsed_tweet = {}
@@ -98,7 +99,8 @@ def main():
     api = TwitterClient()
     # calling function to get tweets
     
-    tweets = api.get_tweets(query = 'anime -filter:links lang:en', count = 200)   
+    tweets = api.get_tweets(query = 'anime -filter:links lang:en', count = 1000)   
+    addline("Time is: " + str(time.time()-myTime))
     addline("total "+str(len(tweets)))
     ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
     addline("positive "+str(float(len(ptweets))/float(len(tweets))))
@@ -125,4 +127,4 @@ def hello_world():
     return main()
 if __name__ == "__main__":
     # calling main function
-   app.run(host='138.197.173.59', port=6528)
+   app.run(host='138.197.160.52', port=6528)
