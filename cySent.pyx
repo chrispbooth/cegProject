@@ -114,9 +114,9 @@ class TwitterClient(object):
                 #if "rt" not in key:
                     # if tweet has retweets, ensure that it is appended only once
                 if value not in tweets:
-                    tweets.append(value)
+                    tweets.append(str(value))
                 else:
-                    tweets.append(value)
+                    tweets.append(str(value))
                                 # return parsed tweets
             return sentPointer
  
