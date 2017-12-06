@@ -68,7 +68,7 @@ class TwitterClient(object):
         else:
             norman = 0 
             return norman
-    def pull_from_API(self, query, count, i,return_tweets,procm):
+    def pull_from_API(self, query, count,return_tweets,procm):
         j=i+1
         muhtweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
         #since="2017-11-" + str(i),  until="2017-11-" + str(j), 
@@ -94,23 +94,43 @@ class TwitterClient(object):
         global tweets
         return_tweets.clear()
         tweets.clear()
-        cpdef int[1000] sentPointer
+        cpdef int[3000] sentPointer
         cdef int tsize = 0
         try:
             # call twitter api to fetch tweets
             #fetched_tweets = self.api.search(q = query, count = count)
             #, (self, query, 50, 6), (self, query, 50, 9)])
 
-            p1 = Process(target=self.pull_from_API, args=(query, 100, 0,return_tweets,"p1"))
-            p2 = Process(target=self.pull_from_API, args=(query, 100, 2,return_tweets,"p2"))
-            p3 = Process(target=self.pull_from_API, args=(query, 100, 4,return_tweets,"p3"))
-            p4 = Process(target=self.pull_from_API, args=(query, 100, 6,return_tweets,"p4"))
-            p5 = Process(target=self.pull_from_API, args=(query, 100, 8,return_tweets,"p5"))
-            p6 = Process(target=self.pull_from_API, args=(query, 100, 10,return_tweets,"p6"))
-            p7 = Process(target=self.pull_from_API, args=(query, 100, 12,return_tweets,"p7"))
-            p8 = Process(target=self.pull_from_API, args=(query, 100, 14,return_tweets,"p8"))
-            p9 = Process(target=self.pull_from_API, args=(query, 100, 16,return_tweets,"p9"))
-            p10 = Process(target=self.pull_from_API, args=(query, 100, 18,return_tweets,"p10"))
+            p1 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p1"))
+            p2 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p2"))
+            p3 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p3"))
+            p4 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p4"))
+            p5 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p5"))
+            p6 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p6"))
+            p7 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p7"))
+            p8 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p8"))
+            p9 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p9"))
+            p10 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p10"))
+            p11 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p11"))
+            p12 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p12"))
+            p13 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p13"))
+            p14 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p14"))
+            p15 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p15"))
+            p16 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p16"))
+            p17 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p17"))
+            p18 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p18"))
+            p19 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p19"))
+            p20 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p20"))
+            p21 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p21"))
+            p22 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p22"))
+            p23 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p23"))
+            p24 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p24"))
+            p25 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p25"))
+            p26 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p26"))
+            p27 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p27"))
+            p28 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p28"))
+            p29 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p29"))
+            p30 = Process(target=self.pull_from_API, args=(query, 100, return_tweets,"p30"))
             p1.start()
             p2.start()
             p3.start()
@@ -121,6 +141,26 @@ class TwitterClient(object):
             p8.start()
             p9.start()
             p10.start()
+            p11.start()
+            p12.start()
+            p13.start()
+            p14.start()
+            p15.start()
+            p16.start()
+            p17.start()
+            p18.start()
+            p19.start()
+            p20.start()
+            p21.start()
+            p22.start()
+            p23.start()
+            p24.start()
+            p25.start()
+            p26.start()
+            p27.start()
+            p28.start()
+            p29.start()
+            p30.start()
             p1.join()
             p2.join()
             p3.join()
@@ -131,6 +171,26 @@ class TwitterClient(object):
             p8.join()
             p9.join()
             p10.join()
+            p11.join()
+            p12.join()
+            p13.join()
+            p14.join()
+            p15.join()
+            p16.join()
+            p17.join()
+            p18.join()
+            p19.join()
+            p20.join()            
+            p21.join()
+            p22.join()
+            p23.join()
+            p24.join()
+            p25.join()
+            p26.join()
+            p27.join()
+            p28.join()
+            p29.join()
+            p30.join()
             fetched_tweets=return_tweets
             ###fetched_tweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
             # parsing tweets one by one
@@ -184,15 +244,15 @@ def main():
     myTime = time.time()
     api = TwitterClient()
     # calling function to get tweets
-    cpdef int point[1000]
-    point = api.get_tweets(query = 'anime -filter:links lang:en', count = 1000)   
+    cpdef int point[3000]
+    point = api.get_tweets(query = 'engineering lang:en', count = 3000)   
     addline("total "+str(len(tweets)))
     cdef int k =len(tweets)
     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
     cdef int i =0
     cdef int N = 0
     cdef int M = 0
-    for i in prange(k, schedule='dynamic', nogil=True):
+    for i in prange(k, schedule='dynamic', nogil=True, num_threads=120):
         N += (point[i]==1)
         M += (point[i]==0)
     ptweets = N
@@ -228,4 +288,4 @@ def main():
 def hello_world():
     return main()
 def startwebapp():
-    app.run(host='138.197.141.136', port=6528)
+    app.run(host='138.197.130.166', port=6528)
