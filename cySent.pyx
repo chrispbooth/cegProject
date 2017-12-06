@@ -273,7 +273,7 @@ def main():
     # percentage of neutral tweets
     #print("Neutral tweets percentage: "+''.format(100*len(tweets - ntweets - ptweets)/len(tweets)))
     addline("========================================================================")
-    for i in prange(len(tweets)):
+    for i in prange(len(tweets), nogil=True):
         addline(tweets[i])
     addline("========================================================================")
     addline("Time is: " + str(time.time()-myTime))
