@@ -70,21 +70,21 @@ class TwitterClient(object):
             return norman
     def pull_from_API(self, query, count,return_tweets,procm):
         
-        muhtweets = [status for status in tweepy.Cursor(self.api.search, q=query, rpp = 100).items(count)]
+        muhtweets = self.api.search(q=query,rpp = 100,count = 100)
         #since="2017-11-" + str(i),  until="2017-11-" + str(j), 
         itc=0
         d=return_tweets
         for tweet in muhtweets:
-            if tweet.retweet_count> 0:
-                if tweet.text not in d.values():
-                    ritc = str(itc)+"rt"+procm
-                    d[ritc]=tweet.text   
-            else :
-                ritc = str(itc)+procm
-                d[ritc]=tweet.text
+            #if tweet.retweet_count> 0:
+                #if tweet.text not in d.values():
+                    #ritc = str(itc)+"rt"+procm
+                    #d[ritc]=tweet.text   
+            #else :
+            ritc = str(itc)+procm
+            d[ritc]=tweet.text
             itc=itc+1
         return_tweets.update(d)
-
+        return_tweets = return_tweets
         
     def get_tweets(self, query, count):
         '''
@@ -206,10 +206,8 @@ class TwitterClient(object):
                 # appending parsed tweet to tweets list
                 #if "rt" not in key:
                     # if tweet has retweets, ensure that it is appended only once
-                if value not in tweets:
-                    tweets.append(str(value))
-                else:
-                    tweets.append(str(value))
+                
+                tweets.append(str(value))
                                 # return parsed tweets
             
             return sentPointer
@@ -245,7 +243,7 @@ def main():
     api = TwitterClient()
     # calling function to get tweets
     cpdef int point[3000]
-    point = api.get_tweets(query = 'engineering lang:en', count = 3000)   
+    point = api.get_tweets(query = 'anime lang:en', count = 3000)   
     addline("total "+str(len(tweets)))
     cdef int k =len(tweets)
     #ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 1]
